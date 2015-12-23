@@ -1,5 +1,4 @@
 # Genomic Neuralnet Thesis Paper #
----
 
 Author: Riley McDowell
 Email: mcdori02{at}luther{dot}edu

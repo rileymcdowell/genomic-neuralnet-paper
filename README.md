@@ -1,7 +1,7 @@
 # Genomic Neuralnet Thesis Paper #
 
-Author: Riley McDowell
-Email: mcdori02{at}luther{dot}edu
+* Author: Riley McDowell
+* Email: mcdori02{at}luther{dot}edu
 
 ### Executive Summary ###
 ---
@@ -12,7 +12,7 @@ This is the source code to compile my thesis paper.
 ---
 You'll need the following at a minimum to compile the paper.
 
-1. [make](https://www.gnu.org/software/make/)
+1. [GNU Make](https://www.gnu.org/software/make/)
 2. [LaTeX](https://www.latex-project.org/)
 3. [latexmk](http://www.ctan.org/pkg/latexmk/)
 

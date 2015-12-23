@@ -14,20 +14,23 @@ BIB = bibtex
 PDF_VIEWER = evince
 
 LATEXMK = latexmk
-LATEXMK_OPT = -pdf
+LATEXMK_OPT = -pdf -output-directory=./$(OUTPUT_DIR)
 
 
 .PHONY: clean all view
 
-all : $(OUTPUT_DIR)/$(NAME).pdf
+all : $(NAME).pdf
 
-view:
+view: $(NAME).pdf
 	$(PDF_VIEWER) $(NAME).pdf
+
+$(NAME).pdf: $(OUTPUT_DIR)/$(NAME).pdf
+	cp $(OUTPUT_DIR)/$(NAME).pdf .
 
 $(OUTPUT_DIR)/$(NAME).pdf: $(NAME).tex 
 	$(LATEXMK) $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEXOPT) %O %S" $(NAME)
 
 clean:
 	$(LATEXMK) -C $(NAME)
-	rm -f $(MAIN).pdfsync
 	rm -f $(OUTPUT_DIR)/*
+	rm -f ./$(NAME).pdf

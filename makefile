@@ -2,20 +2,15 @@ OS = Linux
 SCRIPT_VERSION = 0.1
 
 NAME = main
-CHAPTER_DIR = chapters
 OUTPUT_DIR = output
 
-CHAPTERS = $(wildcard $(CHAPTER_DIR)/*.tex)
-SOURCES=$(NAME).tex Makefile $(CHAPTERS) 
-
 LATEX = pdflatex 
-LATEX_OPT = -file-line-error -output-directory=./$(OUTPUT_DIR)
+LATEX_OPT = -file-line-error
 BIB = bibtex
 PDF_VIEWER = evince
 
 LATEXMK = latexmk
-LATEXMK_OPT = -pdf -output-directory=./$(OUTPUT_DIR)
-
+LATEXMK_OPT = -output-directory=./$(OUTPUT_DIR)
 
 .PHONY: clean all view
 
@@ -27,8 +22,16 @@ view: $(NAME).pdf
 $(NAME).pdf: $(OUTPUT_DIR)/$(NAME).pdf
 	cp $(OUTPUT_DIR)/$(NAME).pdf .
 
-$(OUTPUT_DIR)/$(NAME).pdf: $(NAME).tex 
-	$(LATEXMK) $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEXOPT) %O %S" $(NAME)
+$(OUTPUT_DIR)/$(NAME).pdf: $(OUTPUT_DIR)/$(NAME).aux $(OUTPUT_DIR)/$(NAME).bbl
+	# %O are the options passed to latexmk 
+	# %S is the source .tex file
+	$(LATEXMK) -pdf $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(NAME)
+
+$(OUTPUT_DIR)/$(NAME).bbl: $(OUTPUT_DIR)/$(NAME).aux
+	$(BIB) $(OUTPUT_DIR)/$(NAME).aux
+
+$(OUTPUT_DIR)/$(NAME).aux: $(NAME).tex 
+	$(LATEXMK) $(LATEXMK_OPT) $(NAME)
 
 clean:
 	$(LATEXMK) -C $(NAME)

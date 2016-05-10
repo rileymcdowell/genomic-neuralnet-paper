@@ -1,0 +1,4 @@
+% Where is it good? Fisher's infinitesimal model vs few-locus models?
+
+% A nice pseudo-plot describing where each algorithm is strongest.
+

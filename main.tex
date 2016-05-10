@@ -7,14 +7,14 @@
 \usepackage[titletoc]{appendix}
 \usepackage{amsmath}
 \usepackage{natbib}
+\usepackage{pdfpages}
 
 \graphicspath{ {images/} }
 
 \begin{document}
-
 \input{chapters/title_page}
 \input{chapters/table_of_contents}
 \input{chapters/general_introduction}
 \input{chapters/literature_cited}
-
+\includepdf[pages={-}]{output/g3_article.pdf}
 \end{document}

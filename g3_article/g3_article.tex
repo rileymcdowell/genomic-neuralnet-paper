@@ -22,22 +22,50 @@
 %\affil[$\S$]{Author four affiliation}
 %\affil[$\ast\ast$]{Author five affiliation}
 
+%For the authors' names, indicate different affiliations with the 
+%symbols: $\ast$, $\dagger$, $\ddagger$, $\S$. After four authors
+%, the symbols double, triple, quadruple, and so forth as required.
+
 \keywords{ genomic prediction \\ deep learning \\ neural network \\ genomic selection \\ SNP }
 
-\runningtitle{ Genomic Prediction with Deep Networks } % For use in the footer 
+\runningtitle{ Genomic Prediction with Deep Networks } % Goes into the footer.
 
-\correspondingauthor{Corresponding Author}
+\correspondingauthor{Corresponding Author HERE} % TODO: Who is this?
 
 \begin{abstract}
-The abstract should be written for people who may not read the 
-entire paper, so it must stand on its own.  The impression it makes usually determines 
-whether the reader will go on to read the article, so the abstract must be 
-engaging, clear, and concise.  In addition, the abstract may be the only part of the 
-article that is indexed in databases, so it must accurately reflect the 
-content of the article. A well-written abstract is the  most effective way to reach intended 
-readers, leading to more robust search, retrieval, and usage of the article. 
 
-Please see additional guidelines notes on preparing your abstract below.
+Reduced costs for DNA marker technology coupled has generated a huge amount of
+molecular data and greatly increased the options available to characterize lines 
+in a breeding program. Concurrently, the field of machine learning has experienced
+a resurgence of research into techniques to detect or "learn" patterns in noisy
+data in a variety of technical applications. Here, we apply so called "deep learning"
+techniques from current machine learning research in neural networks to 
+genomic selection and phenotypic selection problems on standard published datasets. 
+We compare the results of these algorithms to the bayesian and linear regression techniques
+commonly employed today.
+
+
+%The abstract should be written for people who may not read the 
+%entire paper, so it must stand on its own.  The impression it makes usually determines 
+%whether the reader will go on to read the article, so the abstract must be 
+%engaging, clear, and concise.  In addition, the abstract may be the only part of the 
+%article that is indexed in databases, so it must accurately reflect the 
+%content of the article. A well-written abstract is the  most effective way to reach intended 
+%readers, leading to more robust search, retrieval, and usage of the article. 
+%
+%Please see additional guidelines notes on preparing your abstract below.
+
+%\begin{itemize}
+%\item provide a synopsis of the entire article;
+%\item begin with the broad context of the study, followed by specific background for the study;
+%\item describe the purpose, methods and procedures, core findings and results, and conclusions of the study;
+%\item emphasize new or important aspects of the research;
+%\item engage the broad readership of G3 and be understandable to a diverse audience (avoid using jargon);
+%\item be a single paragraph of less than 250 words;
+%\item contain the full name of the organism studied;
+%\item NOT contain citations or abbreviations.
+%\end{itemize}
+
 \end{abstract}
 
 \setboolean{displaycopyright}{true}
@@ -50,39 +78,38 @@ Please see additional guidelines notes on preparing your abstract below.
 \articletypemark
 \marginmark
 \firstpagefootnote
-\correspondingauthoraffiliation{Please insert the affiliation correspondence address and email for the corresponding author. The corresponding author should be marked with a `1' in the author list, as shown in the example.}
+\correspondingauthoraffiliation{CORRESPONDING AUTHOR ADDRESS AND EMAIL}%Please insert the affiliation correspondence address and email for the corresponding author. The corresponding author should be marked with a `1' in the author list, as shown in the example.}
 \vspace{-11pt}%
 
-\noindent This G3: Genes|Genomes|Genetics journal template is provided to help you write your work in the correct journal format. Instructions for use are provided below. 
+\noindent % Skip header for 'Introduction'.
 
-\section*{Guide to using this template in Overleaf}
+Markers are useful because they can be associated with traits.
+QTL mapping, most useful for traits with small number of contributing loci.
+Not useful for early breeding program selection or phenotypic prediction.
 
-This template is provided to help you prepare your article for submission to the \textit{Genetics}.
+Meuwissen et al. (2001) publishes paper on genomic selection using
+simulated data demonstrating prediction of offspring performance
+from genotypic data using mixed models and bayesian methods.
+Bayesian methods are most accurate.
 
-\section*{Author Affiliations}
+Technique is applied to animal breeding, then plant breeding,
+both successfully. Several alternate methods used. 
 
-For the authors' names, indicate different affiliations with the symbols: $\ast$, $\dagger$, $\ddagger$, $\S$. After four authors, the symbols double, triple, quadruple, and so forth as required.
+Several articles publish data and genomic selection algorithms,
+reporting the accuracy of each on the dataset. One includes 
+simple artificial neural network.
 
-\section*{Your Abstract}
+Concurrently, artificial intelligence research is rebranded as machine
+learning, and the popularity of the interdisciplinary field known as data science 
+increases dramatically. Data scientists apply machine learning and statistics 
+from a wide variety of domains including mathematics, physics, and 
+computer science to non-scientific domains such as sales and marketing.
 
-In addition to the guidelines provided in the example abstract above, your abstract should:
+Overview of networks and award-winning performance in many domains \citep{schmidhuber2015}.
 
-\begin{itemize}
-\item provide a synopsis of the entire article;
-\item begin with the broad context of the study, followed by specific background for the study;
-\item describe the purpose, methods and procedures, core findings and results, and conclusions of the study;
-\item emphasize new or important aspects of the research;
-\item engage the broad readership of G3 and be understandable to a diverse audience (avoid using jargon);
-\item be a single paragraph of less than 250 words;
-\item contain the full name of the organism studied;
-\item NOT contain citations or abbreviations.
-\end{itemize}
 
-\section*{Introduction}
 
-For the introduction, authors should be mindful of the broad readership of the journal. The introduction should set the stage for the importance of the work to a generalist reader and draw the reader in to the specific study. The scope and impact of the work should be clearly stated.
-
-In individual organisms where a mutant is being studied, the rationale for the study of that mutant must be clear to a geneticist not studying that particular organism. Similarly, study of particular phenotypes should be justified broadly and not on the basis of interest for that organism alone. General background on the importance of the genetic pathway and/or phenotype should be provided in a single, well-reasoned paragraph near the beginning of the introduction.
+% For the introduction, authors should be mindful of the broad readership of the journal. The introduction should set the stage for the importance of the work to a generalist reader and draw the reader in to the specific study. The scope and impact of the work should be clearly stated.
 
 Authors are encouraged to:
 
@@ -122,7 +149,14 @@ The results and discussion should not be repetitive. The results section should 
 
 Add citations using the \verb|\citep{}| command, for example \citep{neher2013genealogies} or for multiple citations, \citep{neher2013genealogies, rodelsperger2014characterization}.
 
-For examples of different references, please see the example bibliography file (accessible via the Project menu in the Overleaf editor). This contains examples of articles \citep{neher2013genealogies, rodelsperger2014characterization}, a book \citep{Sturtevent2001}, a book chapter \citep{Sturtevent2001chp7}, ahead-of-print work \citep{Starita2015} and software \citep{Kruijer2015}.
+For examples of different references, please see the example bibliography file 
+(accessible via the Project menu in the Overleaf editor). This contains examples 
+of articles \citep{neher2013genealogies, rodelsperger2014characterization}, a 
+book \citep{Sturtevent2001}, a book 
+chapter 
+XXXX-SKIPPED-XXXX
+%\citep{Sturtevent2001chp7}
+, ahead-of-print work \citep{Starita2015} and software \citep{Kruijer2015}.
 
 \section*{Examples of Article Components}
 \label{sec:examples}
@@ -208,6 +242,6 @@ S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
 \end{equation}
 denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
 
-\bibliography{example-bibliography}
+\bibliography{bibliography}
 
 \end{document}

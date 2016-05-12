@@ -22,7 +22,10 @@ all : $(NAME).pdf
 view: $(NAME).pdf
 	$(PDF_VIEWER) $(NAME).pdf
 
-# Main Paper #
+articleview: $(OUTPUT_DIR)/$(ARTICLE).pdf
+	$(PDF_VIEWER) $(OUTPUT_DIR)/$(ARTICLE).pdf
+
+# Thesis Paper #
 
 $(NAME).pdf: $(OUTPUT_DIR)/$(NAME).pdf
 	cp $(OUTPUT_DIR)/$(NAME).pdf .
@@ -32,20 +35,24 @@ $(OUTPUT_DIR)/$(NAME).pdf: $(OUTPUT_DIR)/$(NAME).aux $(OUTPUT_DIR)/$(NAME).bbl $
 	# %S is the source .tex file
 	$(LATEXMK) -pdf $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(NAME)
 
-$(OUTPUT_DIR)/$(NAME).bbl: $(OUTPUT_DIR)/$(NAME).aux
-	$(BIB) $(OUTPUT_DIR)/$(NAME).aux
-
 $(OUTPUT_DIR)/$(NAME).aux: $(NAME).tex 
 	$(LATEXMK) $(LATEXMK_OPT) $(NAME)
 
 # Article #
 
-$(OUTPUT_DIR)/$(ARTICLE).pdf: $(ARTICLE_SRC_DIR)/$(ARTICLE).tex 
+$(OUTPUT_DIR)/$(ARTICLE).pdf: $(ARTICLE_SRC_DIR)/$(ARTICLE).tex $(OUTPUT_DIR)/$(ARTICLE).bbl
 	# %O are the options passed to latexmk
 	# %S is the source .tex file
 	$(LATEXMK) -pdf $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(ARTICLE_SRC_DIR)/$(ARTICLE)
 
 # Utility #
+
+$(OUTPUT_DIR)/$(ARTICLE).bbl: $(OUTPUT_DIR)/$(NAME).bbl
+	cp $(OUTPUT_DIR)/$(NAME).bbl $(OUTPUT_DIR)/$(ARTICLE).bbl
+
+$(OUTPUT_DIR)/$(NAME).bbl: $(OUTPUT_DIR)/$(NAME).aux
+	$(BIB) $(OUTPUT_DIR)/$(NAME).aux
+
 
 clean:
 	$(LATEXMK) -C $(NAME)

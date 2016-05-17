@@ -8,7 +8,7 @@
 % {gos} Genetics of Sex 
 % {mp} Multiparental Populations
 
-\title{Template for preparing your submission \\to G3: Genes|Genomes|Genetics using Overleaf}
+\title{Genomic Selection with Deep Neural Networks}
 
 \author[$\ast$,1]{Riley McDowell}
 \author[$\dagger$]{David Grant}
@@ -28,7 +28,7 @@
 
 \keywords{ genomic prediction \\ deep learning \\ neural network \\ genomic selection \\ SNP }
 
-\runningtitle{ Genomic Prediction with Deep Networks } % Goes into the footer.
+\runningtitle{ Genomic Selection with Deep Neural Networks } % Goes into the footer.
 
 \correspondingauthor{Corresponding Author HERE} % TODO: Who is this?
 
@@ -105,7 +105,29 @@ increases dramatically. Data scientists apply machine learning and statistics
 from a wide variety of domains including mathematics, physics, and 
 computer science to non-scientific domains such as sales and marketing.
 
-Overview of networks and award-winning performance in many domains \citep{schmidhuber2015}.
+Neural networks began gaining popularity with the rise of computers capable of
+running the complex calculations required to train them. The most
+common training procedure is backpropagation, where output errors are attributed
+to prior network layers, adjusted, and remaining errors propagated backward
+until the input layer is reached \citep{rumelhart1986}. Many thousands of small 
+adjustments are made on batches of data until the error in the output is 
+minimized. In the late 80s, it was shown that that multi-layer feedforward 
+neural networks were capable of approximating functions of arbitrary complexity to 
+arbitrary accuracy \citep{hornik1989}. With the rise of artificial intelligence
+rebranded as machine learning, neural networks again surged in popularity,
+but with considerably more computational power available. Networks that were
+previously too complex to train in time to publish a paper can now be trained in
+a matter of hours on a modern computer processor or high performance graphics card. 
+
+Because networks are universal approximators, networks with many
+neurons have a tendency to fit individual datapoints too tightly 
+in a process known as overfitting. In order to capture true trends in the data 
+rather than noise, a process called regularization is employed. One method
+of regularization is to penalize weights $w$ with very large values \citep{krogh1992}. 
+Another is to remove neurons and their connections at random during each training
+epoch, preventing them from co-adapting and overfitting the training set \citep{srivastava2014}.
+
+Today, networks and award-winning performance in many domains \citep{schmidhuber2015}.
 
 
 

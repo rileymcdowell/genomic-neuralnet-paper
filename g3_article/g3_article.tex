@@ -78,7 +78,7 @@ commonly employed today.
 \articletypemark
 \marginmark
 \firstpagefootnote
-\correspondingauthoraffiliation{CORRESPONDING AUTHOR ADDRESS AND EMAIL}%Please insert the affiliation correspondence address and email for the corresponding author. The corresponding author should be marked with a `1' in the author list, as shown in the example.}
+\correspondingauthoraffiliation{CORRESPONDING AUTHOR ADDRESS AND EMAIL}
 \vspace{-11pt}%
 
 \noindent % Skip header for 'Introduction'.
@@ -121,17 +121,20 @@ a matter of hours on a modern computer processor or high performance graphics ca
 
 Because networks are universal approximators, networks with many
 neurons have a tendency to fit individual datapoints too tightly 
-in a process known as overfitting. In order to capture true trends in the data 
-rather than noise, a process called regularization is employed. One method
+in a process known as overfitting. In order to fit the model to the underlying
+sigmal rather than noise, a process called regularization is employed. One method
 of regularization is to penalize weights $w$ with very large values \citep{krogh1992}. 
 Another is to remove neurons and their connections at random during each training
-epoch, preventing them from co-adapting and overfitting the training set \citep{srivastava2014}.
+epoch, allowing subsets of the network to for independent units of learning al.la. ensemble learning methods.  
+This allows neurons to adapt and build independenty operating units and prevents the entire
+network from co-adapting and overfitting the training set \citep{srivastava2014}.
 
 Today, networks and award-winning performance in many domains \citep{schmidhuber2015}.
 
-
-
-% For the introduction, authors should be mindful of the broad readership of the journal. The introduction should set the stage for the importance of the work to a generalist reader and draw the reader in to the specific study. The scope and impact of the work should be clearly stated.
+% For the introduction, authors should be mindful of the broad readership of the journal. i
+% The introduction should set the stage for the importance of the work to a generalist 
+% reader and draw the reader in to the specific study. The scope and impact of the 
+% work should be clearly stated.
 
 Authors are encouraged to:
 
@@ -143,17 +146,48 @@ Authors are encouraged to:
 
 \section*{Materials and Methods}
 
-Manuscripts submitted to G3 should contain a clear description of the experimental design in sufficient detail so that the experimental analysis could be repeated by another scientist. If the level of detail necessary to explain the protocol goes beyond two paragraphs, give a short description in the main body of the paper and prepare a detailed description for supporting information.  For example, details would include indicating how many individuals were used, and if applicable how individuals or groups were combined for analysis. If working with mutants indicate how many independent mutants were isolated. If working with populations indicate how samples were collected and whether they were random with respect to the target population.
+Manuscripts submitted to G3 should contain a clear description of the experimental design in sufficient detail so that 
+the experimental analysis could be repeated by another scientist. If the level of detail necessary to explain the 
+protocol goes beyond two paragraphs, give a short description in the main body of the paper and prepare a detailed 
+description for supporting information.  For example, details would include indicating how many individuals were used, 
+and if applicable how individuals or groups were combined for analysis. If working with mutants indicate how 
+many independent mutants were isolated. If working with populations indicate how samples were collected 
+and whether they were random with respect to the target population.
 
 \subsection*{Statistical Analysis} 
 
-Indicate which statistical analysis has been performed and describe the method and model applied. If many genes were examined simultaneously, or many phenotypes, a multiple comparison correction should be used to control the type I error rate, or a rationale for not applying a correction must be provided. The type of correction applied should be clearly stated. It should also be clear whether the p-values reported are raw, or after correction. Corrected p-values are often appropriate, but raw p-values should be available in the supporting materials so that others may perform their own corrections. 
+Indicate which statistical analysis has been performed and describe the method and model applied. 
+If many genes were examined simultaneously, or many phenotypes, a multiple comparison correction should be 
+used to control the type I error rate, or a rationale for not applying a correction must be provided. 
+The type of correction applied should be clearly stated. It should also be clear whether the p-values 
+reported are raw, or after correction. Corrected p-values are often appropriate, but raw p-values 
+should be available in the supporting materials so that others may perform their own corrections. 
 
 \subsection*{Data Availability}
 
-At the end of the Materials and Methods section, include a statement on reagent and data availability. Please read the Data and Reagent Policy before writing the statement. Make sure to list the accession numbers or DOIs of any data you have placed in public repositories. List the file names and descriptions of any data you will upload as supplemental information. The statement should also include any applicable IRB numbers. You may include specifications for how to properly acknowledge or cite the data.
+Arabidopsis, loblolly pine, maize, pig, and wheat datasets were collected from the author's web pages
+or the supplementary information published with their respective papers \citep{loudet2002, resende2012, crossa2010, cleveland2012, thavamanikumar2015}.
+%Arabidopsis long and short day flowering times and associated marker data are from Loudet et al., 2002. 
+%Maize grain yield, flowering time, and marker data are from Crossa et al., 2010. Loblolly Pine phenotypic
+%measurements for 17 trait and the associated marker data are from Resende et al., 2012. 
+%Measurements of 5 traits in a standard pig dataset are from Cleveland et. al., 2012.
+%Phenotypes for Flowering time and Spike Grain Number with marker data aref from thavamanikumar et al. 2015.
+Copies of each of these datasets, as well as modified versions formatted for compatibility withe the analyses
+presented in this paper are available on github \citep{mcdowell2016}. File S1 contains an shapshot of the 
+source code and data files that were used to generate the results presented in this publication.
 
-For example: Strains are available upon request. File S1 contains detailed descriptions of all supplemental files. File S2 contains SNP ID numbers and locations. File S3 contains genotypes for each individual. Sequence data are available at GenBank and the accession numbers are listed in File S3. Gene expression data are available at GEO with the accession number: GDS1234. Code used to generate the simulated data is provided in file S4. 
+%At the end of the Materials and Methods section, include a statement on reagent and data availability. 
+%Please read the Data and Reagent Policy before writing the statement. Make sure to list the 
+%accession numbers or DOIs of any data you have placed in public repositories. List the file 
+%names and descriptions of any data you will upload as supplemental information. 
+%The statement should also include any applicable IRB numbers. You may include specifications for 
+%how to properly acknowledge or cite the data.
+%
+%For example: Strains are available upon request. File S1 contains detailed descriptions of all supplemental files. 
+%File S2 contains SNP ID numbers and locations. File S3 contains genotypes for each individual. 
+%Sequence data are available at GenBank and the accession numbers are listed in File S3. 
+%Gene expression data are available at GEO with the accession number: GDS1234. 
+%Code used to generate the simulated data is provided in file S4. 
 
 \section*{Results and Discussion}
 

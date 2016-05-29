@@ -40,7 +40,7 @@ in a breeding program. Concurrently, the field of machine learning has experienc
 a resurgence of research into techniques to detect or "learn" patterns in noisy
 data in a variety of technical applications. Here, we apply so called "deep learning"
 techniques from current machine learning research in neural networks to 
-genomic selection and phenotypic selection problems on standard published datasets. 
+genomic selection and phenotypic selection problems on published reference datasets. 
 We compare the results of these algorithms to the bayesian and linear regression techniques
 commonly employed today.
 
@@ -146,33 +146,61 @@ Authors are encouraged to:
 
 \section*{Materials and Methods}
 
-Manuscripts submitted to G3 should contain a clear description of the experimental design in sufficient detail so that 
-the experimental analysis could be repeated by another scientist. If the level of detail necessary to explain the 
-protocol goes beyond two paragraphs, give a short description in the main body of the paper and prepare a detailed 
-description for supporting information.  For example, details would include indicating how many individuals were used, 
-and if applicable how individuals or groups were combined for analysis. If working with mutants indicate how 
-many independent mutants were isolated. If working with populations indicate how samples were collected 
-and whether they were random with respect to the target population.
+Five benchmark datasets of paired phenotypic and genotypic marker data were predicted 
+using a collection of regression techniques. Benchmark species included three food crops, 
+one forestry species, and one animal species. Benchmark traits include a variety of high and low
+heritability traits with simple and complex genetic archetectures. Each dataset was divided
+into 10 partitions by drawing entries without replacement and predicted with each
+regression technique using ten-fold cross validation. The partitions of the data were 
+held constant across all regression techniques to facilitate a fair comparision of the
+prediction accuracy of each technique.
+
+For statistical models with tunable hyperparameters, a grid-search of the parameter 
+space was conducted and the parameters that produced maximum hold-out set accuracy 
+were used in the final analysis. 
+
+%Manuscripts submitted to G3 should contain a clear description of the experimental design in sufficient detail so that 
+%the experimental analysis could be repeated by another scientist. If the level of detail necessary to explain the 
+%protocol goes beyond two paragraphs, give a short description in the main body of the paper and prepare a detailed 
+%description for supporting information.  For example, details would include indicating how many individuals were used, 
+%and if applicable how individuals or groups were combined for analysis. If working with mutants indicate how 
+%many independent mutants were isolated. If working with populations indicate how samples were collected 
+%and whether they were random with respect to the target population.
 
 \subsection*{Statistical Analysis} 
 
-Indicate which statistical analysis has been performed and describe the method and model applied. 
-If many genes were examined simultaneously, or many phenotypes, a multiple comparison correction should be 
-used to control the type I error rate, or a rationale for not applying a correction must be provided. 
-The type of correction applied should be clearly stated. It should also be clear whether the p-values 
-reported are raw, or after correction. Corrected p-values are often appropriate, but raw p-values 
-should be available in the supporting materials so that others may perform their own corrections. 
+Least squares regression, ridge regression, lasso regression, and elastic net regression were applied as examples of
+forms of linear regression with and without a normalization penalties. Bayesian ridge regression is a bayesian
+version of ridge regression that assumes that the residual error in the model is gaussian distributed. These
+five regression techniques are implemented in the scikit-learn python package version 0.17.1 \citep{scikit-learn}.
 
-\subsection*{Data Availability}
+A single, fully-connected, multi-layer neural-network with dropout and weight-decay parameters was built using 
+the python bindings to the TensorFlow machine intelligence library version 0.8.0 \citep{tensorflow2015}. All network training
+and evaluation was conducted on an NVIDIA GTX 680 graphics card using the CUDA 7.5 toolkit. 
+
+Each regression technique was trained and evaluated on each phenotypic trait in all 10 cross-validation folds of each dataset.
+The correlation of the predicted and actual phenotypic values was taken for each fold, and the average and 
+standard deviation of the resulting correlation coefficients for each regression technique were reported.
+ 
+%Indicate which statistical analysis has been performed and describe the method and model applied. 
+%If many genes were examined simultaneously, or many phenotypes, a multiple comparison correction should be 
+%used to control the type I error rate, or a rationale for not applying a correction must be provided. 
+%The type of correction applied should be clearly stated. It should also be clear whether the p-values 
+%reported are raw, or after correction. Corrected p-values are often appropriate, but raw p-values 
+%should be available in the supporting materials so that others may perform their own corrections. 
+
+\subsection*{Benchmark Datasets}
 
 Arabidopsis, loblolly pine, maize, pig, and wheat datasets were collected from the author's web pages
 or the supplementary information published with their respective papers \citep{loudet2002, resende2012, crossa2010, cleveland2012, thavamanikumar2015}.
+
 %Arabidopsis long and short day flowering times and associated marker data are from Loudet et al., 2002. 
 %Maize grain yield, flowering time, and marker data are from Crossa et al., 2010. Loblolly Pine phenotypic
 %measurements for 17 trait and the associated marker data are from Resende et al., 2012. 
 %Measurements of 5 traits in a standard pig dataset are from Cleveland et. al., 2012.
 %Phenotypes for Flowering time and Spike Grain Number with marker data aref from thavamanikumar et al. 2015.
-Copies of each of these datasets, as well as modified versions formatted for compatibility withe the analyses
+
+Copies of each of the benchmark datasets as well as modified versions formatted for compatibility withe the analyses
 presented in this paper are available on github \citep{mcdowell2016}. File S1 contains an shapshot of the 
 source code and data files that were used to generate the results presented in this publication.
 
@@ -191,15 +219,35 @@ source code and data files that were used to generate the results presented in t
 
 \section*{Results and Discussion}
 
-The results and discussion should not be repetitive. The results section should give a factual presentation of the data and all tables and figures should be referenced; the discussion should not summarize the results but provide an interpretation of the results, and should clearly delineate between the findings of the particular study and the possible impact of those findings in a larger context. Authors are encouraged to cite recent work relevant to their interpretations. Present and discuss results only once, not in both the Results and Discussion sections. It is sometimes acceptable to combine results and discussion. The text should be as succinct as possible. Heed Strunk and White's dictum: "Omit needless words!"
+The results and discussion should not be repetitive. The results section should give a factual 
+presentation of the data and all tables and figures should be referenced; the discussion 
+should not summarize the results but provide an interpretation of the results, and should 
+clearly delineate between the findings of the particular study and the possible impact 
+of those findings in a larger context. Authors are encouraged to cite recent work 
+relevant to their interpretations. Present and discuss results only once, not in 
+both the Results and Discussion sections. It is sometimes acceptable to combine 
+results and discussion. The text should be as succinct as possible. 
+Heed Strunk and White's dictum: "Omit needless words!"
 
 \section*{Additional guidelines}
 
-\subsection*{Numbers} In the text, write out numbers nine or less except as part of a date, a fraction or decimal, a percentage, or a unit of measurement. Use Arabic numbers for those larger than nine, except as the first word of a sentence; however, try to avoid starting a sentence with such a number.
+    \subsection*{Numbers} In the text, write out numbers nine or less except as part of a date, a fraction or decimal, 
+                          a percentage, or a unit of measurement. Use Arabic numbers for those larger than nine, 
+                          except as the first word of a sentence; however, try to avoid starting a sentence with such a number.
 
-\subsection*{Units} Use abbreviations of the customary units of measurement only when they are preceded by a number: "3 min" but "several minutes". Write "percent" as one word, except when used with a number: "several percent" but "75\%." To indicate temperature in centigrade, use ° (for example, 37°); include a letter after the degree symbol only when some other scale is intended (for example, 45°K).
+    \subsection*{Units} Use abbreviations of the customary units of measurement only when they are preceded by a number: 
+            "3 min" but "several minutes". Write "percent" as one word, except when used with a number: 
+            "several percent" but "75\%." To indicate temperature in centigrade, use ° 
+            (for example, 37°); include a letter after the degree symbol only when some 
+            other scale is intended (for example, 45°K).
 
-\subsection*{Nomenclature and Italicization} Italicize names of organisms even when  when the species is not indicated.  Italicize the first three letters of the names of restriction enzyme cleavage sites, as in HindIII. Write the names of strains in roman except when incorporating specific genotypic designations. Italicize genotype names and symbols, including all components of alleles, but not when the name of a gene is the same as the name of an enzyme. Do not use "+" to indicate wild type. Carefully distinguish between genotype (italicized) and phenotype (not italicized) in both the writing and the symbolism.
+    \subsection*{Nomenclature and Italicization} Italicize names of organisms even when  when the species is 
+        not indicated.  Italicize the first three letters of the names of restriction enzyme cleavage 
+        sites, as in HindIII. Write the names of strains in roman except when incorporating 
+        specific genotypic designations. Italicize genotype names and symbols, including all components 
+        of alleles, but not when the name of a gene is the same as the name of 
+        an enzyme. Do not use "+" to indicate wild type. Carefully distinguish between genotype 
+        (italicized) and phenotype (not italicized) in both the writing and the symbolism.
 
 \section*{In-text Citations}
 
@@ -243,8 +291,21 @@ Figure \ref{fig:spectrum} shows an example figure.
 \renewcommand{\familydefault}{\sfdefault}\normalfont
 \centering
 \includegraphics[width=\linewidth]{images/example-figure-g3}
-\caption{Example figure from \url{http://dx.doi.org/10.1534/g3.115.017509}. Please include your figures in the manuscript for the review process. You can upload figures to Overleaf via the Project menu. Upon acceptance, we'll ask for your figure files to be uploaded in any of the following formats: TIFF (.tiff), JPEG (.jpg), Microsoft PowerPoint (.ppt), EPS (.eps), or Adobe Illustrator (.ai).  Images should be a minimum of 300 dpi in resolution and 500 dpi minimum if line art images.  RGB, CMYK, and Grayscale are all acceptable. Halftones should be high contrast with sharp detail, because some loss of detail and contrast is inevitable in the production process. Figures should be 10-20 cm in width and 1-25 cm in height. Graph axes must be exactly perpendicular and all lines of equal density.
-Label multiple figure parts with A, B, etc. in bolded type, and use Arrows and numbers to draw attention to areas you want to highlight. Legends should start with a brief title and should be a self-contained description of the content of the figure that provides enough detail to fully understand the data presented. All conventional symbols used to indicate figure data points are available for typesetting; unconventional symbols should not be used. Italicize all mathematical variables (both in the figure legend and figure) , genotypes, and additional symbols that are normally italicized.  
+\caption{Example figure from \url{http://dx.doi.org/10.1534/g3.115.017509}. Please include your figures in the 
+    manuscript for the review process. You can upload figures to Overleaf via the Project menu. Upon acceptance, 
+    we'll ask for your figure files to be uploaded in any of the following formats: TIFF (.tiff), JPEG (.jpg), 
+    Microsoft PowerPoint (.ppt), EPS (.eps), or Adobe Illustrator (.ai).  Images should be a minimum of 
+    300 dpi in resolution and 500 dpi minimum if line art images.  RGB, CMYK, and Grayscale are all 
+    acceptable. Halftones should be high contrast with sharp detail, because some loss of detail and 
+    contrast is inevitable in the production process. Figures should be 10-20 cm in width and 1-25 cm 
+    in height. Graph axes must be exactly perpendicular and all lines of equal density.  Label 
+    multiple figure parts with A, B, etc. in bolded type, and use Arrows and numbers to draw attention 
+    to areas you want to highlight. Legends should start with a brief title and should be a 
+    self-contained description of the content of the figure that provides enough detail to fully 
+    understand the data presented. All conventional symbols used to indicate figure data points are 
+    available for typesetting; unconventional symbols should not be used. Italicize all mathematical 
+    variables (both in the figure legend and figure) , genotypes, and additional symbols that 
+    are normally italicized.  
 }%
 \label{fig:spectrum}
 \end{figure}
@@ -257,17 +318,24 @@ Figure \ref{video:spectrum} shows how to include a video in your manuscript.
 \renewcommand{\familydefault}{\sfdefault}\normalfont
 \centering
 \includegraphics[width=\linewidth]{images/example-figure-g3}
-\caption{Example movie (the figure file above is used as a placeholder for this example). G3 supports video and movie files that can be linked from any portion of the article - including the abstract. Acceptable formats include .asf, avi, .wav, and all types of Windows Media files.   
+\caption{Example movie (the figure file above is used as a placeholder for this example). G3 supports video and movie 
+         files that can be linked from any portion of the article - including the abstract. Acceptable formats include 
+         .asf, avi, .wav, and all types of Windows Media files.   
 }%
+
 \label{video:spectrum}
 \end{figure}
 
 
 \subsection*{Sample Table}
 
-Table \ref{tab:shape-functions} shows an example table. Avoid shading, color type, line drawings, graphics, or other illustrations within tables. Use tables for data only; present drawings, graphics, and illustrations as separate figures. Histograms should not be used to present data that can be captured easily in text or small tables, as they take up much more space.  
+Table \ref{tab:shape-functions} shows an example table. Avoid shading, color type, line drawings, graphics, or 
+                                other illustrations within tables. Use tables for data only; present drawings, graphics, 
+                                and illustrations as separate figures. Histograms should not be used to present data 
+                                that can be captured easily in text or small tables, as they take up much more space.  
 
-Tables numbers are given in Arabic numerals. Tables should not be numbered 1A, 1B, etc., but if necessary, interior parts of the table can be labeled A, B, etc. for easy reference in the text.  
+Tables numbers are given in Arabic numerals. Tables should not be numbered 1A, 1B, etc., but if necessary, 
+interior parts of the table can be labeled A, B, etc. for easy reference in the text.  
 
 
 \begin{table*}[htbp]

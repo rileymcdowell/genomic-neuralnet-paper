@@ -194,6 +194,14 @@ standard deviation of the resulting correlation coefficients for each regression
 Arabidopsis, loblolly pine, maize, pig, and wheat datasets were collected from the author's web pages
 or the supplementary information published with their respective papers \citep{loudet2002, resende2012, crossa2010, cleveland2012, thavamanikumar2015}.
 
+Marker calls were scaled to the range $[-1, 1]$ for all SNP information. If more than 20\% of
+marker calls were missing for a sample, the sample was discarded. If fewer than 20\% were missing,
+the average value for that marker was imputed for the missing values with one exception: if data were 
+published with a marker imputation technique already applied, no further imputation was attempted.
+
+Individuals without phenotypic measurements were discarded from further analysis. A combination of phenotypic 
+measurements and deregressed breeding values were predicted, depending on which was provided by the authors.
+
 %Arabidopsis long and short day flowering times and associated marker data are from Loudet et al., 2002. 
 %Maize grain yield, flowering time, and marker data are from Crossa et al., 2010. Loblolly Pine phenotypic
 %measurements for 17 trait and the associated marker data are from Resende et al., 2012. 

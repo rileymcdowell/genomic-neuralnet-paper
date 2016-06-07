@@ -1,5 +1,13 @@
 \documentclass[9pt,twocolumn,twoside]{g3_article/gsag3jnl}
 
+% Packages.
+
+\usepackage{multirow}
+\usepackage{caption}
+
+% Custom Commands.
+\newcommand{\etal}{\textit{et al.}}
+
 \articletype{gs} % article type
 % {inv} Investigations
 % {msr} Mutant Screen Reports
@@ -209,23 +217,28 @@ Species, authorship, marker, and sample information is summarized in Table \ref{
 \centering
 \caption{\bf Benchmark Datasets}
 \begin{tableminipage}{\textwidth}
-\begin{tabularx}{\textwidth}{XXXXXX}
+    \begin{tabularx}{\textwidth}{ m{10em} X m{18em} m{4em} m{4em} m{12em} }
 \hline
-\header Author & Species & Trait & Markers\footnote{Markers with greater than 20\% missing calls were filtered from analysis.} & Samples\footnote{Samples without phenotypic measurements were filtered from analysis.} & Prediction Type \\
+\header Author & Species & Trait & Markers\footnote{Markers with greater than 20\% missing calls were filtered from analysis.} & Samples\footnote{Samples without phenotypic measurements were filtered from analysis.} & Predicting \\
 \hline
-Loudet \textit{et al.}         & Arabidopsis   & Days to flowering under short day length  & 69   & 415  & Phenotypic Measurement\\
-Loudet \textit{et al.}         & Arabidopsis   & Dry matter accumulation - low resources   & 69   & 415  & Phenotypic Measurement\\
-Resende \textit{et al.}        & Loblolly Pine & Crown width at age 6 yrs                  & 926  & 861  & Phenotypic Measurement\\
-Resende \textit{et al.}        & Loblolly Pine & Wood lignin content at age 4 yrs          & 926  & 910  & Phenotypic Measurement\\
-Crossa \textit{et al.}         & Maize         & Grain yield in well-watered environment   & 1135 & 264  & Phenotypic Measurement\\
-Crossa \textit{et al.}         & Maize         & Female flowering date                     & 1148 & 284  & Phenotypic Measurement\\
-Cleveland \textit{et al.}      & Pig           & Trait 1 (low heritabilty)                 & 3534 & 2804 & Phenotypic Measurement (corrected for environment)\\
-Cleveland \textit{et al.}      & Pig           & Trait 5 (high heritability)               & 3534 & 3184 & Phenotypic Measurement (corrected for environment)\\
-Thavamanikumar \textit{et al.} & Wheat         & Time to young microspore (flowering time) & 808  & 324  & TODO XXX \\
-Thavamanikumar \textit{et al.} & Wheat         & Spike Grain Number                        & 808  & 324  & TODO XXX \\
+\multirow{2}{*}{Loudet \etal}         & \multirow{2}{*}{Arabidopsis}   & Days to flowering under short day length  & 69     & 415  & \multirow{2}{*}{Phenotypic Measurement} \\
+                                      &                                & Dry matter accumulation - low resources   & 69     & 415  &                                         \\
+\hline
+\multirow{2}{*}{Resende \etal}        & \multirow{2}{*}{Loblolly Pine} & Crown width at age 6 yrs                  & 4700   & 861  & \multirow{2}{*}{Phenotypic Measurement} \\
+                                      &                                & Wood lignin content at age 4 yrs          & 4698   & 910  &                                         \\
+\hline
+\multirow{2}{*}{Crossa \etal}         & \multirow{2}{*}{Maize}         & Grain yield in well-watered environment   & 1135   & 264  & \multirow{2}{*}{Phenotypic Measurement} \\
+                                      &                                & Female flowering date                     & 1148   & 284  &                                         \\
+\hline
+\multirow{2}{*}{Cleveland \etal}      & \multirow{2}{*}{Pig}           & Trait 1 (low heritabilty)                 & 52843  & 2804 & \multirow{2}{*}{Phenotypic Measurement} \\
+                                      &                                & Trait 5 (high heritability)               & 52843  & 3184 &                                         \\
+\hline
+\multirow{2}{*}{Thavamanikumar \etal} & \multirow{2}{*}{Wheat}         & Time to young microspore (flowering time) & 797   & 324  & \multirow{2}{*}{BLUP}                   \\
+                                      &                                & Spike grain number                        & 797   & 324  &                                         \\
 \hline
 \end{tabularx}
-  \label{tab:benchmark_datasets}
+\label{tab:benchmark_datasets}
+\footnotesize  
 \end{tableminipage}
 \end{table*}
 

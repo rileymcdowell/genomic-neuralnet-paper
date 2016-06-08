@@ -212,6 +212,12 @@ Arabidopsis, loblolly pine, maize, pig, and wheat datasets were collected from t
 or the supplementary information published with their respective papers \citep{loudet2002, resende2012, crossa2010, cleveland2012, thavamanikumar2015}.
 Species, authorship, marker, and sample information is summarized in Table \ref{tab:benchmark-datasets}.
 
+\newcommand{\loudet}        {\multirow{2}{3cm}{Loudet \etal ~2002}}
+\newcommand{\resende}       {\multirow{2}{3cm}{Resende \etal ~2012}}
+\newcommand{\crossa}        {\multirow{2}{3cm}{Crossa \etal ~2010}}
+\newcommand{\cleveland}     {\multirow{2}{3cm}{Cleveland \etal ~2012}}
+\newcommand{\thavamanikumar}{\multirow{2}{3cm}{Thavamanikumar \etal ~2015}}
+
 \begin{table*}[htbp]
 \renewcommand{\familydefault}{\sfdefault}\normalfont
 \centering
@@ -219,28 +225,51 @@ Species, authorship, marker, and sample information is summarized in Table \ref{
 \begin{tableminipage}{\textwidth}
     \begin{tabularx}{\textwidth}{ m{10em} X m{18em} m{4em} m{4em} m{12em} }
 \hline
-\header Author & Species & Trait & Markers\footnote{Markers with greater than 20\% missing calls were filtered from analysis.} & Samples\footnote{Samples without phenotypic measurements were filtered from analysis.} & Predicting \\
+\header Author & Species & Trait & Markers\footnote{Markers with greater than 20\% missing calls were filtered from analysis.} & Samples\footnote{Samples with missing phenotypic measurements or greater than 50\% missing marker calls were filtered from analysis.} & Dependent Variable \\
 \hline
-\multirow{2}{*}{Loudet \etal}         & \multirow{2}{*}{Arabidopsis}   & Days to flowering under short day length  & 69     & 415  & \multirow{2}{*}{Phenotypic Measurement} \\
-                                      &                                & Dry matter accumulation - low resources   & 69     & 415  &                                         \\
+\loudet         & \multirow{2}{*}{Arabidopsis}   & Days to flowering under short day length  & 69     & 415    & \multirow{2}{*}{Phenotypic Measurement} \\
+                &                                & Dry matter accumulation - low resources   & 69     & 415    &                                         \\
 \hline
-\multirow{2}{*}{Resende \etal}        & \multirow{2}{*}{Loblolly Pine} & Crown width at age 6 yrs                  & 4700   & 861  & \multirow{2}{*}{Phenotypic Measurement} \\
-                                      &                                & Wood lignin content at age 4 yrs          & 4698   & 910  &                                         \\
+\resende        & \multirow{2}{*}{Loblolly Pine} & Crown width at age 6 yrs                  & 4,700   & 861   & \multirow{2}{*}{Phenotypic Measurement} \\
+                &                                & Wood lignin content at age 4 yrs          & 4,698   & 910   &                                         \\
 \hline
-\multirow{2}{*}{Crossa \etal}         & \multirow{2}{*}{Maize}         & Grain yield in well-watered environment   & 1135   & 264  & \multirow{2}{*}{Phenotypic Measurement} \\
-                                      &                                & Female flowering date                     & 1148   & 284  &                                         \\
+\crossa         & \multirow{2}{*}{Maize}         & Grain yield in well-watered environment   & 1,135   & 264   & \multirow{2}{*}{Phenotypic Measurement} \\
+                &                                & Female flowering date                     & 1,148   & 284   &                                         \\
 \hline
-\multirow{2}{*}{Cleveland \etal}      & \multirow{2}{*}{Pig}           & Trait 1 (low heritabilty)                 & 52843  & 2804 & \multirow{2}{*}{Phenotypic Measurement} \\
-                                      &                                & Trait 5 (high heritability)               & 52843  & 3184 &                                         \\
+\cleveland      & \multirow{2}{*}{Pig}           & Trait 1 (low heritabilty)                 & 52,843  & 2,804 & \multirow{2}{*}{Phenotypic Measurement} \\
+                &                                & Trait 5 (high heritability)               & 52,843  & 3,184 &                                         \\
 \hline
-\multirow{2}{*}{Thavamanikumar \etal} & \multirow{2}{*}{Wheat}         & Time to young microspore (flowering time) & 797   & 324  & \multirow{2}{*}{BLUP}                   \\
-                                      &                                & Spike grain number                        & 797   & 324  &                                         \\
+\thavamanikumar & \multirow{2}{*}{Wheat}         & Time to young microspore (flowering time) & 797   & 324     & \multirow{2}{*}{BLUP}                   \\
+                &                                & Spike grain number                        & 797   & 324     &                                         \\
 \hline
 \end{tabularx}
 \label{tab:benchmark_datasets}
 \footnotesize  
 \end{tableminipage}
 \end{table*}
+
+% Question for Dr. Grant when Intro + M&M draft is ready.
+
+%One thing that is important to me is to apply consistent QC and analysis to each dataset. 
+%I feel that giving unique treatment to each dataset will make for a clunky and difficult 
+%to read paper. I prefer a generic approach that would be more likely to apply to other 
+%datasets or readers who might want to try this on their own data. In some cases, 
+%this will mean that what I do is different from what was done with the data in 
+%the original publication. For instance, Cleveland uses phenotypic measurements to 
+%derive breeding values, then uses genomic selection to estimate them back using 
+%cross-validation. However, Cleveland et al. published the phenotypic measurments, 
+%and I would rather predict phenotypic measurements when possible like in Loudet, 
+%Resende, and Crossa. Similarly, Thavamanikumar only published the BLUPs (not the raw data) 
+%for two different populations, then, among other things, tried to predict BLUPs 
+%in one population using the data in the other one. I plan to lump the Thavamanikumar 
+%data together into one population and make predictions using only markers that are 
+%polymorphic within and across both populations. I arrived at this plan because 
+%it makes for a highly consistent analysis that is identical in all datasets.
+%
+%Questions: Do you feel this approach is reasonable? Given that this is primarily a methods 
+%paper, do I need to detail how each of these is slightly different than the original 
+%authors' methods in the paper itself or can I rely on my common quality control and 
+%analysis description to illustrate the differences.
 
 %\begin{table*}[htbp]
 %\renewcommand{\familydefault}{\sfdefault}\normalfont

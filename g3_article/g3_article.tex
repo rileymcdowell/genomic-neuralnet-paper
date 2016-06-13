@@ -4,6 +4,7 @@
 
 \usepackage{multirow}
 \usepackage{caption}
+\usepackage{tikz}
 
 % Custom Commands.
 \newcommand{\etal}{\textit{et al.}}
@@ -87,33 +88,105 @@ commonly employed today.
 \marginmark
 \firstpagefootnote
 \correspondingauthoraffiliation{CORRESPONDING AUTHOR ADDRESS AND EMAIL}
-\vspace{-11pt}%
+\vspace{-11pt}
 
 \noindent % Skip header for 'Introduction'.
 
-Markers are useful because they can be associated with traits.
-QTL mapping, most useful for traits with small number of contributing loci.
-Not useful for early breeding program selection or phenotypic prediction.
+The wide availability and reduced cost of molecular marker technology
+has created opportunities to perform marker assisted selection of genotypes
+in plant and animal breeding. Quantitative Trait Locus (QTL) mapping techniques
+have proved useful for detecting small numbers of markers producing 
+phenotypes with large effects \citep{miles2008}. Once the QTL 
+markers have been identified, they can be leveraged for making selections
+on a population. However, when making selections on traits affected by many 
+alleles with varying effect sizes distributed widely across a genome, 
+QTL mapping is less effective. 
 
-Meuwissen et al. (2001) publishes paper on genomic selection using
-simulated data demonstrating prediction of offspring performance
-from genotypic data using mixed models and bayesian methods.
-Bayesian methods are most accurate.
+Unlike QTL mapping, genomic selection methods attempt to predict phenotypes 
+utilizing all available SNP marker data collected from a population,
+allowing one of many possible statistical models to learn the marker-trait 
+associations in a data driven way \citep{meuwissen2001}. This techique has
+proven effective, but the choice of the statistical model that will most
+accurately predict phenotype from a panel of high-density marker data. It is likely 
+that the best statistical model for genomic selection is dependent on the genetic 
+archetecture of the predicted trait \citep{crossa2010, gonzalez-camacho2012, 
+resende2012, cleveland2012, thavamanikumar2015}.  Mathematically, models incorporating 
+interactions between markers features have the capacity to achieve higher accuracy 
+by caputuring non-additive effects. Experimental results support this 
+hypothesis \citep{gonzalez-camacho2012}. Alternative prediction methods continue 
+to be an active area of research in plant and animal breeding \citep{koning2012}.
 
-Technique is applied to animal breeding, then plant breeding,
-both successfully. Several alternate methods used. 
+Concurrent with the advent of genomic selection as a practice the popularity of the 
+interdisciplinary field known as data science has increased. Practitioners of data 
+science apply machine learning and statistics to make predictions, usually
+by applying ideas or techniques from a wide variety of domains 
+including mathematics, physics, and computer science to non-scientific 
+domains such as sales and marketing. Often, a data scientist's focus is to
+create a predictive model rather than generative model. This can be viewed 
+as the distinction between data science and classical statistics 
+\citep{donoho2015, brieman2001}. The rapid increase in popularity of data science
+is associated with an increase in definition of best practices for predictive modeling
+across many disciplines as well as software packages to automate the 
+process of building predictive models from any data source.
 
-Several articles publish data and genomic selection algorithms,
-reporting the accuracy of each on the dataset. One includes 
-simple artificial neural network.
+\begin{figure}[htbp]
+\renewcommand{\familydefault}{\sfdefault}\normalfont
+\centering
+\input{g3_article/figures/simplenet}
+\caption{A fully connected feedforward neural network. Many input marker calls are mapped 
+to a single hidden layer of neurons of an arbitrary size. For genomic selection, a single output
+neuron combines the information from the hidden layer to predict a phenotype or BLUP.}%
+\label{fig:simplenet}
+\end{figure}
 
-Concurrently, artificial intelligence research is rebranded as machine
-learning, and the popularity of the interdisciplinary field known as data science 
-increases dramatically. Data scientists apply machine learning and statistics 
-from a wide variety of domains including mathematics, physics, and 
-computer science to non-scientific domains such as sales and marketing.
+\begin{figure}[htbp]
+\renewcommand{\familydefault}{\sfdefault}\normalfont
+\centering
+\input{g3_article/figures/deepnet}
+\caption{A fully connected deep feedforward neural network. Many input marker calls are mapped 
+to a many sequential hidden layers of neurons of arbitrary sizes. For genomic selection, a single output
+neuron combines the information from the final hidden layer to predict a phenotype or BLUP.}%
+\label{fig:deepnet}
+\end{figure}
 
-Neural networks began gaining popularity with the rise of computers capable of
+%Good post, good links to the 'deep' part of deep nets.
+%http://stats.stackexchange.com/questions/182734/what-is-the-difference-between-a-neural-network-and-a-deep-neural-network
+
+Neural networks are a type of model frequently employed by data scientists
+for predictive modeling. A neural network maps a length $i$ input vector $x = (x_1, ..., x_i)$
+through a series of $j$ hidden layers $(l_1, ..., l_j)$ consisting of $(k_1, ..., k_j)$ "neurons" 
+which apply a mathematical transformation to their input and forward the 
+result on to every neuron in the subsequent layer (Figure \ref{fig:simplenet}). 
+Each non-input layer is associated with a set of weights $W = (w_{11}, ..., w_{ij})$
+and biases $B = (b_1, ... b_j)$ which are applied to inputs prior to applying the
+activation function. Thus each non-input neuron can be described as a transformation
+of a weighted sum of its inputs
+
+\begin{equation}
+    output_k = \sum_{i=1}^{k_{j}} f_j(w_{ij} + b_j)
+\label{eq:neuron}
+\end{equation}
+
+where $output_k$ is the output from neuron $k$ in layer $j$ having activation
+function $f_j$. 
+
+Once the network is defined, it is typically trained in a supervised way by 
+exposing the network to input and desired output values, propagating error 
+back through the network, and updating the weights and biases in the direction that would
+decrease output error. This turns the network training process into 
+function minimization problem, where the parameters to the function are the
+weights and biases, and the function to be minimized is the squared differences
+between the network outputs and the desired outputs. This process is 
+known as backpropagation, and has been used and improved
+extensively since its description in the 1980s \citep{rumelhart1986}. 
+
+Attempts to apply neural networks to genomic selection have commonly resulted
+in overfitting and problems with the computation complexity required to 
+fit the model to the data \citep{heslot2012, gonzalez-recio2014}.
+
+% Regularization and GPUs.
+
+Neural networks wegaining popularity with the rise of computers capable of
 running the complex calculations required to train them. The most
 common training procedure is backpropagation, where output errors are attributed
 to prior network layers, adjusted, and remaining errors propagated backward
@@ -139,7 +212,10 @@ network from co-adapting and overfitting the training set \citep{srivastava2014}
 
 Today, networks and award-winning performance in many domains \citep{schmidhuber2015}.
 
-Historically, very large neural networks can take many CPU-hours to optimize and 
+Networks often don't train well if they are very deep, but recent methods
+show that carefully selected initialization of weights in the network
+allow efficient training even with very deep networks \citep{
+Historically, very large neural networks have taken many CPU-hours to optimize and 
 train, limiting their application \citep{gonzalez-recio2014}. 
 % Probably a great citation/paper out there about how GPU compute has revolutionized
 % neural network training.

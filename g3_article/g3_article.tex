@@ -124,7 +124,7 @@ including mathematics, physics, and computer science to non-scientific
 domains such as sales and marketing. Often, a data scientist's focus is to
 create a predictive model rather than generative model. This can be viewed 
 as the distinction between data science and classical statistics 
-\citep{donoho2015, brieman2001}. The rapid increase in popularity of data science
+\citep{donoho2015, breiman2001}. The rapid increase in popularity of data science
 is associated with an increase in definition of best practices for predictive modeling
 across many disciplines as well as software packages to automate the 
 process of building predictive models from any data source.
@@ -153,8 +153,8 @@ neuron combines the information from the final hidden layer to predict a phenoty
 %http://stats.stackexchange.com/questions/182734/what-is-the-difference-between-a-neural-network-and-a-deep-neural-network
 
 Neural networks are a type of model frequently employed by data scientists
-for predictive modeling. A neural network maps a length $i$ input vector $x = (x_1, ..., x_i)$
-through a series of $j$ hidden layers $(l_1, ..., l_j)$ consisting of $(k_1, ..., k_j)$ "neurons" 
+for predictive modeling. A neural network maps a length $n$ input vector $x = (x_1, ..., x_n)$
+through a series of $j$ "hidden" layers $(l_1, ..., l_j)$ consisting of $(k_1, ..., k_j)$ "neurons" 
 which apply a mathematical transformation to their input and forward the 
 result on to every neuron in the subsequent layer (Figure \ref{fig:simplenet}). 
 Each non-input layer is associated with a set of weights $W = (w_{11}, ..., w_{ij})$
@@ -168,74 +168,55 @@ of a weighted sum of its inputs
 \end{equation}
 
 where $output_k$ is the output from neuron $k$ in layer $j$ having activation
-function $f_j$. 
+function $f_j$.
 
-Once the network is defined, it is typically trained in a supervised way by 
-exposing the network to input and desired output values, propagating error 
-back through the network, and updating the weights and biases in the direction that would
-decrease output error. This turns the network training process into 
-function minimization problem, where the parameters to the function are the
-weights and biases, and the function to be minimized is the squared differences
-between the network outputs and the desired outputs. This process is 
-known as backpropagation, and has been used and improved
-extensively since its description in the 1980s \citep{rumelhart1986}. 
+Once the network is defined, it must be exposed to input and desired output
+values, and adjusted to minimize error in output in a process known as training.
+Error in the output of the network is propagated back through the hidden 
+layers, and the weights and biases are updated in the direction that would 
+decrease output error on many sets or subsets of the input data. 
+This turns the network training process into general 
+function minimization problem, where the parameters to the function are the 
+weights and biases, and the function to be minimized is the squared differences 
+between the network outputs and the desired outputs. The process of 
+propagating output error back through a neural network is known as 
+backpropagation, and has been used and improved extensively since its 
+description in the 1980s \citep{rumelhart1986}. 
 
-Attempts to apply neural networks to genomic selection have commonly resulted
-in overfitting and problems with the computation complexity required to 
-fit the model to the data \citep{heslot2012, gonzalez-recio2014}.
+Attempts to apply neural networks to genomic selection has resulted in overfitting of the 
+network to training data as well as concerns over the 
+computation complexity required to fit the model to datasets with many
+markers across many genotypes \citep{heslot2012, gonzalez-recio2014}. 
+These results are not surprising. It was shown that that multi-layer 
+feedforward neural networks were capable of approximating functions of 
+arbitrary complexity to arbitrary accuracy if provided enough neurons 
+in hidden layers \citep{hornik1989}. This property commonly
+results in overfitting if not regularized in some way. 
 
-% Regularization and GPUs.
+Given the promising results from regularized and bayesian methods for 
+genomic selection such as ridge regression and bayesian family of regressors,
+it is prudent to evaluate some of the many of neural network training algorithms which
+incorporate regularization of weights and biases during training. Similarly, while
+neural networks are computationally demanding to train, the training algorithms 
+themselves are often easily expressed with vector and matrix algebra and thus amenable to
+Graphics Processing Unit (GPU) accelerated computing. Some report up to sixty-fold speedups 
+in training time \citep{sierra2010, schmidhuber2015}. 
 
-Neural networks wegaining popularity with the rise of computers capable of
-running the complex calculations required to train them. The most
-common training procedure is backpropagation, where output errors are attributed
-to prior network layers, adjusted, and remaining errors propagated backward
-until the input layer is reached \citep{rumelhart1986}. Many thousands of small 
-adjustments are made on batches of data until the error in the output is 
-minimized. In the late 80s, it was shown that that multi-layer feedforward 
-neural networks were capable of approximating functions of arbitrary complexity to 
-arbitrary accuracy \citep{hornik1989}. With the rise of artificial intelligence
-rebranded as machine learning, neural networks again surged in popularity,
-but with considerably more computational power available. Networks that were
-previously too complex to train in time to publish a paper can now be trained in
-a matter of hours on a modern computer processor or high performance graphics card. 
-
-Because networks are universal approximators, networks with many
-neurons have a tendency to fit individual datapoints too tightly 
-in a process known as overfitting. In order to fit the model to the underlying
-sigmal rather than noise, a process called regularization is employed. One method
-of regularization is to penalize weights $w$ with very large values \citep{krogh1992}. 
-Another is to remove neurons and their connections at random during each training
-epoch, allowing subsets of the network to for independent units of learning al.la. ensemble learning methods.  
-This allows neurons to adapt and build independenty operating units and prevents the entire
-network from co-adapting and overfitting the training set \citep{srivastava2014}.
-
-Today, networks and award-winning performance in many domains \citep{schmidhuber2015}.
-
-Networks often don't train well if they are very deep, but recent methods
-show that carefully selected initialization of weights in the network
-allow efficient training even with very deep networks \citep{
-Historically, very large neural networks have taken many CPU-hours to optimize and 
-train, limiting their application \citep{gonzalez-recio2014}. 
-% Probably a great citation/paper out there about how GPU compute has revolutionized
-% neural network training.
-Advances in machine 
-learning coupled with Moore's Law and the widespread availability of programmable 
-Graphics Processing Units (GPUs) opens neural networks to many problems and 
-domains that would not have been possible a few years earlier. 
+In this paper, we present the results of applying two types of regularization
+to so-called deep neural networks. The first is a weight decay regularization
+which penalizes the weight and bias vectors $W$ and $B$ with very large values 
+similar to ridge regression \citep{krogh1992}. The second is to remove subsets of neurons
+and their connections at random during training, encouraging subsets of
+the network to learn to recognize input features independently. This allows 
+neurons to adapt and build independently operating units and prevents the 
+neurons from co-adapting, reducing overfitting \citep{srivastava2014}.  
+Today, networks based on these and other regularization techniques are
+demonstrating award-winning performance across many domains \citep{schmidhuber2015}.
 
 % For the introduction, authors should be mindful of the broad readership of the journal. i
 % The introduction should set the stage for the importance of the work to a generalist 
 % reader and draw the reader in to the specific study. The scope and impact of the 
 % work should be clearly stated.
-
-Authors are encouraged to:
-
-\begin{itemize}
-\item cite the supporting literature completely rather than select a subset of citations;
-\item provide important background citations, including relevant review papers (to help orient the non-specialist reader);
-\item to cite similar work in other organisms.
-\end{itemize}
 
 \section*{Materials and Methods}
 

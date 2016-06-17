@@ -1,0 +1,31 @@
+% Benchmark Datasets table.
+
+\newcommand{\loudet}        {\multirow{2}{3cm}{Loudet \etal ~2002}}
+\newcommand{\resende}       {\multirow{2}{3cm}{Resende \etal ~2012}}
+\newcommand{\crossa}        {\multirow{2}{3cm}{Crossa \etal ~2010}}
+\newcommand{\cleveland}     {\multirow{2}{3cm}{Cleveland \etal ~2012}}
+\newcommand{\thavamanikumar}{\multirow{2}{3cm}{Thavamanikumar \etal ~2015}}
+\newcommand{\phenom}        {\multirow{2}{*}{Phenotypic Measurement}}
+\newcommand{\blupm}         {\multirow{2}{*}{BULP}}
+
+\begin{tabularx}{\textwidth}{ m{10em} X m{18em} m{4em} m{4em} m{12em} }
+\hline
+\header Author & Species & Trait & Markers\footnote{Markers with greater than 20\% missing calls were filtered from analysis.} & Samples\footnote{Samples with missing phenotypic measurements or greater than 50\% missing marker calls were filtered from analysis.} & Dependent Variable \\
+\hline
+\loudet         & \multirow{2}{*}{Arabidopsis}   & Days to flowering under short day length  & 69     & 415    &  \phenom \\
+                &                                & Dry matter accumulation - low resources   & 69     & 415    &          \\
+\hline
+\resende        & \multirow{2}{*}{Loblolly Pine} & Crown width at age 6 yrs                  & 4,700   & 861   &  \phenom \\
+                &                                & Wood lignin content at age 4 yrs          & 4,698   & 910   &          \\
+\hline
+\crossa         & \multirow{2}{*}{Maize}         & Grain yield in well-watered environment   & 1,135   & 264   &  \phenom \\
+                &                                & Female flowering date                     & 1,148   & 284   &          \\
+\hline
+\cleveland      & \multirow{2}{*}{Pig}           & Trait 1 (low heritabilty)                 & 52,843  & 2,804 &  \phenom \\
+                &                                & Trait 5 (high heritability)               & 52,843  & 3,184 &          \\
+\hline
+\thavamanikumar & \multirow{2}{*}{Wheat}         & Time to young microspore (flowering time) & 797   & 324     &  \blupm  \\
+                &                                & Spike grain number                        & 797   & 324     &          \\
+\hline
+\end{tabularx}
+

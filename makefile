@@ -6,8 +6,9 @@ ARTICLE = g3_article
 ARTICLE_SRC_DIR = g3_article
 OUTPUT_DIR = output
 ARTICLE_FIGURE_DIR = $(ARTICLE_SRC_DIR)/figures
-
-ARTICLE_FIGURES = $(wildcard $(ARTICLE_FIGURE_DIR)/*)
+ARTICLE_FIGURES = $(wildcard $(ARTICLE_FIGURE_DIR)/*.tex)
+ARTICLE_TABLE_DIR = $(ARTICLE_SRC_DIR)/tables
+ARTICLE_TABLES = $(wildcard $(ARTICLE_TABLE_DIR)/*.tex)
 
 LATEX = pdflatex 
 LATEX_OPT = -file-line-error
@@ -42,7 +43,7 @@ $(OUTPUT_DIR)/$(NAME).aux: $(NAME).tex
 
 # Article #
 
-$(OUTPUT_DIR)/$(ARTICLE).pdf: $(ARTICLE_SRC_DIR)/$(ARTICLE).tex $(OUTPUT_DIR)/$(ARTICLE).bbl $(ARTICLE_FIGURES)
+$(OUTPUT_DIR)/$(ARTICLE).pdf: $(ARTICLE_SRC_DIR)/$(ARTICLE).tex $(OUTPUT_DIR)/$(ARTICLE).bbl $(ARTICLE_FIGURES) $(ARTICLE_TABLES)
 	# %O are the options passed to latexmk
 	# %S is the source .tex file
 	$(LATEXMK) -pdf $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(ARTICLE_SRC_DIR)/$(ARTICLE)

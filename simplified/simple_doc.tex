@@ -1,0 +1,45 @@
+\documentclass{article}
+
+% Packages.
+
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{natbib}
+\usepackage{tabularx}
+\usepackage{url}
+\usepackage{setspace}
+
+% Mock out the tableminipage environment. 
+\newenvironment{tableminipage} [1] { }
+
+% Mockout a fake header environment. 
+\newcommand{\header}[1]{#1}
+
+\begin{document}
+
+\doublespacing
+
+\title{Genomic Selection with Deep Neural Networks}
+
+\author{Riley McDowell}
+\author{David Grant}
+
+\input{g3_article/sections/abstract}
+
+\section*{Introduction}
+
+\input{g3_article/sections/introduction}
+
+\section*{Materials and Methods}
+
+\input{g3_article/sections/methods}
+
+\section*{Results and Discussion}
+
+\input{g3_article/sections/results.tex}
+
+\bibliographystyle{apalike}
+\bibliography{bibliography}
+
+\end{document}

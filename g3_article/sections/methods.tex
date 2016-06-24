@@ -39,18 +39,9 @@ of RAM using the CUDA 7.5 toolkit \citep{nickolls2008}. A network with no regula
 as well as with one or both of the weight-decay and dropout regularization parameters
 supplied was trained on each dataset. A summary of all regression methods is presented in Table \ref{tab:regression-methods}.
 
-\begin{table*}[htbp]
-\renewcommand{\familydefault}{\sfdefault}\normalfont
-\centering
-\caption{\bf Regression Methods}
-
-\begin{tableminipage}{\textwidth}
-
-\input{g3_article/tables/regression_methods}
-\label{tab:regression-methods}
-\footnotesize  
-\end{tableminipage}
-\end{table*}
+\ifdefined\showtablesandfigures
+\input{g3_article/tables/regression_methods} % Label = tab:regression-methods.
+\fi
 
 Each regression technique was trained and evaluated on each phenotypic trait in all 10 cross-validation folds of each dataset.
 The correlation of the predicted and actual phenotypic values was taken for each fold, and the average and 
@@ -69,16 +60,9 @@ Arabidopsis, loblolly pine, maize, pig, and wheat datasets were collected from t
 or the supplementary information published with their respective papers \citep{loudet2002, resende2012, crossa2010, cleveland2012, thavamanikumar2015}.
 Species, authorship, marker, and sample information is summarized in Table \ref{tab:benchmark-datasets}.
 
-\begin{table*}[htbp]
-\renewcommand{\familydefault}{\sfdefault}\normalfont
-\centering
-\caption{\bf Benchmark Datasets}
-\begin{tableminipage}{\textwidth}
-\input{g3_article/tables/benchmark_datasets}
-\label{tab:benchmark-datasets}
-\footnotesize  
-\end{tableminipage}
-\end{table*}
+\ifdefined\showtablesandfigures
+\input{g3_article/tables/benchmark_datasets} % Label = tab:benchmark-datasets.
+\fi
 
 Marker calls were scaled to the range $[-1, 1]$ for all SNP information. If more than 20\% of
 marker calls were missing for a sample, the sample was discarded. If fewer than 20\% were missing,

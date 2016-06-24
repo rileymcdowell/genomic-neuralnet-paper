@@ -55,18 +55,9 @@ number of neurons, each of which apply an associated coefficient, bias, and
 mathematical transformation to their input and forward the 
 result on to every neuron in the subsequent layer forming a network (Figure \ref{fig:deepnet}).
 
-\begin{figure}[htbp]
-\renewcommand{\familydefault}{\sfdefault}\normalfont
-\centering
-\input{g3_article/figures/deepnet}
-\caption{A deep feedforward neural network. Many input marker calls are mapped 
-to one or more sequential hidden layers of neurons. For genomic selection, the
-input layer often consists of one neuron per marker and the output consists of a single
-neuron which combines the information from the final hidden layer to predict a phenotype or BLUP.
-The presence of more than one hidden layer indicates that a network is likely to learn
-higher order non-linear interactions, and can be called a deep network.}
-\label{fig:deepnet}
-\end{figure}
+\ifdefined\showtablesandfigures
+\input{g3_article/figures/deepnet} % Label = fig:deepnet
+\fi
 
 Once the network is defined, it must be exposed to input and desired output
 values, and adjusted to minimize error in output in a process known as training.

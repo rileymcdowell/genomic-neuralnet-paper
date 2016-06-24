@@ -1,2 +1,7 @@
 *
+!figures_tex/
+!tables_tex/
+!figures_pdf/
+!tables_pdf/
+!simple_images/
 !.gitignore

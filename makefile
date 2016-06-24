@@ -12,9 +12,12 @@ ARTICLE_TABLES = $(wildcard $(ARTICLE_TABLE_DIR)/*.tex)
 
 SIMPLE_DOC_DIR = simplified
 SIMPLE_DOC = simple_doc
+SIMPLE_DOC_PATH = $(SIMPLE_DOC_DIR)/$(SIMPLE_DOC)
 
-DOC_LATEX = htlatex 
-DOC_LATEX_OPT =
+HTML_LATEX = htlatex 
+HTML_LATEX_OPT = "xhtml,word" "symbol/!" "-cvalidate"
+
+TEMPLATE_MAKER = scripts/make_tex_template.py
 
 LATEX = pdflatex 
 LATEX_OPT = -file-line-error
@@ -24,9 +27,11 @@ PDF_VIEWER = evince
 LATEXMK = latexmk
 LATEXMK_OPT = -output-directory=./$(OUTPUT_DIR)
 
-.PHONY: clean all view
+.PHONY: clean all view articleview worddoc
 
 all : $(NAME).pdf
+
+article : $(OUTPUT_DIR)/$(ARTICLE).pdf
 
 view: $(NAME).pdf
 	$(PDF_VIEWER) $(NAME).pdf
@@ -49,24 +54,26 @@ $(OUTPUT_DIR)/$(NAME).pdf: $(OUTPUT_DIR)/$(NAME).aux $(OUTPUT_DIR)/$(NAME).bbl $
 $(OUTPUT_DIR)/$(NAME).aux: $(NAME).tex 
 	$(LATEXMK) $(LATEXMK_OPT) $(NAME)
 
-# Word Doc #
-
-$(OUTPUT_DIR)/$(SIMPLE_DOC).docx: $(OUTPUT_DIR)/$(SIMPLE_DOC).html
-	pandoc -f html -t docx -o $(OUTPUT_DIR)/$(SIMPLE_DOC).docx $(OUTPUT_DIR)/$(SIMPLE_DOC).html
-
-$(OUTPUT_DIR)/$(SIMPLE_DOC).html: $(SIMPLE_DOC_DIR)/$(SIMPLE_DOC).tex $(OUTPUT_DIR)/$(SIMPLE_DOC).bbl $(ARTICLE_FIGURES) $(ARTICLE_TABLES) 
-	# %O are the options passed to latexmk
-	# %S is the source .tex file
-	#$(LATEXMK) -pdf $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(SIMPLE_DOC_DIR)/$(SIMPLE_DOC)
-	$(DOC_LATEX) $(DOC_LATEX_OPT) $(SIMPLE_DOC_DIR)/$(SIMPLE_DOC)
-	mv $(SIMPLE_DOC)* $(OUTPUT_DIR)
-
 # Article #
 
 $(OUTPUT_DIR)/$(ARTICLE).pdf: $(ARTICLE_SRC_DIR)/$(ARTICLE).tex $(OUTPUT_DIR)/$(ARTICLE).bbl $(ARTICLE_FIGURES) $(ARTICLE_TABLES)
 	# %O are the options passed to latexmk
 	# %S is the source .tex file
 	$(LATEXMK) -pdf $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(ARTICLE_SRC_DIR)/$(ARTICLE)
+
+# Word Doc #
+
+$(OUTPUT_DIR)/$(SIMPLE_DOC).docx: $(OUTPUT_DIR)/$(SIMPLE_DOC).html
+	cp $(OUTPUT_DIR)/$(SIMPLE_DOC).html $(OUTPUT_DIR)/$(SIMPLE_DOC).html.bak
+	iconv -f iso-8859-1 -t utf-8 $(OUTPUT_DIR)/$(SIMPLE_DOC).html.bak -o $(OUTPUT_DIR)/$(SIMPLE_DOC).html
+	cd output && pandoc $(SIMPLE_DOC).html -o $(SIMPLE_DOC).docx 
+
+$(OUTPUT_DIR)/$(SIMPLE_DOC).html: $(SIMPLE_DOC_PATH).tex $(OUTPUT_DIR)/$(SIMPLE_DOC).bbl
+	cp $(OUTPUT_DIR)/$(SIMPLE_DOC).bbl .
+	$(HTML_LATEX) $(SIMPLE_DOC_PATH) $(DOC_LATEX_OPT) 
+	$(BIB) $(SIMPLE_DOC)
+	$(HTML_LATEX) $(SIMPLE_DOC_PATH) $(DOC_LATEX_OPT) # Again, now with bibliography entries.
+	mv simple_doc* $(OUTPUT_DIR) # Everything was dumped in makefile directory, so move it to output.
 
 # Utility #
 
@@ -79,10 +86,10 @@ $(OUTPUT_DIR)/$(ARTICLE).bbl: $(OUTPUT_DIR)/$(NAME).bbl
 $(OUTPUT_DIR)/$(NAME).bbl: $(OUTPUT_DIR)/$(NAME).aux
 	$(BIB) $(OUTPUT_DIR)/$(NAME).aux
 
-
 clean:
 	$(LATEXMK) -C $(NAME)
-	rm -f $(OUTPUT_DIR)/*
+	# Files contain a dot, directories don't.
+	rm -f $(OUTPUT_DIR)/*.*
 	rm -f ./$(NAME).pdf
 
 

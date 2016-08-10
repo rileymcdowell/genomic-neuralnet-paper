@@ -68,9 +68,15 @@ This turns the network training process into general
 function minimization problem, where the parameters to the function are the 
 weights and biases of the network neurons and the function to be 
 minimized is the squared differences between the network outputs and 
-the desired outputs. The process of propagating output error back 
+the desired true values. The process of propagating output error back 
 through a neural network is known as backpropagation, and has been used 
 and improved extensively since its description in the 1980s \citep{rumelhart1986}. 
+Typically, the training data is split evenly into representative, randomly 
+sampled collections of data called batches. The training algorithm
+exposes the network to each batch until they are depleted, after which the process
+is repeated. Each collection of batches is known as an epoch, and training typically
+involves applying backpropagation for several hundred epochs, or until the network
+converges to a globally minimum amount of prediction error.
 
 %Good post, good links to the 'deep' part of deep nets.
 %http://stats.stackexchange.com/questions/182734/what-is-the-difference-between-a-neural-network-and-a-deep-neural-network
@@ -87,7 +93,7 @@ to describe the construction and training of deep neural networks.
 
 Attempts to apply neural networks to genomic selection has resulted in overfitting of the 
 network to training data as well as concerns over the 
-computation complexity required to fit the model to datasets with many
+computation time required to fit the model to datasets with many
 markers across many genotypes \citep{heslot2012, gonzalez-recio2014}. 
 These results are not surprising. Multi-layer feedforward neural networks 
 are capable of approximating functions of arbitrary complexity to arbitrary 
@@ -107,15 +113,19 @@ themselves are often easily expressed with vector and matrix algebra and thus am
 Graphics Processing Unit (GPU) accelerated computing. Some report up to sixty-fold speedups 
 in training time \citep{sierra2010, schmidhuber2015}. 
 
-In this paper, we present the results of applying two types of regularization
+In this paper, we present the results of applying deep neural networks
+to genomic prediction. We explore two types of network regularization
 to deep neural networks. The first is a weight decay regularization
 which penalizes the weights $W$ with very large values 
-similar to ridge regression \citep{krogh1992}. The second is known as dropout 
-regularization, where subsets of neurons and their connections are removed 
-at random during training, encouraging subsets of the network to learn 
+similar to ridge regression \citep{krogh1992}. The second is dropout 
+regularization, in which a portion of neurons and their connections are removed 
+at random during each training epoch, encouraging subsets of the network to learn 
 to recognize input features independently. This allows neurons to adapt 
 and build independently operating units and prevents the 
 neurons from co-adapting, reducing overfitting \citep{srivastava2014}.  
+We also quantitatively evaluate the time required to train neural networks
+using both CPU and GPU based network fitting. Last, we compare the 
+performance of regularized networks with other competitive genomic prediction models.
 
 % For the introduction, authors should be mindful of the broad readership of the journal. i
 % The introduction should set the stage for the importance of the work to a generalist 

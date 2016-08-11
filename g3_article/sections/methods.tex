@@ -11,6 +11,11 @@ For statistical models with tunable hyperparameters, a grid-search of the parame
 space was conducted and the parameters that produced maximum accuracy on the hold-out
 data folds are used in the final analysis. 
 
+On occasion, we observed neural network outputs diverging to negative or positive infinity rather
+than a global or local optimum prediction. This can happen when the weights and biases of the 
+hidden layer neurons are initialized very far from the optimimum values. If an infinite prediction 
+was detected, the weights and biases were re-initialized and the was re-fit to the training data.
+
 The full analysis pipeline, including formatted datasets, quality control processes, 
 implementations of each model, and final hyperparameter settings are available in File S1 *TODO* and
 in a public repository on github \citep{mcdowell2016}.

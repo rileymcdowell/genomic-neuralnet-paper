@@ -61,7 +61,9 @@ result on to every neuron in the subsequent layer forming a network (Figure \ref
 
 Once the network is defined, it must be exposed to input and desired output
 values, and adjusted to minimize error in output in a process known as training.
-Error in the output of the network is propagated back through the hidden 
+The weights and biases are typically initialized by drawing from a
+random normal distribution. From this initial state, error in 
+the output of the network is propagated back through the hidden 
 layers, and the weights and biases are updated in the direction that would 
 decrease output error on many sets or subsets of the input data. 
 This turns the network training process into general 
@@ -76,7 +78,8 @@ sampled collections of data called batches. The training algorithm
 exposes the network to each batch until they are depleted, after which the process
 is repeated. Each collection of batches is known as an epoch, and training typically
 involves applying backpropagation for several hundred epochs, or until the network
-converges to a globally minimum amount of prediction error.
+weights and biases reach an equilibrium state that has converged to a 
+globally minimum amount of prediction error.
 
 %Good post, good links to the 'deep' part of deep nets.
 %http://stats.stackexchange.com/questions/182734/what-is-the-difference-between-a-neural-network-and-a-deep-neural-network

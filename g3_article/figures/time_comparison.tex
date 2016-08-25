@@ -1,0 +1,14 @@
+
+\begin{figure}[htbp]
+\renewcommand{\familydefault}{\sfdefault}\normalfont
+\centering 
+\includegraphics[width=\linewidth]{g3_article/figures/time_comparison.png}
+    \caption{Time to train identical networks on identical datsets using a dedicated CPU core
+             compared to a dedicated GPU card. For all datasets, a single hidden layer, unregularized 
+             neural network was trained for 10K epochs. Optimizations that could cause a network
+             to terminate training early were disabled so differences in network initialization
+             would not affect timing. Each CPU and GPU training example were compared using 
+             an independent samples T-test with $n=30$. Columns annotated with the same letter 
+             are not significantly different at the $\alpha=0.05$ level.}
+\label{fig:time-comparison}
+\end{figure}

@@ -1,24 +1,46 @@
-The results and discussion should not be repetitive. The results section should give a factual 
-presentation of the data and all tables and figures should be referenced; the discussion 
-should not summarize the results but provide an interpretation of the results, and should 
-clearly delineate between the findings of the particular study and the possible impact 
-of those findings in a larger context. Authors are encouraged to cite recent work 
-relevant to their interpretations. Present and discuss results only once, not in 
-both the Results and Discussion sections. It is sometimes acceptable to combine 
-results and discussion. The text should be as succinct as possible. 
-Heed Strunk and White's dictum: "Omit needless words!"
+
+\subsection*{Overall Performance}
 
 \ifdefined\showtablesandfigures
 \input{g3_article/tables/model_comparison_wrapper} % Label = tab:model-comparison
 \fi
 
+\subsection*{Regularized Network Performance}
+
+If a model is overfitted to training data, training data prediction accuracy is greater than 
+the accuracy observed when making predictions on new datasets. Because all measurements were collected 
+using five-fold cross validation sampling, models that overfit should exhibit lower accuracy. 
+The decreased performance of the unregularized networks on several datasets in Figure 
+\ref{fig-network-comparison} suggests that the overfitting problems 
+previously observed were limiting out-of-sample performance. Our results demonstrate that 
+applying one or more regularization methods to networks can improve their 
+predictive accuracy for genomic prediction problems.
+
 \ifdefined\showtablesandfigures
 \input{g3_article/figures/network_comparison} % Label = fig:network-comparison
 \fi
 
+\subsection*{Deep Network Performance}
+
 \ifdefined\showtablesandfigures
 \input{g3_article/figures/depth_comparison} % Label = fig:depth-comparison
 \fi
+
+\subsection*{GPU and CPU Training Time}
+
+Network training time was significantly different from CPU training time in all datasets (Figure \ref{fig:time-comparison}).
+For small networks trained on smaller datasets such as arabidopsis, CPU training completed significantly faster than GPU training, though only
+by a small magnitude. For small networks and all other datasets, as well as for all large networks, GPU training time was faster than 
+CPU training time on a per-core basis. For very large datasets such as the pig and loblolly datasets, CPU computing could not be 
+completed in under 24 hours, but could be completed by a dedicated GPU card during that time. These results confirm that the 
+speedups associated with GPU network training apply to genomic selection applications.  
+
+The results from Figure \ref{fig:time-comparison} compare a single Intel i7-4790K CPU core to a single Nvidia GTX 680 graphics card.
+However, most modern full-size computers posess multiple CPU cores, but few contain graphics cards with GPU compute capability. 
+Thus, choosing a network training method depends on computing hardware availability as well as required turnaround time. Cloud providers such 
+as Amazon Web Services (AWS) are becoming more popular, and make this choice somewhat less important. AWS provides both CPU and GPU rich 
+machines which can be rented at low cost and are charged by the hour. This makes it feasible to choose a training platform 
+that is most cost effective based on the quantity of data and desired network archetecture for any genomic selection application.
 
 \ifdefined\showtablesandfigures
 \input{g3_article/figures/time_comparison} % Label = fig:time-comparison

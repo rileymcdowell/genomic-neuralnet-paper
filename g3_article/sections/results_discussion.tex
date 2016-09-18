@@ -1,6 +1,34 @@
 
 \subsection*{Overall Performance}
 
+The unregularized neural network archetecture (N) was not a top performer for any of the six datasets. 
+At least one form of regularization outperformed the unregularized network for every dataset. 
+No network with only a single form of regularization was a best-in-dataset performer, but networks 
+with both dropout and weight decay were able to achive best-in-dataset performance on the Arabidopsis 
+- Flowering and Wheat - Time Young Microspore genomic prediction tasks. These results are summarized 
+in Table \ref{tab:model-comparison}.
+
+These results support the hypothesis that some type of regularization is required to achieve
+optimal performance in nerual network models. Additionally, a singular regularization strategy was
+not optimal for all datasets, indicating that the best regularization strategy for genomic prediction
+is dependent on the predicted species, trait, or population studied. 
+
+Dropout regularization tends to produce networks 
+that have reduced co-adaptation \citep{srivastava2014}. For genomic prediction tasks, this would
+indicate that the detection of rare combinations haplotypes specific to only one
+or two individuals are generally not learned or used for prediction. Instead, common haplotypes that persist across many
+different dropout iterations would be preferred by the network during training.
+
+Weight decay is an application of L2 regularization to neural networks \citep{krogh1992}. Like ridge regression, it prefers
+solutions that do not place large emphasis on any singular feature. For genomic prediction tasks, 
+this will produce models that perform well on traits with many predictive marker calls 
+with small effects. 
+
+For traits with a mixture of a few large-effect alleles and many small effect allels, some combination of 
+L1 and L2 regularization may be optimal. The elastic net (EN) model incorporates both of these regularization
+techniques, and is the top performer on two of the six datasets presented.
+
+
 \ifdefined\showtablesandfigures
 \input{g3_article/tables/model_comparison_wrapper} % Label = tab:model-comparison
 \fi

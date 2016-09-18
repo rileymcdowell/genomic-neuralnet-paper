@@ -9,13 +9,13 @@
 
 \newcommand{\etal} {\textit{et al.}}
 
-\newcommand{\loudet}        {\multirow{2}{*}{Loudet \etal ~2002}}
-\newcommand{\resende}       {\multirow{2}{*}{Resende \etal ~2012}}
-\newcommand{\crossa}        {\multirow{2}{*}{Crossa \etal ~2010}}
-\newcommand{\cleveland}     {\multirow{2}{*}{Cleveland \etal ~2012}}
-\newcommand{\thavamanikumar}{\multirow{2}{*}{Thavamanikumar \etal ~2015}}
-\newcommand{\phenom}        {\multirow{2}{*}{Phenotypic Measurement}}
-\newcommand{\blupm}         {\multirow{2}{*}{BULP}}
+\newcommand{\loudet}        {\multirow{2}{*}{\parbox{4.0em}{Loudet \etal ~2002}}}
+%\newcommand{\resende}       {\multirow{2}{*}{\parbox{4.5em}{Resende \etal ~2012}}}
+\newcommand{\crossa}        {\multirow{2}{*}{\parbox{4.0em}{Crossa \etal ~2010}}}
+%\newcommand{\cleveland}     {\multirow{2}{*}{\parbox{4.5em}{Cleveland \etal ~2012}}}
+\newcommand{\thavamanikumar}{\multirow{2}{*}{\parbox{4.5em}{Thavamanikumar \etal ~2015}}}
+\newcommand{\phenom}        {\multirow{2}{*}{\parbox{4.0em}{Measure-ment}}}
+\newcommand{\blupm}         {\multirow{2}{*}{BLUP}}
 
 
 \newcommand{\arabidopsis}   {\multirow{2}{*}{Arabidopsis}}
@@ -25,23 +25,23 @@
 \newcommand{\wheat}         {\multirow{2}{*}{Wheat}}
 
 
-\begin{tabularx}{\textwidth}{XXXXXX} %{ m{10em} X m{18em} m{4em} m{4em} m{12em} }
+\begin{tabularx}{\textwidth}{ m{7em} m{5em} m{10em} m{4em} m{4em} m{5em} }
 \hline
 \header Author & Species & Trait & Markers\footnote{Markers with greater than 20\% missing calls were filtered from analysis.} & Samples\footnote{Samples with missing phenotypic measurements or greater than 50\% missing marker calls were filtered from analysis.} & Dependent Variable \\
 \hline
-\loudet         & \arabidopsis & Days to flowering under short day length  & 69     & 415   & \phenom \\
-                &              & Dry matter accumulation - low resources   & 69     & 415   &         \\
+\loudet         & \arabidopsis & Days to flowering w/ short day length     & 69     & 415   & \phenom \\
+                &              & Low resource dry matter accumulation      & 69     & 415   &         \\
+%\hline
+%\resende        & \loblolly    & Crown width age 6 yrs                     & 4,700  & 861   & \phenom \\
+%                &              & Wood lignin age 4 yrs                     & 4,698  & 910   &         \\
 \hline
-\resende        & \loblolly    & Crown width at age 6 yrs                  & 4,700  & 861   & \phenom \\
-                &              & Wood lignin content at age 4 yrs          & 4,698  & 910   &         \\
-\hline
-\crossa         & \maize       & Grain yield in well-watered environment   & 1,135  & 264   & \phenom \\
+\crossa         & \maize       & Well-watered grain yield                  & 1,135  & 264   & \phenom \\
                 &              & Female flowering date                     & 1,148  & 284   &         \\
+%\hline
+%\cleveland      & \pig         & Trait 1 (low heritabilty)                 & 52,843 & 2,804 & \phenom \\
+%                &              & Trait 5 (high heritability)               & 52,843 & 3,184 &         \\
 \hline
-\cleveland      & \pig         & Trait 1 (low heritabilty)                 & 52,843 & 2,804 & \phenom \\
-                &              & Trait 5 (high heritability)               & 52,843 & 3,184 &         \\
-\hline
-\thavamanikumar & \wheat       & Time to young microspore (flowering time) & 797    & 324   & \blupm  \\
+\thavamanikumar & \wheat       & Time to young microspore                  & 797    & 324   & \blupm  \\
                 &              & Spike grain number                        & 797    & 324   &         \\
 \hline
 \end{tabularx}

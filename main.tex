@@ -1,83 +1,4 @@
-\documentclass[12pt]{report}
-
-% Required Packages
-\usepackage[utf8]{inputenc}
-\usepackage[titletoc]{appendix}
-\usepackage{multirow}
-\usepackage{caption}
-\usepackage{tikz}
-\usepackage{tabularx}
-\usepackage{url}
-\usepackage{ifthen}
-\usepackage{verbatim}
-\usepackage{blindtext}
-\usepackage{amsmath}
-\usepackage{natbib}
-\usepackage{textcomp}
-\usepackage[hypertexnames=false,linktocpage=true]{hyperref}
-\hypersetup{colorlinks=true,linkcolor=blue,anchorcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue,bookmarksnumbered=true,pdfview=FitB}
-
-\graphicspath{ {images/} }
-
-% Set ISU required margins for unbound manuscript.
-\usepackage[margin=1.0in]{geometry}
-
-% Allow frontmatter and mainmatter in an article instead of a book.
-\newcommand\frontmatter{%
-    \cleardoublepage
-    \pagenumbering{roman}}
-\newcommand\mainmatter{%
-    \cleardoublepage
-    \pagenumbering{arabic}}
-
-% ISU thesis wants specific ToC formatting.
-\usepackage{tocloft}
-\renewcommand{\contentsname}{\hfill\bfseries\Large TABLE OF CONTENTS\hfill}
-\renewcommand\cftaftertoctitle{\hfill}
-\renewcommand\cftchapfont{\bfseries\MakeUppercase}
-\renewcommand\cftchappresnum{\chaptername~}
-\renewcommand\cftchapaftersnum{.}
-\cftsetindents{chapter}{0em}{8em}
-\cftsetindents{section}{2em}{6em}
-\cftsetindents{subsection}{4em}{6em}
-
-% ISU thesis wants bold, centered, uppercase chapters.
-\usepackage{titlesec}
-\titleformat{\chapter}[display]
-    {\normalfont\Large\bfseries\centering}
-    {\MakeUppercase\chaptertitlename\ \thechapter}{0pt}{\Large\uppercase}
-\titlespacing*{\chapter}{0pt}{-30pt}{30pt}
-
-% ISU thesis wants bold, centered, IntialCaps sections.
-\titleformat{\section}[display]
-    {\normalfont\large\bfseries\centering}
-    {}{0pt}{\large}
-
-% ISU wants 16pt Chapters and 12pt text.
-% That makes for 14pt sections.
-\makeatletter
-\renewcommand\Large{\@setfontsize\Large\@xivpt{16}}
-\renewcommand\large{\@setfontsize\Large\@xivpt{14}}
-\makeatother
-
-% ISU wants double spacing.
-\usepackage{setspace}
-
-% ISU examples show indents in paragraphs even after centered headings.
-\usepackage{indentfirst}
-
-% ISU wants page numbers top and centered.
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{} % Clear all headers and footers.
-\fancyhead[C]{\textbf{\thepage}} % Put page # at top of page.
-\fancypagestyle{plain}{ % Do the same thing for the plain style.
-    \fancyhf{} 
-    \fancyhead[C]{\textbf{\thepage}}
-    }
-\renewcommand{\headrulewidth}{0pt}
-
-% Begin the document.
+\include{preamble}
 
 \begin{document}
 \frontmatter
@@ -91,12 +12,33 @@
 
 
 \mainmatter
+% Chapter #1 - General Introduction
 \input{chapters/general_intro/general_introduction}
-\input{chapters/general_conclusions/general_conclusions}
-%\input{simplified/simple_contents}
-%\includepdf[pages={-}]{output/g3_article.pdf}
-\input{chapters/literature_cited}
 
+% Chapter #2 - Article Contents
+\chapter{\Large Genomic Prediction with Deep Neural Networks} 
+\section*{ \normalfont\large A paper to be submitted to G3} 
+\section*{ \normalfont\large Riley McDowell and David Grant}
+\section{Abstract}
+\input{g3_article/sections/abstract}
+\section{Introduction}
+\input{g3_article/sections/introduction}
+\section{Materials and Methods}
+\input{g3_article/sections/methods}
+\section{Results and Discussion}
+\input{g3_article/sections/results_discussion}
+
+% Chapter #3 - General Conclusions
+\input{chapters/general_conclusions/general_conclusions}
+
+\singlespacing
+% References
+\phantomsection
+\input{chapters/literature_cited}
+\addcontentsline{toc}{chapter}{Literature Cited}
+
+% Appendix A - Raw Data
+\phantomsection
 \input{chapters/appendices/raw_data}
 \addcontentsline{toc}{chapter}{Appendix A. Raw Data}
 

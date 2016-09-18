@@ -27,7 +27,7 @@
         \path[yshift=0.0cm]
             node[hidden neuron] (H2-\name) at (\layersep * 2,-\y cm) {};
 
-    \node[output neuron, pin={[pin edge={->}]right:Prediction}, right of=H2-3] (0) {};
+    \node[output neuron, pin={[pin edge={->}]right:\small{Prediction}}, right of=H2-3] (out) {};
 
     \foreach \source in {1,...,5}
         \foreach \dest in {1,...,4}
@@ -38,12 +38,12 @@
             \path (H1-\source) edge (H2-\dest);
 
     \foreach \source in {1,...,5}
-        \path (H2-\source) edge (0);
+        \path (H2-\source) edge (out);
 
-    \node[annot, above of=I-1, node distance=1cm] (il) {Input Layer};
-    \node[annot, right of=il] (hl1) {Hidden Layer 1};
-    \node[annot, right of=hl1] (hl2) {Hidden Layer 2};
-    \node[annot, right of=hl2] {Output Layer};
+    \node[annot, above of=I-1, node distance=1cm] (il) {\small Input Layer};
+    \node[annot, right of=il] (hl1) {\small Hidden Layer 1};
+    \node[annot, right of=hl1] (hl2) {\small Hidden Layer 2};
+    \node[annot, right of=hl2] {\small Output Layer};
 \end{tikzpicture}
 
 \caption{A deep feedforward neural network. Many input marker calls are mapped 

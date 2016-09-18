@@ -25,7 +25,7 @@ BIB = bibtex
 PDF_VIEWER = evince
 
 LATEXMK = latexmk
-LATEXMK_OPT = -output-directory=./$(OUTPUT_DIR)
+LATEXMK_OPT = -pdf -output-directory=./$(OUTPUT_DIR)
 
 .PHONY: clean all view articleview worddoc
 
@@ -49,7 +49,7 @@ $(NAME).pdf: $(OUTPUT_DIR)/$(NAME).pdf
 $(OUTPUT_DIR)/$(NAME).pdf: $(OUTPUT_DIR)/$(NAME).aux $(OUTPUT_DIR)/$(NAME).bbl $(OUTPUT_DIR)/$(ARTICLE).pdf
 	# %O are the options passed to latexmk 
 	# %S is the source .tex file
-	$(LATEXMK) -pdf $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(NAME)
+	$(LATEXMK) $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(NAME)
 
 $(OUTPUT_DIR)/$(NAME).aux: $(NAME).tex 
 	$(LATEXMK) $(LATEXMK_OPT) $(NAME)
@@ -59,7 +59,7 @@ $(OUTPUT_DIR)/$(NAME).aux: $(NAME).tex
 $(OUTPUT_DIR)/$(ARTICLE).pdf: $(ARTICLE_SRC_DIR)/$(ARTICLE).tex $(OUTPUT_DIR)/$(ARTICLE).bbl $(ARTICLE_FIGURES) $(ARTICLE_TABLES)
 	# %O are the options passed to latexmk
 	# %S is the source .tex file
-	$(LATEXMK) -pdf $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(ARTICLE_SRC_DIR)/$(ARTICLE)
+	$(LATEXMK) $(LATEXMK_OPT) -pdflatex="$(LATEX) $(LATEX_OPT) %O %S" $(ARTICLE_SRC_DIR)/$(ARTICLE)
 
 # Word Doc #
 

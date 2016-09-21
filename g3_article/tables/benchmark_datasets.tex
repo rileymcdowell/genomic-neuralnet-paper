@@ -27,7 +27,7 @@
 
 \begin{tabularx}{\textwidth}{ m{7em} m{5em} m{10em} m{4em} m{4em} m{5em} }
 \hline
-\header Author & Species & Trait & Markers\footnote{Markers with greater than 20\% missing calls were filtered from analysis.} & Samples\footnote{Samples with missing phenotypic measurements or greater than 50\% missing marker calls were filtered from analysis.} & Dependent Variable \\
+    \header Author & Species & Trait & Markers\protect\footnotemark[1]  & Samples\protect\footnotemark[2] & Dependent Variable \\
 \hline
 \loudet         & \arabidopsis & Days to flowering w/ short day length     & 69     & 415   & \phenom \\
                 &              & Low resource dry matter accumulation      & 69     & 415   &         \\
@@ -48,5 +48,11 @@
 
 \label{tab:benchmark-datasets}
 \footnotesize  
+\raggedright
+
+\footnotemark[1] Markers with greater than 20\% missing calls were filtered from analysis.
+\\
+\footnotemark[2] Samples with missing phenotypic measurements or greater than 50\% missing marker calls were filtered from analysis.
+
 \end{tableminipage}
 \end{table*}

@@ -1,4 +1,4 @@
-\section{Introduction}
+\section{Introduction} \label{sec:gen-intro}
 
 Humans have been breeding plants for food since the dawn of agriculture. This process
 emerged from a haphazard form of artifical selection where farmers would save seed from the 
@@ -12,8 +12,6 @@ stage for agricultural giants such as Norman Borlaug, Henry A. Wallace, and othe
 options to breed plants for specific traits, and apply rigorous, scientifically-motivated 
 management practices which improve varieties and the yield of agruculture practice worldwide.
 
-% Pioner published "Developing a Superior Maize Hybrid"
-% https://www.pioneer.com/CMRoot/Pioneer/About_Global/news_media/media_library/articles/maize_hybrid.pdf
 As an example, in 1930, corn was an open-pollinated crop with an average 
 yield around 20-30 bu/ac. By 1960, field corn had was usually single-cross hybrids 
 producing twice the yield of those bred only two or three decades earlier. The implementation
@@ -21,26 +19,35 @@ agricultural practices that would drive the green revolution had been kicked off
 the stage was set for a rapid improvement in yield and genetic gain year-over-year in
 corn as well as many other crops. This improvement continued into the 2000s \citep{evenson2003}.
 
-% Common knowledge.
 The green revolution drove crop production yields higher through a combination of 
 improved agricultural practices and varieties that had greater yield potential
 and agronomic stability. By the year 2000, advances in agronomy were slowing, and 
 molecular breeding technologies were promising the next advancement in crop yield
-through a focus on a better understanding of crop DNA. Bt Corn was commercialized
-in 1996 and accounted for 63\% of U.S. grain corn by 2010 \citep{fernandez2012}. 
+through a focus on a better understanding of crop DNA. The advent of Bt Corn was the
+landmark technology delivering on the promise of biotechnology in agriculture.
+Bt corn was first commercialized in in 1996 and accounted for 63\% of U.S. grain 
+corn by 2010 \citep{fernandez2012}. 
 
-% Biotech starts with Bt but also drives genome sequencing, drives marker costs
-% down. Now data is cheaper than growing plots and taking phenotypic measurements.
-% Cue genomic selection.
+Biotechnology in agriculture is not limited only to transgenic traits. The cost of 
+DNA sequencing and genetic marker assays began to fall during as the green revolution
+came to a close. The cost of SNP assays has dropped so sharply that today it is 
+possible to apply them to many thousands of samples in large breeding programs \citep{hiremath2012}. 
+In many cases, it is less costly to genotype a seed than to grow it and observe its phenotype.
 
-Very recently, the monetary cost of using molecular techniques to measure and even modify plant
-genetics artificially has dropped significantly, ushering in an opportunity to inprove 
-the rate of genetic gain in plant breeding once again.
+Because a SNP assay captures the genes and thus a part of the genetic potential of an 
+individual, it is be possible to use the outcome of a SNP assay to predict the genetic
+potential of the sampled individual in a affordable way. This process is known 
+as genomic prediction, and when used to inform breeding 
+program selections is known as genomic selection. Genomic prediction is typically 
+applied early in a breeding program as a way to increase the overall selection 
+pressure in a breeding program to increase genetic gain. A review of literature
+and methods to perform this technique is presented in Section \ref{sec:lit-review}. 
 
-% Fehr's Principles of Cultivar Development.
 The genetic gain in a breeding program is directly related to a host of factors. A 
-general guideline to expected genetic gain each year in a generic inbred breeding 
-program is presented in equation \ref{eq:genetic_gain} \citep{fehr1987}.
+general guideline to expected genetic gain each year in an inbred breeding 
+program is presented in Equation \ref{eq:genetic_gain} \citep{fehr1987}. The equation is
+often used as a general guideline to explore whether changes in breeding strategy will
+have a positive or negative effect on genetic gain. 
 
 \begin{equation} \label{eq:genetic_gain}
 \begin{split}
@@ -59,24 +66,32 @@ program is presented in equation \ref{eq:genetic_gain} \citep{fehr1987}.
 \end{split}
 \end{equation}
 
-The goal of a breeding program is to maximize the total genetic gain per breeding cycle, 
-which consists of multiple years of breeding. Controllable ways to improve genetic gain 
-per cycle involve increasing the number of replications iand/or environments tested,
-increasing the number of plants within each experimental plot, or increasing overall selection pressure
-during the breeding year.
+From Equation \ref{eq:genetic_gain}, it is clear that improvements in genetic gain per year can
+be made by increasing the number of replications and/or environments tested, increasing the 
+number of plants within each experimental plot, or increasing overall selection pressure 
+during the breeding program. Genomic selection improves genetic gain by addressing 
+all of these at once.
 
-Genomic selection allows breeders to grow large cohorts of plants which would ordinarily be 
-tested in one location with one or two replications to establish a genetic value and instead 
-estimate the genetic value based on previously establised genetic effects. 
+\begin{itemize}
+    \item A breeder may grow many more plants than can be evaluated using field plots in 
+          early generations. This allows a program to increase the overall selection 
+          differential without reducing the number of new lines at the end of the breeding pipeline.
+    \item Because genomic prediction estimate genetic potential directly from genetic information,
+          genotype by environment interaction is reduced to zero.
+    \item In most scenarios, only one SNP assay is run per sample. When data collection is properly
+          calibrated and quality controlled this results in near zero measurement error. This reduces
+          within-plot and between-plot (or more accurately, within genotype and between genotype) 
+          variation from all sources to zero.
+\end{itemize}
+
+However, unlike the genetic gain equation, genomic prediction introduces prediction error to the 
+denominator of the equation. By comparing the magnitude of prediction error with the cost
+of executing early-generation SNP assays in a breeding program, it is possible to determine
+if genomic selection is beneficial to a breeding program. This thesis explores the application 
+of regularized neural networks to minimizing genomic selection prediction error. 
 
 
-This is a section of text about genomic selection. 
 
-Let's cite Gianola here \citep{gianola2006}.
 
-\blindtext
 
-% Modeling Approaches?
 
-\blindenumerate
-\blindtext

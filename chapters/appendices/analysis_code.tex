@@ -1,0 +1,20 @@
+\chapter*{Analysis Code} \label{app:analysis-code}
+
+The source code used to generate the analysis in this paper is available at 
+\url{https://github.com/rileymcdowell/genomic-neuralnet}. The \texttt{genomic\_neuralnet}
+directory contains the source code itself. The 
+\texttt{genomic\_neuralnet/analysis/optimize\_all.sh} script fits all available 
+models to all datasets when executed. Command line parameters are available for all python source
+code when executed with the \texttt{--help} command line argument. All genomic prediction models presented in this 
+paper are implemented in the \texttt{genomic\_neuralnet/methods/} directory. 
+
+To facilitate fitting thousands of model variants on each dataset, Amazon Web Services (AWS) 
+resources were utilized for pay by the hour compute capacity. A small compute cluster was 
+created containing a single head cluster node and a variable number of slave nodes depending
+on the current market price of AWS Elastic Compute Cluster (EC2) instance spot instances at that time.
+The head cluster node was initialized with the \texttt{cloud-init-master.sh} script in 
+the root source code directory. The slave nodes were initialized
+using either the \texttt{cloud-init-slave.sh} or \texttt{cloud-init-slave-gpu.sh} scripts
+depending on the absence or presence of a GPU on the node, respectively. All
+nodes were running Amazon Linux AMI 2016.03.3 as the base operating system.
+

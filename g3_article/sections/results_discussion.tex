@@ -1,11 +1,20 @@
 
 \subsection*{Overall Performance}
 
-The unregularized neural network archetecture (N) was not a top performer for any of the six datasets. 
-At least one form of regularization outperformed the unregularized network for every dataset. 
-No network with only a single form of regularization was a best-in-dataset performer, but networks 
-with both dropout and weight decay were able to achive best-in-dataset performance on the "Arabidopsis 
- - Flowering" and "Wheat - Time Young Microspore" genomic prediction tasks. These results are summarized 
+The unregularized neural network archetecture (N) was not a top performer for 
+any of the six datasets. The other unregularized network, ordinary least 
+squares (OLS) was the worst performer on every dataset. Ridge regression, 
+a model with only L2 normalization, performed best on one dataset. 
+LASSO regression, a form of L1 normalization that favors traits with few 
+markers associated with moderate effects was not best on any dataset. 
+Elastic Net is a regression technique that incorporates L2 and L1 
+regularization together in a single model and was optimal on one dataset. 
+Bayesian Ridge Regression incorporates L2 regularization, while also fitting 
+regression coefficients to a gaussian distribution. It did not perform optimally 
+on any problems, but frequenly performed above avreage. For the neural network family of 
+regressors, at least one form of regularization outperformed the unregularized 
+network for every dataset. Networks with both dropout and weight decay were 
+able to achive best-in-dataset performance on two prediction tasks. These results are summarized 
 in Table \ref{tab:model-comparison}.
 
 These results support the hypothesis that some type of regularization is required to achieve

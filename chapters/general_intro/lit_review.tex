@@ -137,10 +137,6 @@ degrees in data science that include statistics, mathematics, and computer
 science courses. Genomic prediction is one of many opportunities for data scientists
 to apply data science practices to plant and animal breeding.
 
-\subsection{Popular Models}
-
-Lorem Ipsum.
-
 \subsection{Neural Network Architecture} \label{ssec:neuralnets}
 
 Neural networks are a type of model frequently employed by data scientists
@@ -220,7 +216,7 @@ These results are not surprising. Multi-layer feedforward neural networks
 are capable of approximating functions of arbitrary complexity to arbitrary 
 accuracy if provided enough neurons in even a single hidden 
 layer. This property of neural networks is known as the 
-universal approximation theorem, and can result in 
+universal approximation theorem, and can result in
 overfitting if the weights of the network are not regularized in some way \citep{hornik1989}.
 
 Given the promising results from regularized and bayesian methods for 
@@ -255,5 +251,61 @@ performance of regularized networks with other competitive genomic prediction mo
 
 \subsection{Genomic Selection in a Breeding Program}
 
-Lorem ipsum.
+Genomic selection is practiced by all major plant breeding companies today. 
+Typically, this is accomplished by increasing the number of progeny evaluated
+early in a breeding program and practicing intense selection based on genomic
+prediction values. It is possible to phenotypically evaluate a randomly
+selected subset of a cohort of progeny, while genotyping the entire cohort. It is
+then trivial to build a genomic prediction model from the subset of the progeny
+with both phenotypic and genotypic data and use the resulting model to make 
+selections on the entire cohort. 
+
+One advantage to using genomic prediction methods over MAS is that the 
+patterns in genotypic data that are used for selections naturally regenerate
+new haplotypes after each recombination event. It has been hypothesized that 
+selecting directly on this information rather than on phenotypic measurements
+alone may help maintain diversity in a breeding program \citep{daetwyler2007}.
+Other work demonstrated that genetic gain per year could be improved
+by utilizing genomic selection rather than MAS in both a theoretical high-investment
+maize breeding program as well as a a low-investment winter wheat breeding program \citep{heffner2010}.
+
+Beyond improving genetic diversity and genetic gain of a breeding program, 
+genomic selection also may allow breeders to characterize the performance of 
+allele combinations in environments that are critical to a target market but
+are rarely observed. \citet{heffner2009} suggests that it may be possible to
+capture genotype by environment interaction by modeling genotype performance
+in severe weather years. The resulting models could be used to characterize 
+lines in non-severe years while still enabling selections for traits such as
+severe weather hardiness or severe drought tolerance.
+
+The adoption of genomic selection and the use of GEBVs in commercial plant
+breeding is broad. As molecular marker technology such as dense marker 
+arrays has become less expensive, adoption continues to increase. 
+\citet{heffner2009} offers the possibilty that breeding programs may 
+eventually transition to using genomic selection as a primary selection method
+in a breeding progam. Phenotypic evaluation, at least early in a breeding 
+program, could one day be used for training statistical models of genotypic 
+performance or updating models to improve predictions on new genotypes 
+or recombinations. These same models could then be used to identify 
+parent candidates without performing expensive field trials.
+Yield trials would only be strictly needed at the end of a breeding program
+prior to verify general agronomic performance prior to cultivar release.
+
+The future state described by \citet{heffner2009} where breeding program
+selections are driven primarily by data from predictive models rather than
+direct measurements is not unlike the transformation that is currently
+underway in other industries. Both of these transformations are driven by the 
+growth of data science as a field, though the moniker itself has not
+been adopted as widely as the techniques of the field.
+Advertising giants like Google and Facebook are hiring data scientists to develop
+ways to match customers with advertisements for products they are 
+most likely to purchase. Breeding companies are seeking individuals with the same skills to
+join their research programs and drive innovation in data analysis and
+interpretation beyond that which can be achived by classical statistics
+alone. As breeding companies apply genomic selection more widely, the choice of 
+mathematical model to use for making selections will become more important. 
+Small percentage improvements in accuracy could generate much larger
+improvements in genetic gain over the lifetime of a breeding program.
+
+
 

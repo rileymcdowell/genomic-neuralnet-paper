@@ -1,32 +1,28 @@
-Five benchmark datasets of paired phenotypic and genotypic marker data were predicted 
-using a collection of regression techniques. Benchmark species included three food crops, 
-one forestry species, and one animal species. Benchmark traits include a variety of high and low
-heritability traits with simple and complex genetic archetectures. Each dataset was divided
-into 10 partitions by drawing entries without replacement and predicted with each
-regression technique using ten-fold cross validation. The partitions of the data were 
-held constant across all regression techniques to facilitate a fair comparision of the
-prediction accuracy of each technique.
+Three benchmark datasets of paired phenotypic and genotypic marker data were predicted 
+using a collection of regression techniques. Three food crops were selected
+as benchmark species. Benchmark traits included both high and low heritability 
+traits with simple and complex genetic architectures. Each dataset was divided
+into five partitions by drawing entries without replacement and predicted with each
+regression technique using five-fold cross validation. This process was then repeated
+a second time to produce 10 randomized predictions for each regression technique on
+each dataset and trait. The partitions of the data were held constant across all 
+regression techniques to facilitate a fair comparison of the prediction accuracy of 
+each technique.
 
 For statistical models with tunable hyperparameters, a grid-search of the parameter 
-space was conducted and the parameters that produced maximum accuracy on the hold-out
-data folds are used in the final analysis. 
+space was conducted and the parameters as well as mean and standard deviation of
+prediction accuracies for each parameter combination was recorded. 
 
 On occasion, we observed neural network outputs diverging to negative or positive infinity rather
 than a global or local optimum prediction. This can happen when the weights and biases of the 
-hidden layer neurons are initialized very far from the optimimum values. If an infinite prediction 
-was detected, the weights and biases were re-initialized and the was re-fit to the training data.
+hidden layer neurons are initialized very far from the optimum values. To reduce
+the incidence of divergence, the first hundred epochs of neural network training
+were repeated twice, and the model with the lowest prediction error at that time was selected
+to continue training. This was found to eliminate divergent predictions.
 
 The full analysis pipeline, including formatted datasets, quality control processes, 
-implementations of each model, and final hyperparameter settings are available in File S1 *TODO* and
-in a public repository on github \citep{mcdowell2016}.
-
-%Manuscripts submitted to G3 should contain a clear description of the experimental design in sufficient detail so that 
-%the experimental analysis could be repeated by another scientist. If the level of detail necessary to explain the 
-%protocol goes beyond two paragraphs, give a short description in the main body of the paper and prepare a detailed 
-%description for supporting information.  For example, details would include indicating how many individuals were used, 
-%and if applicable how individuals or groups were combined for analysis. If working with mutants indicate how 
-%many independent mutants were isolated. If working with populations indicate how samples were collected 
-%and whether they were random with respect to the target population.
+implementations of each model, and final hyperparameter settings in file databases 
+are available in versioned files in a public repository on github \citep{mcdowell2016}.
 
 \subsection*{Statistical Analysis} 
 
@@ -39,43 +35,38 @@ techniques are implemented in the scikit-learn python package version 0.17.1 \ci
 A single parameterized neural network with dropout and weight-decay parameters was built using 
 the Keras modular neural network library \citep{chollet2015}. The neural network results presented in this
 manuscript were trained and evaluated using the default Theano backend \citep{team2016}. 
-All training was conducted on an NVIDIA GTX 680 graphics card with 4GB 
-of RAM using the CUDA 7.5 toolkit \citep{nickolls2008}. A network with no regularization,
-as well as with one or both of the weight-decay and dropout regularization parameters
-supplied was trained on each dataset. A summary of all regression methods is presented in Table \ref{tab:regression-methods}.
+Network training was conducted on a combination of a single NVIDIA GTX 680 graphics card with 4GB 
+of RAM and a cluster of NVIDIA GRID K520 graphics cards with 4GB of ram. Both cards used the 
+CUDA 7.5 toolkit \citep{nickolls2008}. A network with no regularization,
+as well as with either one or both of the weight-decay and dropout regularization parameters
+supplied was trained on each dataset. A summary of all regression methods is presented 
+in Table \ref{tab:regression-methods}.
 
 \ifdefined\showtablesandfigures
 \input{g3_article/tables/regression_methods} % Label = tab:regression-methods.
 \fi
 
-Each regression technique was trained and evaluated on each phenotypic trait in all 10 cross-validation folds of each dataset.
-The correlation of the predicted and actual phenotypic values was taken for each fold, and the average and 
+Each regression technique was trained and evaluated on each phenotypic trait in all ten (5*2) cross-validation 
+folds of each dataset. The correlation of the predicted and actual phenotypic values was taken for each fold, and the average and 
 standard deviation of the resulting correlation coefficients for each regression technique were reported.
-
-%Indicate which statistical analysis has been performed and describe the method and model applied. 
-%If many genes were examined simultaneously, or many phenotypes, a multiple comparison correction should be 
-%used to control the type I error rate, or a rationale for not applying a correction must be provided. 
-%The type of correction applied should be clearly stated. It should also be clear whether the p-values 
-%reported are raw, or after correction. Corrected p-values are often appropriate, but raw p-values 
-%should be available in the supporting materials so that others may perform their own corrections. 
 
 \subsection*{Benchmark Datasets}
 
-Arabidopsis, loblolly pine, maize, pig, and wheat datasets were collected from the author's web pages
-or the supplementary information published with their respective papers \citep{loudet2002, resende2012, crossa2010, cleveland2012, thavamanikumar2015}.
+Arabidopsis, maize, and wheat datasets were collected from the author's web pages
+or the supplementary information published with their respective papers \citep{loudet2002, crossa2010, thavamanikumar2015}.
 Species, authorship, marker, and sample information is summarized in Table \ref{tab:benchmark-datasets}.
 
 \ifdefined\showtablesandfigures
 \input{g3_article/tables/benchmark_datasets} % Label = tab:benchmark-datasets.
 \fi
 
-Marker calls were scaled to the range $[-1, 1]$ for all SNP information. If more than 20\% of
+Marker calls were scaled to the range $[0,1]$ for all SNP information. If more than 20\% of
 marker calls were missing for a sample, the sample was discarded. If fewer than 20\% were missing,
 the average value for that marker was imputed for the missing values with one exception: if data were 
 published with a marker imputation technique already applied, no further imputation was attempted.
 
 Individuals without phenotypic measurements were discarded from further analysis. A combination of phenotypic 
-measurements and deregressed breeding values were predicted, depending on which was provided by the authors.
+measurements and deregressed breeding values were predicted, depending on which measure was provided by the authors.
 
 In addition to their original publications, copies of each of the benchmark datasets as well 
 as modified versions formatted for compatibility with the analyses presented in 
@@ -83,17 +74,4 @@ this paper are available on github \citep{mcdowell2016}. The analysis framework
 is extensible and can be utilized to evaluate arbitrary datasets and predictive models
 with minimal coding requirements provided the statistical models are implemented
 in the python2.7 programming language.
-
-%At the end of the Materials and Methods section, include a statement on reagent and data availability. 
-%Please read the Data and Reagent Policy before writing the statement. Make sure to list the 
-%accession numbers or DOIs of any data you have placed in public repositories. List the file 
-%names and descriptions of any data you will upload as supplemental information. 
-%The statement should also include any applicable IRB numbers. You may include specifications for 
-%how to properly acknowledge or cite the data.
-%
-%For example: Strains are available upon request. File S1 contains detailed descriptions of all supplemental files. 
-%File S2 contains SNP ID numbers and locations. File S3 contains genotypes for each individual. 
-%Sequence data are available at GenBank and the accession numbers are listed in File S3. 
-%Gene expression data are available at GEO with the accession number: GDS1234. 
-%Code used to generate the simulated data is provided in file S4. 
 

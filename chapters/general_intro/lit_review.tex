@@ -1,6 +1,6 @@
 \section{Literature Review} \label{sec:lit-review}
 
-\subsection{QTL mapping and MAS}
+\subsection*{QTL mapping and MAS}
 
 The wide availability and reduced cost of molecular marker technology
 has created opportunities to perform marker assisted selection of genotypes
@@ -18,7 +18,7 @@ traits with a few large effect alleles with high heritability. However, when mak
 on traits with many contributing small effect alleles distributed widely 
 across a genome, MAS becomes less effective \citep{heffner2009}. 
 
-In order to leverage MAS for traits with diverse genetic architectures, is is
+In order to leverage MAS for traits with diverse genetic architectures, it is
 advisable to combine MAS on juvenile individuals and subsequent phenotypic
 selection on adults with favorable MAS scores \citep{lande1990}. This process, 
 known as two-stage selection, proved effective for improving
@@ -28,10 +28,11 @@ only utilizes select markers with significant QTL effects. The present cost of
 genome wide SNP assays has fallen dramatically enough that today individuals are
 frequently genotyped for hundreds, thousands, or even tens of thousands of SNPs. 
 Information in SNPs that are not significantly associated with a trait are lost 
-when applying MAS and two-stage selection, but could provide improved predictive 
-accuracy on individual's genetic value.
+when applying MAS and two-stage selection, but may still have an small effect on the
+expressed phenotype and thus could provide improved predictive 
+accuracy of individual's genetic value.
 
-\subsection{Genomic Prediction}
+\subsection*{Genomic Prediction}
 
 Unlike QTL mapping and associated MAS techniques, genomic prediction methods 
 attempt to predict phenotypes utilizing all available SNP marker data collected 
@@ -45,7 +46,7 @@ dependent on the genetic architecture of
 the predicted trait \citep{crossa2010, gonzalez-camacho2012, 
 resende2012, cleveland2012, thavamanikumar2015}.  From a mathematical perspective,
 models incorporating interactions between marker features have the 
-capacity to achieve higher accuracy by capturing non-additive effects. 
+capacity to achieve higher accuracy by capturing non-additive effects.
 Experimental results support this hypothesis \citep{gonzalez-camacho2012}. 
 Alternative prediction methods continue to be an active area of research 
 in plant and animal breeding \citep{koning2012}.
@@ -59,13 +60,13 @@ To differentiate breeding values estimated from genomic panels from breeding val
 calculated via traditional phenotypic measurements and best linear unbiased prediction (BLUP)
 models, the term genome estimated breeding value or GEBV was coined \citep{meuwissen2001}.
 
-\subsection{Choosing a Genomic Prediction Model}
+\subsection*{Choosing a Genomic Prediction Model}
 
 Genomic prediction presents a distinct mathematical challenge compared to MAS.
 When conducting MAS, a large number of individuals $n$ are evaluated at a
 comparatively smaller number of loci $p$. In a general sense, this corresponds 
 to solving an overdetermined system of linear equations. The large family of 
-regresson techniques that minimize a least-squares loss function are well
+regression techniques that minimize a least-squares loss function are well
 behaved on overdetermined systems. Genomic prediction is characterized by the opposite
 scenario where $n < p$. Typically a smaller number of individuals are genotyped
 at a larger number of marker loci. These problems can be solved using least squares regression,
@@ -81,7 +82,7 @@ is a L2 regularized ordinary least squares regression. The $\lambda$ parameter t
 the ridge regression model adjusts the penalty applied to large coefficients. Another common
 form of regularization is L1 regularization \citep{tibshirani1996}. L1 regularization penalizes the sum of the regression
 coefficients in least squares regression problems. Where L2 regularization prefers solutions that
-utilize all input features, L1 prefers solutions that set non-informative features coefficients
+utilize all input features to a small degree, L1 prefers solutions that set non-informative features coefficients
 to zero. Least absolute shrinkage and selection operator (LASSO) regression is an L1 regularized
 linear regression. These and other regularization techniques are described in the context
 of neural network models in Subsection \ref{ssec:neuralnets}.
@@ -89,12 +90,12 @@ of neural network models in Subsection \ref{ssec:neuralnets}.
 Different regularization techniques such as L1 and L2 regularization have a relationship
 to the genetic architecture of the trait they are predicting. If a trait has many small 
 effect markers, models incorporating L2 regularization are likely to perform better
-than unregularized models. Classical MAS traits with small number of large effect
+than unregularized models. Classical MAS traits with a small number of large effect
 markers may be best predicted with by algorithms incorporating L1 regularization. 
 Traits falling somewhere in between may do well with models incorporating a combination
 of L1 and L2 regularization such as the so-called elastic net regression \citep{zou2005}.
 
-A wide variety or regularization techinques exist. Some are broadly used and simple
+A wide variety or regularization techniques exist. Some are broadly used and simple
 to reason about like L1 and L2 regularization. Others are applicable only to certain 
 classes of mathematical models such as assumed prior distributions in bayesian
 regression methods. When attempting genomic prediction, it is critical to evaluate 
@@ -102,7 +103,7 @@ the available regularization techniques for multiple prediction methods ideally 
 a single model with zero or more regularization techniques in a data-driven way such 
 as cross validation. 
 
-\subsection{Data Science}
+\subsection*{Data Science}
 
 Concurrent with the advent of genomic prediction as a practice the popularity of the 
 interdisciplinary field known as data science has increased. Practitioners of data 
@@ -119,25 +120,25 @@ process of building predictive models from any data source.
 Data scientists have used their experience to improve existing statistical 
 models and tackle problems of immense complexity, some of which were previously 
 thought unsolvable. Considering only applications of neural networks, data scientists
-applied networks to recognize handwritten text, as well as identify spoken 
+applied networks to recognize handwritten text, as well as generate transcripts of spoken 
 words in real-time audio recordings \citep{lang1990}.
 Data scientists compared the performance of a neural networks model to a traditional 
 logistic regression model used to detect signals indicating epilepsy in electroencephalograph 
 readings and found the network unanimously outperformed the existing model \citep{subasi2005}.
-A complex neural network archetecture learned to play seven different Atari 2600 
+A complex neural network architecture learned to play seven different Atari 2600 
 games using screen pixels as input and training the network to maximize the "score" of
 the game it was trained on \citep{mnih2013}. These results demonstrate that data scientists
 can employ machine learning to solve problems or improve predictive accuracy on large and 
-complex datasets from a wide variety of technical fields.
+complex datasets from a wide variety of fields.
 
 The rise in successful outcomes from individuals employing data science
 methodologies has renewed interest in the machine learning field in both
 private and public sectors. Many universities are now offering advanced cross-disciplinary
 degrees in data science that include statistics, mathematics, and computer
-science courses. Genomic prediction is one of many opportunities for data scientists
+science training. Genomic prediction is one of many opportunities for data scientists
 to apply data science practices to plant and animal breeding.
 
-\subsection{Neural Network Architecture} \label{ssec:neuralnets}
+\subsection*{Neural Network Architecture} \label{ssec:neuralnets}
 
 Neural networks are a type of model frequently employed by data scientists
 for predictive modeling. Neural networks consist of layers of interconnected neurons
@@ -164,14 +165,13 @@ network (Figure \ref{fig:simplenet}).
 \input{g3_article/figures/simplenet.tex} % Label = fig:simplenet
 \fi
 
-
 Once the network is defined, it must be exposed to input and desired output
 values, and adjusted to minimize error in output in a process known as training.
 The weights and biases are often initialized by drawing from a
 random normal distribution. From this initial state, error in 
 the output of the network is propagated back through the hidden 
 layers, and the weights and biases are updated in the direction that would 
-decrease output error on many sets or subsets of the input data. 
+decrease output error on many randomly drawn subsets of the input data. 
 This turns the network training process into general 
 function minimization problem, where the parameters to the function are the 
 weights and biases of the network neurons and the function to be 
@@ -206,7 +206,7 @@ differentiate these deeper networks from prior work, resulting in
 the emergence of the phrase "deep learning" to describe the construction 
 and training of deep neural networks.
 
-\subsection{Neural Networks for Genomic Prediction}
+\subsection*{Neural Networks for Genomic Prediction}
 
 Attempts to apply neural networks to genomic prediction has resulted in overfitting of the 
 network to training data as well as concerns over the 
@@ -249,7 +249,7 @@ performance of regularized networks with other competitive genomic prediction mo
 % reader and draw the reader in to the specific study. The scope and impact of the 
 % work should be clearly stated.
 
-\subsection{Genomic Selection in a Breeding Program}
+\subsection*{Genomic Selection in a Breeding Program}
 
 Genomic selection is practiced by all major plant breeding companies today. 
 Typically, this is accomplished by increasing the number of progeny evaluated
@@ -281,9 +281,9 @@ severe weather hardiness or severe drought tolerance.
 The adoption of genomic selection and the use of GEBVs in commercial plant
 breeding is broad. As molecular marker technology such as dense marker 
 arrays has become less expensive, adoption continues to increase. 
-\citet{heffner2009} offers the possibilty that breeding programs may 
+\citet{heffner2009} offers the possibility that breeding programs may 
 eventually transition to using genomic selection as a primary selection method
-in a breeding progam. Phenotypic evaluation, at least early in a breeding 
+in a breeding program. Phenotypic evaluation, at least early in a breeding 
 program, could one day be used for training statistical models of genotypic 
 performance or updating models to improve predictions on new genotypes 
 or recombinations. These same models could then be used to identify 
@@ -301,7 +301,7 @@ Advertising giants like Google and Facebook are hiring data scientists to develo
 ways to match customers with advertisements for products they are 
 most likely to purchase. Breeding companies are seeking individuals with the same skills to
 join their research programs and drive innovation in data analysis and
-interpretation beyond that which can be achived by classical statistics
+interpretation beyond that which can be achieved by classical statistics
 alone. As breeding companies apply genomic selection more widely, the choice of 
 mathematical model to use for making selections will become more important. 
 Small percentage improvements in accuracy could generate much larger

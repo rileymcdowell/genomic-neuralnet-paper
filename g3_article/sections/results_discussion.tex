@@ -1,7 +1,7 @@
 
 \subsection*{Overall Performance}
 
-The unregularized neural network archetecture (N) was not a top performer for 
+The unregularized neural network architecture (N) was not a top performer for 
 any of the six datasets. The other unregularized network, ordinary least 
 squares (OLS) was the worst performer on every dataset. Ridge regression, 
 a model with only L2 normalization, performed best on one dataset. 
@@ -11,30 +11,37 @@ Elastic Net is a regression technique that incorporates L2 and L1
 regularization together in a single model and was optimal on one dataset. 
 Bayesian Ridge Regression incorporates L2 regularization, while also fitting 
 regression coefficients to a gaussian distribution. It did not perform optimally 
-on any problems, but frequenly performed above avreage. For the neural network family of 
-regressors, at least one form of regularization outperformed the unregularized 
-network for every dataset. Networks with both dropout and weight decay were 
-able to achive best-in-dataset performance on two prediction tasks. These results are summarized 
+on any problems, but frequently performed above average. For the neural 
+network family of regressors, at least one form of regularization 
+outperformed the unregularized network for every dataset. Networks with 
+both dropout and weight decay were able to achieve best-in-dataset 
+performance on two prediction tasks. These results are summarized 
 in Table \ref{tab:model-comparison}.
 
-These results support the hypothesis that some type of regularization is required to achieve
-optimal performance in nerual network models. Additionally, a singular regularization strategy was
-not optimal for all datasets, indicating that the best regularization strategy for genomic prediction
-is dependent on the predicted species, trait, or population studied. 
+These results support the hypothesis that some type of regularization 
+is required to achieve optimal performance in neural network models. 
+Additionally, a singular regularization strategy was not optimal for 
+all datasets, indicating that the best regularization strategy for 
+genomic prediction is dependent on the predicted species, trait, 
+or population studied. 
 
 Dropout regularization tends to produce networks 
-that have reduced co-adaptation \citep{srivastava2014}. For genomic prediction tasks, this would
-indicate that the detection of rare combinations haplotypes specific to only one
-or two individuals are generally not learned or used for prediction. Instead, common haplotypes that persist across many
-different dropout iterations would be preferred and associated with phenotypic performance by the network during training.
+that have reduced co-adaptation \citep{srivastava2014}. For genomic prediction 
+tasks, this would indicate that the detection of rare combinations haplotypes 
+specific to only one or two individuals are generally not learned or used for 
+prediction. Instead, common haplotypes that persist across many different 
+dropout iterations would be preferred and associated with phenotypic 
+performance by the network during training.
 
-Weight decay is an application of L2 regularization to neural networks \citep{krogh1992}. Like ridge regression, it prefers
-solutions that do not place large emphasis on any singular feature. For genomic prediction tasks, 
-this will produce models that perform well on traits with many predictive marker calls 
-with small effects. 
+Weight decay is an application of L2 regularization to neural networks 
+\citep{krogh1992}. Like ridge regression, it prefers solutions that do not place 
+large emphasis on any singular feature or interaction term. For genomic 
+prediction tasks, this will produce models that perform well on traits 
+with many predictive marker calls with small effects. 
 
-For traits with a mixture of a few large-effect alleles and many small effect allels, some combination of 
-L1 and L2 regularization may be optimal. The elastic net (EN) model incorporates both of these regularization
+For traits with a mixture of a few large-effect alleles and many small 
+effect alleles, some combination of L1 and L2 regularization may be optimal. 
+The elastic net (EN) model incorporates both of these regularization
 techniques, and is the top performer on two of the six datasets presented.
 
 Several models with notably high performance that were not included in this analysis include a
@@ -46,7 +53,7 @@ prediction tasks \citep{heslot2012, gianola2008}. Regularization in RKHS regress
 by favoring predictive functions with "smooth" functional forms. Standard implementations
 of the bayesian family of regressors as well as RKHS models were not included in this analysis
 because they do not yet have standard implementations in the python computing libraries used 
-to conducted the experiment presented in this article.
+to conduct the experiment presented in this article.
 
 \ifdefined\showtablesandfigures
 \input{g3_article/tables/model_comparison_wrapper} % Label = tab:model-comparison
@@ -81,8 +88,8 @@ those with 2187 ($3^7$) neurons were evaluated on all datasets. This number is l
 of markers in any dataset evaluated and may be enough to encode complex interactions in only a single
 layer.
 
-Networks with deep archetectures have proven effective on a wide variety of problems, but the largest
-improvents have occurred on problems with high dimensional input data. These include voice recognition 
+Networks with deep architectures have proven effective on a wide variety of problems, but the largest
+improvements have occurred on problems with high dimensional input data. These include voice recognition 
 tasks where vocal frequencies change over a time dimension or two-dimensional images change over 
 a time dimension such as in video playback. It is possible that the dimensionality of genomic 
 prediction tasks presented in this article are insufficient to benefit from the deep interaction 
@@ -105,13 +112,8 @@ as for all large networks, GPU training time was faster than CPU training time o
 per-core basis. These results confirm that the speedups associated 
 with GPU network training apply to genomic selection applications.  
 
-
-%For very large datasets such as the pig and loblolly datasets, CPU 
-%computing could not be completed in under 24 hours, but could be completed by a 
-%dedicated GPU card during that time. 
-
 The results from Figure \ref{fig:time-comparison} compare a single Intel i7-4790K CPU 
-core to a single Nvidia GTX 680 graphics card. However, most modern full-size computers posess 
+core to a single Nvidia GTX 680 graphics card. However, most modern full-size computers possess 
 multiple CPU cores, but few contain graphics cards with GPU compute capability. 
 Thus, choosing a network training method depends on computing hardware availability 
 as well as required turnaround time. Cloud providers such as Amazon Web Services (AWS) 
@@ -119,7 +121,7 @@ are becoming more popular, and make this choice somewhat less important. AWS
 provides both CPU and GPU rich machines which can be rented at low cost and 
 are charged by the hour. This makes it feasible to choose a training platform 
 that is most cost effective based on the quantity of data and desired network 
-archetecture for any genomic selection application.
+architecture for any genomic selection application.
 
 \ifdefined\showtablesandfigures
 \input{g3_article/figures/time_comparison} % Label = fig:time-comparison
@@ -130,7 +132,7 @@ archetecture for any genomic selection application.
 When combined with effective regularization techniques, neural networks can function
 as accurate and effective genomic prediction models with a low risk of overfitting
 to training data. When trained with GPU computation resources, concerns
-over total time to train are partially ameliorated. Searches for optimal archetectures or 
+over total time to train are partially ameliorated. Searches for optimal architectures or 
 regularization techniques can be automated in a time and cost effective 
 manner using cloud compute providers such as AWS.
 

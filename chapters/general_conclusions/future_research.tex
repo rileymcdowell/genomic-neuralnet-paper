@@ -5,10 +5,10 @@ Future research should directly compare neural network based genomic prediction
 models with other state-of-the-art models. The RKHS regression family of models
 has performed well on several prediction tasks \citep{heslot2012, crossa2010, gonzalez-recio2014, gianola2006}.
 In order to properly evaluate these models, a flexible model fitting
-and evaluation model architecture such as the one built for this paper should
-be developed. The bayesian alphabet models have also performed notably well on
+and evaluation model architecture such as the one built for this paper will be
+needed. The Bayesian Alphabet models have also performed notably well on
 a wide variety of problems \citep{heslot2012, crossa2010, thavamanikumar2015}.
-These also should be included as a direct comparison with regularized neural networks.
+These also should be included in comparisons with regularized neural networks.
 Particular focus must be placed on measurable aspects of the genetic architecture 
 of a trait that are correlated with the performance of a particular model. This will 
 enable better modeling decisions during the development of a genomic selection program.
@@ -17,7 +17,7 @@ enable better modeling decisions during the development of a genomic selection p
 
 This study examined the effects of dropout and L2 normalization on neural networks. It 
 did not consider alternative regularization techniques which exist for MLP neural
-networks. While LASSO regression utilizes L1 regularization and were evaluated, 
+networks. While LASSO regression utilizes L1 regularization and was evaluated, 
 L1 regularization on network weights was not evaluated 
 to reduce the total number of network parameters evaluated in this study. 
 Still other regularizers exist such as activity and bias regularization which 
@@ -26,10 +26,10 @@ respectively. Both of these forms of regularization
 can be applied in an L1 and L2 sense. Another series of regularizers are more commonly
 known as constraints, which constrain network various subsets of network parameters 
 within bounds, within norms, or to positive real numbers. Unlike many of the 
-linear or bayesian regression techniques evaluated in this and other studies, 
+linear or Bayesian regression techniques evaluated in this and other studies, 
 the family of fully-connected neural networks are amenable to dozens of different 
 regularization techniques for thousands of different network architectures. This poses
-a kind of combinatorics challenge when attempting to select a single optimal network 
+a combinatorics challenge when attempting to select a single optimal network 
 architecture. However, this also creates opportunities to identify networks that 
 best model the genetic architecture and thus achieve the highest predictive 
 accuracy on a given genomic prediction task.
@@ -40,10 +40,10 @@ Neural networks are robust to input feature transformations. It is typical
 to transform inputs to a real number in the range $[0,1]$ prior to using 
 an input as a model feature. Molecular marker arrays typically output values that
 can be linearly scaled within this range, but other values can be easily included
-in addition to marker calls. Several methods can be used to encode non-marker information
-to improve predictive accuracy. These could include location or population information using
+in addition to marker calls. Several methods could be used to encode non-marker information
+to improve predictive accuracy. These include location or population information using
 a one-hot encoding transformation. Weather information, on daily or weekly intervals could
-be included and allowed to interact with marker calls to produce accurate phenotypic estimates.
+be included and allowed to interact with marker calls to improve phenotypic estimates.
 Sophisticated models such as these could be reverse-engineered to estimate optimal
 genetic combinations for performance in particular environments. Like other regression
 models, the more features that are included in the model, the more regularization is needed
@@ -51,16 +51,16 @@ to prevent overfitting and produce predictive outputs. Many other input features
 can be conceived to augment the information leveraged by a network when making
 a prediction. While neural networks pose the aforementioned combinatoric architecture
 challenge, they are unique in accepting large numbers of inputs from diverse 
-sources of data. Practically any information that a human could leverage when making
+sources of data. Practically any information that a human could use when making
 a prediction can be transformed to a $[0,1]$ scale and leveraged by a
 network. In this way, networks can form so-called expert systems that perform
-similar to a human expert on a task.
+in ways that are similar to that of a human expert.
 
 \subsection*{Larger Datasets}
 
 This study examined both small and medium density marker datasets. Datasets with
 many thousands of marker calls were not included due to time and budgetary constraints.
-Future genomic prediction research needs to include larger datasets with $p \gg n$. Several
+Future genomic prediction research should include larger datasets with $p \gg n$. Several
 examples of these datasets are available in the literature \citep{resende2012, cleveland2012}.
 
 \subsection*{Radial Basis Function Networks}
@@ -73,11 +73,11 @@ problems \citep{gonzalez-camacho2012}.
 
 \subsection*{Final Remarks}
 
-Considerable additional research is needed to determine the performance of 
+Additional research is needed to determine the performance of 
 neural networks relative to other state-of-the-art models. This process can
 be accelerated by leveraging GPU computation to more quickly evaluate
-large numbers of complex networks. Transistor density will continues to
-increase by Moore's law \citep{moore1965}, and GPU computational capacity will subsequently
-increase, shrinking networks computational demands and making them more
+large numbers of complex networks. As transistor density continues to
+increase \citep{moore1965}, and GPU computational capacity subsequently
+increases, a network's computational demands will decrease thus making them more
 attractive for use in genomic prediction tasks as well as in other domains.
 

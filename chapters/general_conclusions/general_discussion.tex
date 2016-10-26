@@ -3,52 +3,56 @@
 There are four primary goals of the work presented in this thesis.
 
 \begin{itemize}
-    \item Explore the effect of GPU computing on neural network training time.
-    \item Determine the effect of adding additional hidden layers to neural 
-          network models for genomic prediction.
-    \item Explicitly state the relationship between model regularization and 
-          the genetic architecture of traits. Explain how the concept of 
-          regularization is shared across many statistical models.
     \item Demonstrate whether neural network models can exhibit competitive 
           accuracy on public datasets.
+    \item Explicitly determine the relationship between model regularization and 
+          the genetic architecture of traits. Explain how the concept of 
+          regularization is shared across many statistical models.
+    \item Determine the effect of adding additional hidden layers to neural 
+          network models for genomic prediction.
+    \item Explore the effect of GPU computing on neural network training time.
 \end{itemize}
 
-To achieve these goals, six public genomic prediction tasks were collected and a
-model fitting framework was created. A combination of CPU and GPU resources were
+To achieve these goals, six public genomic datasets were collected and an
+experimental framework was created to test several genomic prediction models.
+A combination of CPU and GPU resources were
 used to fit nine statistical models including four neural network models
 to each of the six datasets while collecting information on training 
 time as well as final prediction accuracy. 
 
-Previous studies expressed concerns over the computational complexity of fitting
-neural network models \citep{heslot2012,gonzalez-recio2014}. These results show
+Previous studies have raised concerns about the computational complexity of fitting
+neural network models \citep{heslot2012,gonzalez-recio2014}. Our results show
 that training neural networks using GPU resources drastically
-reduces the rate at which training time grows with the sample size, marker count,
+reduces the rate at which training time grows with sample size, marker count,
 and network complexity (Figure \ref{fig:time-comparison}). The improvement in 
-training time was so large that growth in total time to train was sub-linear
+training time we observed was so large that growth in total time to train was sub-linear
 across all three measures of complexity. This is because the compute capacity 
-of modern GPUs is so large that the processing bottleneck is in moving data 
-to and from the memory on the GPU hardware itself, rather than executing 
-the matrix calculus required to fit the model. Hardware manufacturers are 
-aware of this limitation and continue to increase the speed of the hardware 
-buses that move data between computer hardware components. Concerns about 
-computation complexity when fitting networks are no longer valid on small 
-to medium sized datasets such as those presented in this paper. As hardware
-improves, even the largest of datasets will be able to move rapidly between 
-hardware components, moving the model fitting bottleneck to the capacity of the
+of modern GPUs is so large that the processing bottleneck is not the matrix calculus
+required to fit the model but rather moving data to and from the memory on 
+the GPU hardware. Hardware manufacturers are aware of this limitation 
+and continue to increase the speed of the hardware 
+buses that move data between computer hardware components. Our results
+demonstrate that concerns about computation complexity when fitting 
+networks are no longer valid on small to medium sized datasets such as 
+those presented in this paper. We anticipate that as hardware improves, 
+even the largest of datasets will be able to move rapidly between hardware components, 
+and the model fitting bottleneck will be capacity of the
 GPU to perform algebraic manipulations, much like CPU hardware is for most 
 model fitting tasks today.
 
 Adding additional hidden layers to the neural network models did not improve
 network performance on the six genomic prediction tasks presented in this study.
-This result was unexpected, as similar architectures have resulted in outstanding 
+This result was unexpected, as similar architectures have resulted in an outstanding 
 gain in accuracy on both new and old prediction problems \citep{subasi2005, lang1990, mnih2013}.
-There are many possible explanations for these results. First, the universal
+There are several possible explanations for these results. First, the universal
 approximation theorem predicts that sufficiently large single layer networks
 can approximate any function, including those that multi-layer networks can approximate.
 However, improved predictive accuracy from deep networks on some categories of problems
 in other domains suggests that there are occasions where, 
 at a minimum, deep networks train more effectively or reach training states that 
-produce better predictive accuracy on out of sample data.
+produce better predictive accuracy. It is not clear whether our results imply that
+genomic prediction is best performed with neural networks with a single hidden 
+layer or whether other neural network types might benefit from additional hidden layers.
 A second possibility is that the dimensionality of the genomic prediction problems
 presented in the selected datasets was insufficient to take advantage of the
 flexible learning process of deep neural networks. Problems where deep networks have
@@ -64,26 +68,26 @@ network could potentially learn. If so, this problem could be resolved by reduci
 measurement error or increasing sampling sizes in genomic prediction training datasets.  
 
 The regularization methods presented in this paper included standard methods such 
-as L1 and L2, as well as bayesian prior distributions and network dropout. 
+as L1 and L2, as well as Bayesian prior distributions and network dropout. 
 Given the relationship between regularization, genomic architecture, and model 
 performance, it is not surprising that the two unregularized prediction methods, 
 ordinary least squares and a standard MLP neural network, were not top performers 
 on any dataset (Table \ref{tab:model-comparison}). The performance of the neural 
 network models suggests that regularization is critical to achieve optimal 
-performance. This is likely to be true for any problem which predictive rather 
+performance. This is likely to be true for any problem which is predictive rather 
 than descriptive in nature.
 
 Finally, neural networks were top performers on three of the six datasets
 presented in this study. While this is a small sample size, it is
 sufficient to demonstrate that neural networks can function as 
-competitive genomic prediction models. Studies to date have failed 
+competitive genomic prediction models. Published studies to date have failed 
 to apply regularization to networks, resulting in a underestimation 
 of their predictive ability. A large body of work outside of plant 
 and animal breeding literature demonstrates that networks can 
 rapidly solve complex problems when applied appropriately.
 These results provide preliminary evidence that networks can be successful,
 but evaluation of regularized networks in comparison with RKHS and 
-bayesian alphabet methods is required before drawing conclusions about 
+Bayesian Alphabet methods will be required before drawing conclusions about 
 prediction accuracy.
 
 

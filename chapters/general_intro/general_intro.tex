@@ -3,7 +3,7 @@
 Humans have been breeding plants for food since the dawn of agriculture. This process
 emerged from a haphazard form of artificial selection where farmers would save seed from the 
 highest yielding, healthiest, and easiest to harvest plants to plant the following year. 
-Over thousands of years, this process produced many of the subspecies of plants of  
+Over thousands of years, this process produced many of the plants of  
 agricultural value today.
 
 Between 1930 and 1960, academic agricultural and plant breeding communities were setting the
@@ -14,36 +14,36 @@ of agriculture worldwide.
 
 As an example, in 1930, corn was an open-pollinated crop with an average 
 yield around 20-30 bu/ac. By 1960, field corn had transitioned to become a single-cross 
-hybrid crop producing twice the yield of those bred only two or three decades earlier. The implementation
-agricultural practices that would drive the green revolution had been kicked off, and
-the stage was set for a rapid improvement in yield and genetic gain year-over-year in
-corn as well as many other crops. This improvement continued into the 2000s \citep{evenson2003}.
+hybrid crop producing twice the yield of those only two or three decades earlier. The implementation
+of agricultural practices that would drive the green revolution had been kicked off, and
+the stage was set for a rapid improvement in yield and genetic gain in
+corn as well as many other crops which continued into the 2000s \citep{evenson2003}.
 
 The green revolution drove crop production yields higher through a combination of 
 improved agricultural practices and varieties that had greater yield potential
 and agronomic stability. By the year 2000, advances in agronomy were slowing, and 
 molecular breeding technologies were promising the next advancement in crop yield
-through a focus on a better understanding of crop DNA. The advent of Bt Corn was the
-landmark technology delivering on the promise of biotechnology in agriculture.
-Bt corn was first commercialized in in 1996 and accounted for 63\% of U.S. grain 
-corn by 2010 \citep{fernandez2012}. 
+through a focus on a better understanding of crop genetics and genomics. 
+The advent of Bt Corn was the landmark technology delivering on the promise of 
+biotechnology in agriculture. Bt corn was first commercialized in in 1996 and 
+accounted for 63\% of U.S. grain corn by 2010 \citep{fernandez2012}. 
 
 Biotechnology in agriculture is not limited only to transgenic traits. The cost of 
-DNA sequencing and genetic marker assays began to fall during as the green revolution
+DNA sequencing and genetic marker assays began to fall as the green revolution
 came to a close. The cost of SNP assays has dropped so sharply that today it is 
 possible to apply them to many thousands of samples in large breeding programs \citep{hiremath2012}. 
-In many cases, it is less costly to genotype a seed than to grow it and observe its phenotype.
+In many cases, it is now less costly to genotype a seed than to grow it and observe its phenotype.
 
-Because a SNP assay captures the genes and thus a part of the genetic potential of an 
-individual, it is possible to use the outcome of a SNP assay to predict the genetic
-potential of the sampled individual in a affordable way. This process is known 
-as "genome-enable prediction" hereafter called genomic prediction, and when used to inform breeding 
+Because a whole genome SNP assay can serve as an approximation for the genome sequence, 
+it is possible to a SNP haplotype to predict the genetic
+potential of a plant in a affordable way. This process is known 
+as "genome-enabled prediction" hereafter called genomic prediction, and when used to inform breeding 
 program selections is known as genomic selection. Genomic prediction is typically 
 applied early in a breeding program as a way to increase the overall selection 
-pressure in a breeding program to increase genetic gain. A review of literature
-and methods to perform this technique is presented in Section \ref{sec:lit-review}. 
+pressure in a breeding program and thus increase the rate of genetic gain. A review of the 
+literature and methods to perform this technique is presented in Section \ref{sec:lit-review}. 
 
-The genetic gain in a breeding program is directly related to a host of factors. A 
+The genetic gain in a breeding program is directly related to many factors. A 
 general guideline to expected genetic gain each year in an inbred breeding 
 program is presented in Equation \ref{eq:genetic_gain} \citep{fehr1987}. The equation is
 often used as a general guideline to explore whether changes in breeding strategy will
@@ -78,21 +78,21 @@ all of these facets simultaneously.
           differential without reducing the number of new lines at the end of the breeding pipeline.
     \item Because genomic prediction estimates genetic potential directly from genetic information,
           genotype by environment interaction is reduced to zero.
-    \item In most scenarios, only one SNP assay is run per sample. When data collection is properly
-          calibrated and quality controlled this results in near zero measurement error. This reduces
-          within-plot and between-plot (or more accurately, within genotype and between genotype) 
-          variation from all sources to zero.
+    \item When data collection is properly calibrated and quality controlled typically only one
+          SNP assay is required per sample. This results in near zero measurement error of the 
+          genetic information of a plant. This reduces within-plot and between-plot 
+          (or more accurately, within genotype and between genotype) variation from all sources to zero.
 \end{itemize}
 
-However, unlike the genetic gain equation, genomic prediction introduces prediction error to the 
-denominator of the equation. By comparing the magnitude of prediction error with the cost
-of executing early-generation SNP assays in a breeding program, it is possible to determine
-if genomic selection is beneficial to a breeding program. Reducing the total genomic
-prediction error thus has a direct positive impact on genetic gain. This thesis explores 
-the application of regularized neural networks to minimizing genomic selection prediction error. 
-
-
-
-
-
+However, unlike in the genetic gain equation, genomic prediction introduces prediction error to 
+the denominator of the equation. When practicing phenotypic selection, measurement errors 
+directly reduce the rate of genetic gain. When performing genomic prediction, measurement errors 
+affect the training data that the statistical model uses to make predictions, reducing its predictive 
+accuracy. This error can be minimized by by taking accurate measurement like with phenotypic selection, 
+but also benefits from exposure to data from related populations or previous testing years. 
+By comparing the magnitude of prediction error with the cost of executing early-generation 
+SNP assays in a breeding program, it is possible to determine if genomic selection is 
+beneficial to a breeding program. Reducing the total genomic prediction error thus has a 
+direct positive impact on genetic gain. This thesis explores the application of regularized 
+neural networks to minimizing genomic selection prediction error.
 

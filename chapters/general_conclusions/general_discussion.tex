@@ -20,25 +20,28 @@ used to fit nine statistical models including four neural network models
 to each of the six datasets while collecting information on training 
 time as well as final prediction accuracy. 
 
-Previous studies have raised concerns about the computational complexity of fitting
-neural network models \citep{heslot2012,gonzalez-recio2014}. Our results show
-that training neural networks using GPU resources drastically
-reduces the rate at which training time grows with sample size, marker count,
-and network complexity (Figure \ref{fig:time-comparison}). The improvement in 
-training time we observed was so large that growth in total time to train was sub-linear
-across all three measures of complexity. This is because the compute capacity 
-of modern GPUs is so large that the processing bottleneck is not the matrix calculus
-required to fit the model but rather moving data to and from the memory on 
-the GPU hardware. Hardware manufacturers are aware of this limitation 
-and continue to increase the speed of the hardware 
-buses that move data between computer hardware components. Our results
-demonstrate that concerns about computation complexity when fitting 
-networks are no longer valid on small to medium sized datasets such as 
-those presented in this paper. We anticipate that as hardware improves, 
-even the largest of datasets will be able to move rapidly between hardware components, 
-and the model fitting bottleneck will be capacity of the
-GPU to perform algebraic manipulations, much like CPU hardware is for most 
-model fitting tasks today.
+Neural networks were top performers on three of the six datasets
+presented in this study. While this is a small sample size, it is
+sufficient to demonstrate that neural networks can function as 
+competitive genomic prediction models. Published studies to date have failed 
+to apply regularization to networks, resulting in an underestimation 
+of their predictive ability. A large body of work outside of plant 
+and animal breeding literature demonstrates that networks can 
+rapidly solve complex problems when applied appropriately.
+These results provide preliminary evidence that networks can be successful,
+but evaluation of regularized networks in comparison with RKHS and 
+Bayesian Alphabet methods will be required before drawing conclusions about 
+prediction accuracy.
+
+The regularization methods presented in this paper included standard methods such 
+as L1 and L2, as well as Bayesian prior distributions and network dropout. 
+Given the relationship between regularization, genomic architecture, and model 
+performance, it is not surprising that the two unregularized prediction methods, 
+ordinary least squares and a standard MLP neural network, were not top performers 
+on any dataset (Table \ref{tab:model-comparison}). The performance of the neural 
+network models suggests that regularization is critical to achieve optimal 
+performance. This is likely to be true for any problem which is predictive rather 
+than descriptive in nature.
 
 Adding additional hidden layers to the neural network models did not improve
 network performance on the six genomic prediction tasks presented in this study.
@@ -67,29 +70,23 @@ large to mask the subtle interaction effects between markers that a deep
 network could potentially learn. If so, this problem could be resolved by reducing 
 measurement error or increasing sampling sizes in genomic prediction training datasets.  
 
-The regularization methods presented in this paper included standard methods such 
-as L1 and L2, as well as Bayesian prior distributions and network dropout. 
-Given the relationship between regularization, genomic architecture, and model 
-performance, it is not surprising that the two unregularized prediction methods, 
-ordinary least squares and a standard MLP neural network, were not top performers 
-on any dataset (Table \ref{tab:model-comparison}). The performance of the neural 
-network models suggests that regularization is critical to achieve optimal 
-performance. This is likely to be true for any problem which is predictive rather 
-than descriptive in nature.
-
-Finally, neural networks were top performers on three of the six datasets
-presented in this study. While this is a small sample size, it is
-sufficient to demonstrate that neural networks can function as 
-competitive genomic prediction models. Published studies to date have failed 
-to apply regularization to networks, resulting in a underestimation 
-of their predictive ability. A large body of work outside of plant 
-and animal breeding literature demonstrates that networks can 
-rapidly solve complex problems when applied appropriately.
-These results provide preliminary evidence that networks can be successful,
-but evaluation of regularized networks in comparison with RKHS and 
-Bayesian Alphabet methods will be required before drawing conclusions about 
-prediction accuracy.
-
-
-
+Previous studies have raised concerns about the computational complexity of fitting
+neural network models \citep{heslot2012,gonzalez-recio2014}. Our results show
+that training neural networks using GPU resources drastically
+reduces the rate at which training time grows with sample size, marker count,
+and network complexity (Figure \ref{fig:time-comparison}). The improvement in 
+training time we observed was so large that growth in total time to train was sub-linear
+across all three measures of complexity. This is because the compute capacity 
+of modern GPUs is so large that the processing bottleneck is not the matrix calculus
+required to fit the model but rather moving data to and from the memory on 
+the GPU hardware. Hardware manufacturers are aware of this limitation 
+and continue to increase the speed of the hardware 
+buses that move data between computer hardware components. Our results
+demonstrate that concerns about computation complexity when fitting 
+networks are no longer valid on small to medium sized datasets such as 
+those presented in this paper. We anticipate that as hardware improves, 
+even the largest of datasets will be able to move rapidly between hardware components, 
+and the model fitting bottleneck will be capacity of the
+GPU to perform algebraic manipulations, much like CPU hardware is for most 
+model fitting tasks today.
 

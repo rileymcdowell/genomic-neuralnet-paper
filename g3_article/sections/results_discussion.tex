@@ -10,7 +10,7 @@ markers associated with moderate effects was not best on any dataset.
 Elastic Net is a regression technique that incorporates L2 and L1 
 regularization together in a single model and was optimal on one dataset. 
 Bayesian Ridge Regression incorporates L2 regularization, while also fitting 
-regression coefficients to a gaussian distribution. It did not perform optimally 
+regression coefficients to a Gaussian distribution. It did not perform optimally 
 on any problems, but frequently performed above average. For the neural 
 network family of regressors, at least one form of regularization 
 outperformed the unregularized network for every dataset. Networks with 
@@ -18,46 +18,58 @@ both dropout and weight decay were able to achieve best-in-dataset
 performance on two prediction tasks. These results are summarized 
 in Table \ref{tab:model-comparison}.
 
-These results support the hypothesis that some type of regularization 
-is required to achieve optimal performance in neural network models. 
-Additionally, a singular regularization strategy was not optimal for 
-all datasets, indicating that the best regularization strategy for 
-genomic prediction is dependent on the predicted species, trait, 
-or population studied. 
-
-Dropout regularization tends to produce networks 
-that have reduced co-adaptation \citep{srivastava2014}. For genomic prediction 
-tasks, this would indicate that the detection of rare combinations haplotypes 
-specific to only one or two individuals are generally not learned or used for 
-prediction. Instead, common haplotypes that persist across many different 
-dropout iterations would be preferred and associated with phenotypic 
-performance by the network during training.
-
-Weight decay is an application of L2 regularization to neural networks 
-\citep{krogh1992}. Like ridge regression, it prefers solutions that do not place 
-large emphasis on any singular feature or interaction term. For genomic 
-prediction tasks, this will produce models that perform well on traits 
-with many predictive marker calls with small effects. 
-
-For traits with a mixture of a few large-effect alleles and many small 
-effect alleles, some combination of L1 and L2 regularization may be optimal. 
-The elastic net (EN) model incorporates both of these regularization
-techniques, and is the top performer on two of the six datasets presented.
-
-Several models with notably high performance that were not included in this analysis include a
-family of bayesian regression models known as the "bayesian alphabet" \citep{gianola2009}. These
-models apply regularization by assuming prior distributions over the number of contributing markers
-and the magnitude of their effects on a realized phenotype. Another category of model, Reproducing 
-Kernel Hilbert Spaces (RKHS) regression has shown promise on a wide variety of genomic 
-prediction tasks \citep{heslot2012, gianola2008}. Regularization in RKHS regression is achieved
-by favoring predictive functions with "smooth" functional forms. Standard implementations
-of the bayesian family of regressors as well as RKHS models were not included in this analysis
-because they do not yet have standard implementations in the python computing libraries used 
-to conduct the experiment presented in this article.
-
 \ifdefined\showtablesandfigures
 \input{g3_article/tables/model_comparison_wrapper} % Label = tab:model-comparison
 \fi
+
+These results support the hypothesis that some type of regularization 
+is required to achieve optimal performance in neural network models. 
+Additionally, no regularization strategy was optimal for 
+all datasets, indicating that the best regularization strategy for 
+genomic prediction is dependent on the predicted species, trait, 
+or population studied.  
+
+Dropout regularization tends to produce networks that have reduced 
+co-adaptation of neurons \citep{srivastava2014}. For genomic prediction 
+tasks, this means that haplotypes specific to only one or two 
+individuals would often be included in training epochs with 
+different sets of neurons enabled due to dropout regularization. Because
+networks require neurons to be enabled in order to backpropagate error 
+and detect patterns, more common haplotypes with consistent effects 
+that persist across many different dropout iterations would be 
+frequently present when particular sets of neurons are enabled and detect the
+common haplotype effects instead. The detection of rare haplotypes 
+that are only coincidentally and not causatively associated with 
+trait performance is thus far less likely, making dropout 
+regularization effective.
+
+Weight decay is an application of L2 regularization to neural networks 
+\citep{krogh1992}. Weight decay penalizes neurons with large weights values, 
+allowing the backpropagation algorithm to reduce total network error by finding 
+solutions with smaller weights across all inputs and interaction terms much like
+ridge regression. For genomic prediction tasks, this produces models 
+that perform well on traits with many predictive marker calls with small effects. 
+
+For traits with a mixture of a few large-effect alleles and many small-effect
+alleles, some combination of L1 and L2 regularization may be optimal. 
+The elastic net (EN) model incorporates both of these regularization
+techniques, and is the top performer on two of the six datasets presented.
+
+While it is simple to reason about model selection for hypothetical 
+genetic architectures, the architecture of a trait is rarely known prior to 
+conducting a detailed analysis. To ensure that a highly accurate 
+model is selected without knowledge of genetic architecture, 
+we recommend evaluating a variety of models and regularization 
+techniques using cross validation to identify a model to use for 
+making predictions or performing genomic selection. This eliminates 
+the need to understand trait architecture in order to select an appropriate 
+model.
+
+Several models with notably high performance were not available in standard packages for
+the python programming language at the time of this writing and were not included 
+in this analysis. These included a family of Bayesian regression models known 
+as the "Bayesian alphabet" \citep{gianola2009} and Reproducing Kernel Hilbert 
+Spaces (RKHS) regression \citep{gianola2006}.
 
 \subsection*{Regularized Network Performance}
 
@@ -65,12 +77,12 @@ If a model is overfitted to training data, training data prediction accuracy is 
 the accuracy observed when making predictions on new datasets. Regularization methods
 generally penalize models for overfitting to data. Because all measurements in this study 
 were collected using five-fold cross validation sampling, models that exhibited overfitting 
-should exhibit lower accuracy. 
+should exhibit lower accuracy.
 
 The decreased performance of the unregularized networks on several datasets in Figure 
-\ref{fig:network-comparison} suggests that overfitting is sometimes, but not always
-a problem with genomic prediction applications. These results demonstrate that 
-evaluating one or more regularization methods is critical to improve predictive accuracy for 
+\ref{fig:network-comparison} suggests that overfitting is sometimes a problem with 
+genomic prediction applications. These results demonstrate that evaluating one 
+or more regularization methods is critical to improve predictive accuracy for 
 genomic prediction.
 
 \ifdefined\showtablesandfigures
@@ -104,24 +116,51 @@ to mask the subtle interaction effects that would otherwise be learned by the ne
 
 \subsection*{GPU and CPU Training Time}
 
-Network training time was significantly different from CPU training time in all datasets 
-(Figure \ref{fig:time-comparison}).  For small networks trained on smaller datasets 
-such as arabidopsis, CPU training completed significantly faster than GPU training, 
-though only by a small magnitude. For small networks and all other datasets, as well 
-as for all large networks, GPU training time was faster than CPU training time on a 
-per-core basis. These results confirm that the speedups associated 
-with GPU network training apply to genomic selection applications.  
+Network GPU training time was significantly different from CPU training time in all but
+one genomic prediction task (Figure \ref{fig:time-comparison}). For small networks 
+trained on smaller datasets such as arabidopsis, CPU training completed significantly 
+faster than GPU training, though only by a small magnitude. For small networks and 
+all other datasets, as well as for all large networks, GPU training time was faster 
+than CPU training time on a per-core basis. These results confirm that the speedups 
+associated with GPU network training apply to genomic selection applications.
 
-The results from Figure \ref{fig:time-comparison} compare a single Intel i7-4790K CPU 
-core to a single Nvidia GTX 680 graphics card. However, most modern full-size computers possess 
-multiple CPU cores, but few contain graphics cards with GPU compute capability. 
-Thus, choosing a network training method depends on computing hardware availability 
-as well as required turnaround time. Cloud providers such as Amazon Web Services (AWS) 
-are becoming more popular, and make this choice somewhat less important. AWS 
-provides both CPU and GPU rich machines which can be rented at low cost and 
-are charged by the hour. This makes it feasible to choose a training platform 
-that is most cost effective based on the quantity of data and desired network 
-architecture for any genomic selection application.
+The time required to train a network for genomic prediction is related to
+the sample size, marker count, and complexity of the network architecture to be trained.
+The improvement in training time when using GPUs for model training was sub-linear across 
+all three of these measures. This is because the compute capacity of modern GPUs is 
+so large that the processing bottleneck is not the matrix algebra required 
+to perform backpropagation but rather the speed of moving data to and from 
+the memory on the GPU hardware. We frequently observed CPU utilization of 
+100\% during GPU training, indicating that the GPU was demanding resources
+at a rate of speed higher than the computer system as a whole could provide them.
+Consumer grade GPUs such as the NVIDIA Titan X are now available and have twice 
+as many CUDA cores as the GTX 680 as well a 50\% wider memory bus, making it potentially
+faster than the model used for this analysis. 
+
+It is possible to utilize additional CPU cores to linearly decrease the total time 
+needed to train a network, however it is uncommon to utilize multiple GPUs for 
+training the same network, and this is not supported by most software packages 
+due to limitations in how memory is shared between components in systems with 
+multiple GPUs. For example, a quad-core processor like the Intel i7-4790K CPU 
+can train a single network approximately four times faster than indicated in 
+Figure \ref{fig:time-comparison} if the entire CPU is assigned to a single
+network training task. In practice, networks are trained using k-fold
+cross validation, so the actual time to fit a family of networks and select
+an optimal architecture would be several times larger than these values.
+The growth in total time to train when using a CPU to train suggests that with 
+networks larger than the 128x64 network in Figure \ref{fig:time-comparison}, 
+CPU training time could become prohibitively large even with quad-core processors. 
+
+Thus, choosing a network training method depends on the size of the dataset and network
+to be trained. Low complexity networks train rapidly on CPUs, while larger networks
+require a GPU to train efficiently. Cloud compute infrastructure providers such 
+as Amazon Web Services (AWS) are becoming more popular, and make it much easier
+to evaluate training options without purchasing expensive computer hardware.
+AWS provides both CPU and GPU rich machines which can be rented at low cost 
+and are charged by the hour. This makes it feasible to try CPU and GPU training
+on sample data and select a training platform that is most time or cost effective based on the 
+complexity of the desired network architecture and the quantity of data available
+for training. 
 
 \ifdefined\showtablesandfigures
 \input{g3_article/figures/time_comparison} % Label = fig:time-comparison
@@ -129,19 +168,24 @@ architecture for any genomic selection application.
 
 \subsection*{Overall Conclusion}
 
+Breeders are sometimes interested in predicting the additive genetic value of 
+individuals rather than their expressed phenotype. Algorithms such as 
+RKHS regression and neural networks often produce genomic prediction 
+models with high predictive accuracy because they are able to capture 
+interaction effects between genotypes. This is not possible with additive 
+linear models such as ridge regression. As a result, caution must be exercised 
+when interpreting improved prediction accuracy as a better model in the 
+general case. Breeding scenarios where additive genetic value is of primary 
+importance may not benefit from the use of these models. However, when phenotypic 
+predictions are desirable, such as when breeding clonal crop varieties where 
+individual segregates are selected to become commercial varieties, models 
+incorporating interaction effects should perform better than models capturing 
+only additive effects.
+
 When combined with effective regularization techniques, neural networks can function
 as accurate and effective genomic prediction models with a low risk of overfitting
-to training data. When trained with GPU computation resources, concerns
+to training data. With the ready availability of GPU computation resources, concerns
 over total time to train are partially ameliorated. Searches for optimal architectures or 
 regularization techniques can be automated in a time and cost effective 
 manner using cloud compute providers such as AWS.
 
-While algorithms such as RKHS regression and neural networks sometimes produce
-genomic prediction models with high predictive accuracy. Models such as these
-capture interaction effects between groups of one or more markers and thus 
-predict phenotypes rather than GBLUPs. As a result, caution must be exercised when interpreting 
-improved prediction accuracy as a better model in the general case. Applications 
-to breeding scenarios where additive genetic gain is of lesser importance 
-may prove more effective. Examples include breeding clonal crop varieties or 
-making optimal breeding crosses that maximize the likelihood of producing
-transgressive segregates.

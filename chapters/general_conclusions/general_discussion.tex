@@ -45,7 +45,7 @@ than descriptive in nature.
 Adding additional hidden layers to the neural network models did not improve
 network performance on the six genomic prediction tasks presented in this study.
 This result was unexpected, as similar architectures have resulted in an outstanding 
-gain in accuracy on both new and old prediction problems \citep{subasi2005, lang1990, mnih2013}.
+gain in accuracy on both new and old prediction problems \citep{mnih2013, subasi2005, lang1990}.
 There are several possible explanations for these results. First, the universal
 approximation theorem predicts that sufficiently large single layer networks
 can approximate any function, including those that multi-layer networks can approximate.
@@ -75,9 +75,9 @@ that training neural networks using GPU resources drastically
 reduces the rate at which training time grows with sample size, marker count,
 and network complexity (Figure \ref{fig:time-comparison}). The improvement in 
 training time we observed was so large that growth in total time to train was sub-linear
-across all three measures of complexity. This is because the compute capacity 
-of modern GPUs is so large that the processing bottleneck is not the matrix calculus
-required to fit the model but rather moving data to and from the memory on 
+across all three of these measures. This is because the compute capacity 
+of modern GPUs is so large that the processing bottleneck is not the matrix algebra 
+required perform backpropagation but rather moving data to and from the memory on 
 the GPU hardware. Hardware manufacturers are aware of this limitation 
 and continue to increase the speed of the hardware 
 buses that move data between computer hardware components. Our results

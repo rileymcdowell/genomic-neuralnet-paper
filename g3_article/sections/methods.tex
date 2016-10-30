@@ -1,54 +1,63 @@
-Three benchmark datasets of paired phenotypic and genotypic marker data were predicted 
-using a collection of regression techniques. Three food crops were selected
-as benchmark species. Benchmark traits included both high and low heritability 
-traits with simple and complex genetic architectures. Each dataset was divided
-into five partitions by drawing entries without replacement and predicted with each
-regression technique using five-fold cross validation. This process was then repeated
-a second time to produce 10 randomized predictions for each regression technique on
-each dataset and trait. The partitions of the data were held constant across all 
-regression techniques to facilitate a fair comparison of the prediction accuracy of 
-each technique.
+\subsection*{Prediction Pipeline}
 
+%Three benchmark datasets of paired phenotypic and genotypic marker data were analyzed 
+%using a collection of regression techniques. Three species were selected
+%as benchmark species. Benchmark traits included both high and low heritability 
+%traits with simple and complex genetic architectures. 
+
+Each set of paired phenotypic and genotypic measurements were divided into 
+five partitions by drawing paired measurements without replacement. Each prediction model
+was trained on four partitions of the data and used to predict the remaining held-out partition. 
 For statistical models with tunable hyperparameters, a grid-search of the parameter 
-space was conducted and the parameters as well as mean and standard deviation of
-prediction accuracies for each parameter combination was recorded. 
+space was conducted and the model predicted out outcome will all sets of parameters in the grid.
+The prediction accuracy as well as any model parameters were recorded for the partition. The models 
+were then reset and the process was repeated holding out a different partition. This produced 
+five estimates of the prediction accuracy of each model. The datasets were then shuffled 
+and the pipeline was re-run to produce a total of ten prediction accuracy estimates for each model. 
 
-On occasion, we observed neural network outputs diverging to negative or positive infinity rather
-than a global or local optimum prediction. This can happen when the weights and biases of the 
-hidden layer neurons are initialized very far from the optimum values. To reduce
-the incidence of divergence, the first hundred epochs of neural network training
-were repeated twice, and the model with the lowest prediction error at that time was selected
-to continue training. This was found to eliminate divergent predictions.
+\subsection{Neural Network Implementation and Training}
+
+All neural network models were initialized using Glorot weight initialization \citep{glorot2010} 
+and trained for 12,100 epochs of four batches each. Backpropagation was performed using the 
+Nadam backpropagation algorithm with standard parameters \citep{dozat2015}. 
+The first 100 epochs were executed on separate networks, and the network with the lower 
+in-sample prediction accuracy was allowed to complete the remaining 12,000 epochs, 
+reducing the incidence of low accuracy due to poor initial network weights.
+The network learning rate was reduced by a factor of four after 10,100 epochs and reduced by further
+factor of four after 11,600 epochs as a simple form of learning rate decay.
 
 The full analysis pipeline, including formatted datasets, quality control processes, 
 implementations of each model, and final hyperparameter settings in file databases 
-are available in versioned files in a public repository on github \citep{mcdowell2016}.
+are available in versioned files in a public repository on github.com \citep{mcdowell2016}.
 
 \subsection*{Statistical Analysis} 
 
-Least squares, ridge, lasso, and elastic net regression were applied as examples of
-linear regression with and without normalization penalties. Bayesian 
-ridge regression is a bayesian version of ridge regression that assumes that 
-the residual error in the model is gaussian distributed. These five regression 
-techniques are implemented in the scikit-learn python package version 0.17.1 \citep{scikit-learn}.
+Least squares, ridge, LASSO, and elastic net regression were applied as examples of
+linear regression with and without normalization penalties. A Bayesian ridge regression 
+model was included as an example of a model with an enforced Bayesian prior distribution
+on coefficient values. These five regression techniques were available in the 
+scikit-learn python package version 0.17.1 \citep{scikit-learn}.
 
 A single parameterized neural network with dropout and weight-decay parameters was built using 
 the Keras modular neural network library \citep{chollet2015}. The neural network results presented in this
 manuscript were trained and evaluated using the default Theano backend \citep{team2016}. 
 Network training was conducted on a combination of a single NVIDIA GTX 680 graphics card with 4GB 
-of RAM and a cluster of NVIDIA GRID K520 graphics cards with 4GB of ram. Both cards used the 
+of RAM and a cluster of NVIDIA GRID K520 graphics cards with 4GB of RAM each. Both types GPUs used the 
 CUDA 7.5 toolkit \citep{nickolls2008}. A network with no regularization,
 as well as with either one or both of the weight-decay and dropout regularization parameters
-supplied was trained on each dataset. A summary of all regression methods is presented 
-in Table \ref{tab:regression-methods}.
+supplied was trained on each dataset. 
+
+A summary of all regression methods is presented in Table \ref{tab:regression-methods}.
 
 \ifdefined\showtablesandfigures
 \input{g3_article/tables/regression_methods} % Label = tab:regression-methods.
 \fi
 
-Each regression technique was trained and evaluated on each phenotypic trait in all ten (5*2) cross-validation 
-folds of each dataset. The correlation of the predicted and actual phenotypic values was taken for each fold, and the average and 
-standard deviation of the resulting correlation coefficients for each regression technique were reported.
+Each regression technique was trained and evaluated on each phenotypic trait in all 
+ten (5*2) cross-validation partitions of each dataset. The correlation of the 
+predicted and actual phenotypic values was taken for each held-out partition, 
+and the average and standard deviation of the resulting correlation coefficients 
+for each regression technique were reported.
 
 \subsection*{Benchmark Datasets}
 
@@ -73,5 +82,5 @@ as modified versions formatted for compatibility with the analyses presented in
 this paper are available on github \citep{mcdowell2016}. The analysis framework 
 is extensible and can be utilized to evaluate arbitrary datasets and predictive models
 with minimal coding requirements provided the statistical models are implemented
-in the python2.7 programming language.
+in the python 2.7 programming language.
 

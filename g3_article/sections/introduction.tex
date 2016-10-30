@@ -118,7 +118,7 @@ layers have been notoriously difficult to train. The amount of error
 attributed to a neuron by backpropagation decreases in magnitude with each
 additional layer added to the network. As a result, layers nearest the input train
 very slowly in a phenomenon known as the vanishing gradient problem \citep{hochreiter1998}. 
-Recently, a series of breakthroughs in neural network training along with well known
+Recently, a series of breakthroughs in neural network training along with well-known
 increases in computer processing speeds have allowed efficient training
 of deeper networks than were previously possible \citep{sutskever2013}.
 A history of the deep learning literature is available in \cite{lecun2015}.
@@ -150,19 +150,32 @@ themselves are often easily expressed with vector and matrix algebra. These algo
 well suited to execution on Graphics Processing Unit (GPU) hardware, with reports 
 of up to a sixty-fold speedup in training time \citep{sierra2010, schmidhuber2015}. 
 
-In this paper, we present the results of applying deep neural networks
-to genomic prediction. In addition we explore two types of network regularization
-to deep neural networks. The first is a weight decay regularization
-which penalizes the weights $W$ with very large values 
-similar to ridge regression \citep{krogh1992}. The second is dropout 
-regularization, in which a portion of neurons and their connections are removed 
-at random during each training epoch, encouraging subsets of the network to learn 
-to recognize input features independently. This allows neurons to adapt 
-and build independently operating units and prevents the 
-neurons from co-adapting, reducing overfitting \citep{srivastava2014}.  
-We also quantitatively evaluate the time required to train neural networks
-using both CPU and GPU based network fitting. Last, we compare the 
-performance of regularized networks with some other available genomic prediction models.
+To facilitate the evaluation of regularized neural networks, a neural 
+network prediction model was implemented supporting two regularization
+techniques. The first is a weight decay regularization which penalizes the 
+weights $W$ with very large values similar to ridge regression \citep{krogh1992}.
+The second is dropout regularization, in which a portion of neurons and 
+their connections are removed at random during each training epoch, 
+encouraging subsets of the network to learn to recognize input features 
+independently. This allows neurons to adapt and build independently 
+operating units, preventing the neurons from co-adapting and reducing 
+overfitting \citep{srivastava2014}. In order to support training deep networks, 
+network weights were initialized in a way that is known to cause
+deep networks to converge to a global minimum error more rapidly \citep{glorot2010}. 
+A modified form of backpropagation designed for deep network training 
+was also selected \citep{dozat2015}. Finally, a divergence detection method and 
+learning rate decay method were implemented to ensure models converged to
+a global minimum error.
+
+In this paper, we present the results of using this deep neural network
+configuration to perform genomic prediction on three benchmark datasets 
+from different species. A high and low heritability trait was selected 
+from each dataset for a total of six genomic prediction tasks. A collection 
+of regression techniques including single hidden layer and deep neural networks were 
+applied to each task. We also quantitatively evaluate the 
+time required to train neural networks using both CPU and GPU based 
+network fitting. Last, we compare the performance of the regularized network
+implementation with other available genomic prediction models in the collection.
 
 % For the introduction, authors should be mindful of the broad readership of the journal.
 % The introduction should set the stage for the importance of the work to a generalist 

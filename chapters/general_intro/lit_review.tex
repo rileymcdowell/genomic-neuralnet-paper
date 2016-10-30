@@ -75,33 +75,41 @@ addition to the least-squares loss function that is used to select between
 possible solutions to the underdetermined system.
 
 There are many forms of regularization. Perhaps the best known is L2 regularization, 
-which penalizes overly large regression coefficients in least squares regression 
-problems \citep{tibshirani1996}. L2 regularization prefers solutions that utilize all available 
-input features to make a prediction rather than favoring only a few features. Ridge regression
-is an example of an L2 regularized ordinary least squares regression. Another common
-form of regularization is L1 regularization \citep{tibshirani1996}. L1 regularization penalizes the sum of the regression
-coefficients in least squares regression problems. Where L2 regularization prefers solutions that
-utilize all input features to a small degree, L1 prefers solutions that set non-informative 
-feature's coefficients to zero. Least absolute shrinkage and selection operator (LASSO) 
-regression is an L1 regularized linear regression. These and other regularization techniques 
-are described in the context of neural network models in Subsection \ref{ssec:neuralnets}.
+which penalizes large regression coefficients in least squares regression 
+problems \citep{tibshirani1996}. Because L2 regularization penalizes the squares of the coefficients 
+in the model, solutions that place a small coefficient on many available input features 
+produces a lower value for the model's loss function than a model with equivalent accuracy 
+that uses large coefficients on only a few input features. This results in a trained
+model that tends to place a small coefficient on all available input features.  Ridge regression
+is an example of an L2 regularized ordinary least squares regression. 
+
+Another common form of regularization is L1 regularization \citep{tibshirani1996}. 
+L1 regularization penalizes the sum of the regression coefficients in least 
+squares regression problems. This causes solutions that set many input feature 
+coefficients to zero to produce a lower total loss value than alternatives 
+with equivalent prediction accuracy that utilize more input features. 
+As a result, L1 regularization tends to produce solutions that set non-informative 
+feature's coefficients to zero. Least absolute shrinkage and selection operator 
+(LASSO) regression is an L1 regularized ordinary least squares regression. Both L1 and L2
+regularization techniques can be applied to the weights of a neural network's neurons
+as described in Subsection \ref{ssec:neuralnets}.
 
 Different regularization techniques such as L1 and L2 regularization have a relationship
-to the genetic architecture of the trait they are predicting. If a trait is associated 
+to the genetic architecture of the trait they being used to predict. If a trait is associated 
 with many small effect markers, models incorporating L2 regularization are likely 
 to perform better than unregularized models. Classical MAS traits with a small 
 number of large effect markers may be best predicted by algorithms 
 incorporating L1 regularization. Traits falling somewhere in between may do well 
-with models incorporating a combination of L1 and L2 regularization such as the 
-so-called elastic net regression \citep{zou2005}.
+with models incorporating a combination of L1 and L2 regularization such as
+elastic net regression \citep{zou2005}.
 
-A wide variety or regularization techniques exist. Some are broadly used and simple
+A wide variety of regularization techniques exist. Some are broadly used and simple
 to reason about like L1 and L2 regularization. Others are applicable only to certain 
 classes of mathematical models such as assumed prior distributions in Bayesian
 regression methods. When choosing a tool for genomic prediction, it is critical to evaluate 
 the available regularization techniques with multiple prediction methods in a data-driven way.
-such comparisons will ideally result in a single model with zero or more regularization techniques 
-and which can be used to make accurate predictions for the traits of interest. 
+These comparisons will ideally identify a single best model with zero or more regularization techniques 
+which can be used to make accurate predictions for the traits of interest. 
 
 \subsection*{Data Science}
 
@@ -124,9 +132,9 @@ handwritten text or generate transcripts of spoken words from real-time audio re
 Data scientists compared the performance of a neural networks model to a traditional 
 logistic regression model used to detect signals indicating epilepsy in electroencephalograph 
 readings and found the network unanimously outperformed the existing model \citep{subasi2005}.
-A complex neural network architecture learned to play seven different Atari 2600 
-games using screen pixels as input and training the network to maximize the "score" of
-the game it was trained on \citep{mnih2013}. These results demonstrate that machine learning,
+A complex neural network architecture was used to play seven different Atari 2600 
+games using screen pixels as input and training the network to maximize a score metric 
+for the game it was trained on \citep{mnih2013}. These results demonstrate that machine learning,
 and neural networks in particular can be employed to solve problems or improve predictive accuracy
 on large and complex datasets from a wide variety of fields.
 
@@ -171,7 +179,7 @@ the output of the network is propagated back through the hidden
 layers, and the weights and biases are updated in the direction that would 
 decrease output error on many randomly drawn subsets of the input data. 
 This turns the network training process into a general 
-function minimization problem, where the parameters to the function are the 
+function minimization problem where the parameters to the function are the 
 weights and biases of the network neurons and the function to be 
 minimized is the squared differences between the network outputs and 
 the desired true values. The process of propagating output error back 

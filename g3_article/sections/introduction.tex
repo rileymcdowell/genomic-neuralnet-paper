@@ -74,7 +74,7 @@ output_{lk} = \sum_{i=1}^{n} f_l(w_{lki} * x_{i} + b_{lk})
 where $output_{lk}$ is the output from neuron $k$ in network layer $l$ having activation
 function $f_l$, weights $w_{lki}$ and bias $b_{lk}$.
 
-A neural network is a collection of neurons that map a 
+A neural network is thus a collection of neurons that map a 
 length $n$ input vector $x = (x_1, ..., x_n)$ through a series of $j$ 
 "hidden" layers $(l_1, ..., l_j)$. Each hidden layer consists of a variable 
 number of neurons, each of which apply an associated coefficient, bias, and 
@@ -158,13 +158,13 @@ The second is dropout regularization, in which a portion of neurons and
 their connections are removed at random during each training epoch, 
 encouraging subsets of the network to learn to recognize input features 
 independently. This allows neurons to adapt and build independently 
-operating units, preventing the neurons from co-adapting and reducing 
-overfitting \citep{srivastava2014}. In order to support training deep networks, 
-network weights were initialized in a way that is known to cause
-deep networks to converge to a global minimum error more rapidly \citep{glorot2010}. 
+operating units, preventing the neurons from co-adapting and reduces 
+overfitting \citep{srivastava2014}. In order to support training deep 
+networks, network weights were initialized in a way causes deep 
+networks to rapidly converge to a global minimum error \citep{glorot2010}. 
 A modified form of backpropagation designed for deep network training 
-was also selected \citep{dozat2015}. Finally, a divergence detection method and 
-learning rate decay method were implemented to ensure models converged to
+was also selected \citep{dozat2015}. Finally, divergence detection and 
+learning rate decay methods were implemented to ensure models converged to
 a global minimum error.
 
 In this paper, we present the results of using this deep neural network

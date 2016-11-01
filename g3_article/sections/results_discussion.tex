@@ -22,12 +22,18 @@ in Table \ref{tab:model-comparison}.
 \input{g3_article/tables/model_comparison_wrapper} % Label = tab:model-comparison
 \fi
 
-These results support the hypothesis that some type of regularization 
-is required to achieve optimal performance in neural network models. 
-Additionally, no regularization strategy was optimal for 
-all datasets, indicating that the best regularization strategy for 
-genomic prediction is dependent on the predicted species, trait, 
-or population studied.  
+Contrary to expectation, there was no consistent relationship between the 
+top preforming models and the species or trait evaluated, however several 
+models performed notably worse than the others on all prediction tasks.
+The two unregularized methods, OLS and N, as well as the L1 regularized 
+LASSO were never top performers.  The BRR model also was not a top 
+performer, but performed notably worse when predicting highly heritable 
+traits. These results support the hypothesis that regularization is 
+required to achieve optimal performance in neural network models 
+and that the optimal model and regularization strategy is dependent 
+on the specific species, trait, or population studied. Empirical 
+validation of model accuracy is an effective way to select a 
+model and regularization method for genomic prediction.
 
 Dropout regularization tends to produce networks that have reduced 
 co-adaptation of neurons \citep{srivastava2014}. For genomic prediction 
@@ -60,15 +66,16 @@ genetic architectures, the architecture of a trait is rarely known prior to
 conducting a detailed analysis. To ensure that a highly accurate 
 model is selected without knowledge of genetic architecture, 
 we recommend evaluating a variety of models and regularization 
-techniques using cross validation to identify a model to use for 
-making predictions or performing genomic selection. This eliminates 
+techniques using cross validation to identify a model that performs
+well for the specific trait(s) of interest to use for making 
+predictions or performing genomic selection. This eliminates 
 the need to understand trait architecture in order to select an appropriate 
 model.
 
 Several models with notably high performance were not available in standard packages for
 the python programming language at the time of this writing and were not included 
 in this analysis. These included a family of Bayesian regression models known 
-as the "Bayesian alphabet" \citep{gianola2009} and Reproducing Kernel Hilbert 
+as the "Bayesian Alphabet" \citep{gianola2009} and Reproducing Kernel Hilbert 
 Spaces (RKHS) regression \citep{gianola2006}.
 
 \subsection*{Regularized Network Performance}
@@ -104,7 +111,7 @@ Networks with deep architectures have proven effective on a wide variety of prob
 improvements have occurred on problems with high dimensional input data. These include voice recognition 
 tasks where vocal frequencies change over a time dimension or two-dimensional images change over 
 a time dimension such as in video playback. It is possible that the dimensionality of genomic 
-prediction tasks presented in this article are insufficient to benefit from the deep interaction 
+prediction tasks tested are insufficient to benefit from the deep interaction 
 effects that have proven effective in prediction tasks in other domains. 
 
 Yet another possibility is that phenotypic measurement error on many datasets is large enough 
@@ -121,8 +128,8 @@ one genomic prediction task (Figure \ref{fig:time-comparison}). For small networ
 trained on smaller datasets such as arabidopsis, CPU training completed significantly 
 faster than GPU training, though only by a small magnitude. For small networks and 
 all other datasets, as well as for all large networks, GPU training time was faster 
-than CPU training time on a per-core basis. These results confirm that the speedups 
-associated with GPU network training apply to genomic selection applications.
+than CPU training time on a per-core basis. These results confirm that the previously
+observed speedups associated with GPU network training apply to genomic selection applications.
 
 The time required to train a network for genomic prediction is related to
 the sample size, marker count, and complexity of the network architecture to be trained.
@@ -132,8 +139,8 @@ so large that the processing bottleneck is not the matrix algebra required
 to perform backpropagation but rather the speed of moving data to and from 
 the memory on the GPU hardware. We frequently observed CPU utilization of 
 100\% during GPU training, indicating that the GPU was demanding resources
-at a rate of speed higher than the computer system as a whole could provide them.
-Consumer grade GPUs such as the NVIDIA Titan X are now available and have twice 
+at a rate higher than the computer system as a whole could provide them.
+Consumer grade GPUs such as the NVIDIA Titan X are now available with twice 
 as many CUDA cores as the GTX 680 as well a 50\% wider memory bus, making it potentially
 faster than the model used for this analysis. 
 
@@ -147,13 +154,13 @@ Figure \ref{fig:time-comparison} if the entire CPU is assigned to a single
 network training task. In practice, networks are trained using k-fold
 cross validation, so the actual time to fit a family of networks and select
 an optimal architecture would be several times larger than these values.
-The growth in total time to train when using a CPU to train suggests that with 
+The growth in total time to train when using a CPU suggests that with 
 networks larger than the 128x64 network in Figure \ref{fig:time-comparison}, 
 CPU training time could become prohibitively large even with quad-core processors. 
 
 Thus, choosing a network training method depends on the size of the dataset and network
 to be trained. Low complexity networks train rapidly on CPUs, while larger networks
-require a GPU to train efficiently. Cloud compute infrastructure providers such 
+are more efficiently trained using GPUs. Cloud compute infrastructure providers such 
 as Amazon Web Services (AWS) are becoming more popular, and make it much easier
 to evaluate training options without purchasing expensive computer hardware.
 AWS provides both CPU and GPU rich machines which can be rented at low cost 
@@ -176,11 +183,12 @@ interaction effects between genotypes. This is not possible with additive
 linear models such as ridge regression. As a result, caution must be exercised 
 when interpreting improved prediction accuracy as a better model in the 
 general case. Breeding scenarios where additive genetic value is of primary 
-importance may not benefit from the use of these models. However, when phenotypic 
-predictions are desirable, such as when breeding clonal crop varieties where 
-individual segregates are selected to become commercial varieties, models 
-incorporating interaction effects should perform better than models capturing 
-only additive effects.
+importance may not benefit from the use of models that capture interactions
+between genes because these predictions contain non-heritable additive
+variation. However, when phenotypic predictions are desirable, such 
+as when breeding clonal crop varieties where individual segregates are 
+selected to become commercial varieties, models incorporating interaction 
+effects should perform better than models capturing only additive effects.
 
 When combined with effective regularization techniques, neural networks can function
 as accurate and effective genomic prediction models with a low risk of overfitting

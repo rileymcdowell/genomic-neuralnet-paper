@@ -14,22 +14,36 @@ There are four primary goals of the work presented in this thesis.
 
 To achieve these goals, six public genomic datasets were collected and an
 experimental framework was created to test several genomic prediction models.
-A combination of CPU and GPU resources were
-used to fit nine statistical models including four neural network models
-to each of the six datasets while collecting information on training 
-time as well as final prediction accuracy. 
+A combination of CPU and GPU resources was used to fit nine statistical 
+models including four neural network models to each of the six datasets 
+while collecting information on training time as well as final 
+prediction accuracy. 
+
+Contrary to expectation, there was no consistent relationship between
+the top performing models and the species or trait evaluated, however
+several models performed notably worse than the others on all prediction
+tasks (Table \ref{tab:model-comparison}). The unregularized ordinary
+least squares and the unregularized neural network, as well as the L1
+regularized LASSO were never top performers. The Bayesian ridge
+regression model also was not a top performer, but performed notably
+worse when predicting highly heritable traits. These results support the
+hypothesis that regularization is required to achieve optimal performance
+in neural network models and that the optimal model and regularization
+strategy is dependent on the specific species, trait, or population
+studied. Empirical validation of model accuracy is an effective way to 
+select a model and regularization method for genomic prediction.
 
 Neural networks were top performers on three of the six datasets
 presented in this study. While this is a small sample size, it is
 sufficient to demonstrate that neural networks can function as 
 competitive genomic prediction models. Published studies to date have failed 
 to apply regularization to networks, resulting in an underestimation 
-of their predictive ability. A large body of work outside of plant 
+of their predictive ability. A large body of work outside the plant 
 and animal breeding literature demonstrates that networks can 
 rapidly solve complex problems when applied appropriately.
-These results provide preliminary evidence that networks can be successful,
-but evaluation of regularized networks in comparison with RKHS and 
-Bayesian Alphabet methods will be required before drawing conclusions about 
+Our results provide preliminary evidence that networks can be successfully
+applied to plant breeding projects, comparison of regularized networks 
+to RKHS and Bayesian Alphabet methods will be required before drawing conclusions about 
 prediction accuracy.
 
 The regularization methods presented in this paper included standard methods such 
@@ -47,7 +61,7 @@ network performance on the six genomic prediction tasks presented in this study.
 This result was unexpected, as similar architectures have resulted in an outstanding 
 gain in accuracy on both new and old prediction problems \citep{mnih2013, subasi2005, lang1990}.
 There are several possible explanations for these results. First, the universal
-approximation theorem predicts that sufficiently large single layer networks
+approximation theorem predicts that a sufficiently large single layer network
 can approximate any function, including those that multi-layer networks can approximate.
 However, improved predictive accuracy from deep networks on some categories of problems
 in other domains suggests that there are occasions where, 
@@ -59,11 +73,13 @@ A second possibility is that the dimensionality of the genomic prediction proble
 presented in the selected datasets was insufficient to take advantage of the
 flexible learning process of deep neural networks. Problems where deep networks have
 made the largest improvements generally involve data that includes an additional dimension
-such as one-dimensional time series or two-dimensional imagery data. Aside from linkage, the markers used as 
-input for genomic prediction tasks are mostly independent. It is possible that 
-additional data density is required to observe the effects of neural networks, 
-such as full sequencing data which has an additional dimensional structure encoded 
-in the order of nucleotides along a strand of DNA. A third possibility is that 
+such as one-dimensional time series or two-dimensional imagery data. 
+
+Aside from linkage, the markers used as input for genomic prediction 
+tasks are mostly independent. It is possible that additional data density 
+such as full sequencing data which has an additional dimensional 
+structure encoded in the order of nucleotides along a strand of 
+DNA, is required to observe the effects of neural networks. A third possibility is that 
 the measurement error on the phenotypes examined in this study was sufficiently 
 large to mask the subtle interaction effects between markers that a deep 
 network could potentially learn. If so, this problem could be resolved by reducing 

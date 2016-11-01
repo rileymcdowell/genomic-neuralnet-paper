@@ -37,13 +37,15 @@ accuracy on a given genomic prediction task.
 \subsection*{Additional Input Features}
 
 Neural networks are robust to input feature transformations. It is typical 
-to transform inputs to a real number in the range $[0,1]$ prior to using 
-an input as a model feature. Molecular marker arrays typically output values that
+to transform inputs to a real number in the range $[0,1]$ prior to using them
+as input for a neural network. Molecular marker arrays typically output values that
 can be linearly scaled within this range, but other values can be easily included
 in addition to marker calls. Several methods could be used to encode non-marker information
-to improve predictive accuracy. These include location or population information using
-a one-hot encoding transformation. Weather information, on daily or weekly intervals could
-be included and allowed to interact with marker calls to improve phenotypic estimates.
+to improve predictive accuracy. These include location or population information that can
+be encoded using binary features to indicate membership in a particular population
+or that an evaluation was conducted in an environment where a pest was present for example.
+Non-binary inputs such as weather information on a daily or weekly interval could be 
+included and allowed to interact with marker calls to improve phenotypic estimates.
 Sophisticated models such as these could be reverse-engineered to estimate optimal
 genetic combinations for performance in particular environments. Like other regression
 models, the more features that are included in the model, the more regularization is needed
@@ -51,10 +53,10 @@ to prevent overfitting and produce predictive outputs. Many other input features
 can be conceived to augment the information leveraged by a network when making
 a prediction. While neural networks pose the aforementioned combinatoric architecture
 challenge, they are unique in accepting large numbers of inputs from diverse 
-sources of data. Practically any information that a human could use when making
-a prediction can be transformed to a $[0,1]$ scale and leveraged by a
-network. In this way, networks can form so-called expert systems that perform
-in ways that are similar to that of a human expert.
+sources of data. Practically any information can be transformed to 
+a $[0,1]$ scale and leveraged by a network. In this way, networks can 
+form so-called expert systems that perform in ways that are similar to 
+that of a human expert.
 
 \subsection*{Larger Datasets}
 

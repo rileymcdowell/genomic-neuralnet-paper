@@ -13,7 +13,7 @@ the associated markers can be leveraged for making selections on a population.
 Individuals in a population genotyped for previously identified QTL-associated
 markers can be selected based on the presence of desired alleles 
 and/or haplotypes in a process known as Marker Assisted Selection (MAS).
-MAS is usually effective on traits with a few large effect alleles with high 
+MAS is usually most effective for traits with a few large effect alleles with high 
 heritability. However, when making selections on traits with many contributing genes
 with small effect distributed widely across a genome, MAS becomes less 
 effective \citep{heffner2009}.
@@ -36,7 +36,7 @@ accuracy of individual's genetic value.
 
 Unlike QTL mapping and associated MAS techniques, genomic prediction methods
 attempt to predict phenotypes utilizing all available SNP marker data collected 
-from a population, allowing one of many possible statistical models to predict 
+from a population, using one of many possible statistical models to predict 
 the marker-trait associations in a data driven way \citep{meuwissen2001}. 
 The accuracy of genomic prediction relies on an appropriate choice of a 
 statistical model to capture the relationship between the genetic architecture
@@ -78,7 +78,7 @@ There are many forms of regularization. Perhaps the best known is L2 regularizat
 which penalizes large regression coefficients in least squares regression 
 problems \citep{tibshirani1996}. Because L2 regularization penalizes the squares of the coefficients 
 in the model, solutions that place a small coefficient on many available input features 
-produces a lower value for the model's loss function than a model with equivalent accuracy 
+produce a lower value for the model's loss function than a model with equivalent accuracy 
 that uses large coefficients on only a few input features. This results in a trained
 model that tends to place a small coefficient on all available input features.  Ridge regression
 is an example of an L2 regularized ordinary least squares regression. 
@@ -114,7 +114,7 @@ which can be used to make accurate predictions for the traits of interest.
 \subsection*{Data Science}
 
 As interest in using genomic prediction as a breeding tool grew, the research in 
-the interdisciplinary field known as data science has increased. Data scientists 
+the interdisciplinary field known as data science also increased. Data scientists 
 use machine learning and statistics to make 
 predictions, usually by applying ideas or techniques from a wide variety of domains 
 including mathematics, statistics, and computer science. Often, a data scientist's focus is to
@@ -138,7 +138,7 @@ for the game it was trained on \citep{mnih2013}. These results demonstrate that 
 and neural networks in particular can be employed to solve problems or improve predictive accuracy
 on large and complex datasets from a wide variety of fields.
 
-The successes has renewed interest in the machine learning field in both
+These successes have renewed interest in the machine learning field in both
 private and public sectors. Many universities now offer advanced cross-disciplinary
 degrees in data science that include statistics, mathematics, and computer
 science training. Genomic prediction is one of many opportunities for data scientists
@@ -159,7 +159,7 @@ output_{lk} = \sum_{i=1}^{n} f_l(w_{lki} * x_{i} + b_{lk})
 where $output_{lk}$ is the output from neuron $k$ in network layer $l$ having activation
 function $f_l$, weights $w_{lki}$ and bias $b_{lk}$.
 
-A neural network is a collection of neurons that map a 
+A neural network thus is a collection of neurons that map a 
 length $n$ input vector $x = (x_1, ..., x_n)$ through a series of $j$ 
 "hidden" layers $(l_1, ..., l_j)$. Each hidden layer consists of a variable 
 number of neurons, each of which apply an associated coefficient, bias, and 
@@ -287,7 +287,7 @@ direct measurements is not unlike the transformation that is currently
 underway in other industries. Both of these transformations are driven by the 
 growth of data science as a field, though the moniker itself has not
 been adopted as widely as the techniques it encompasses.
-Google and Facebook developing ways to match customers with advertisements for products they are 
+Google and Facebook have developed ways to match customers with advertisements for products they are 
 most likely to purchase. Breeding companies are seeking individuals with the same skills to
 join their research programs and drive innovation in data analysis and
 interpretation beyond that which can be achieved by classical statistics

@@ -67,7 +67,7 @@ which map inputs to one or more outputs. Each neuron in a network can be express
 transformation of a weighted sum of $n$ inputs 
 
 \begin{equation}
-output_{lk} = \sum_{i=1}^{n} f_l(w_{lki} * x_{i} + b_{lk})
+        output_{lk} = f_l \bigg( \sum_{i=1}^{n} (w_{lki} * x_{i}) + b_{lk} \bigg)
 \label{eq:neuron}
 \end{equation}
 
